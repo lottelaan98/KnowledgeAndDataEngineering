@@ -11,4 +11,12 @@ Knowledge graph accuracy: How does integrating a medical knowledge graph (UMLS s
 4. Build UI where a patient can fill in his/her symptoms and the UI will show the concept extracted from the text given by the patient and predict the disease
 5. Evaluation
 
+*Resources*
+
+LLM guides and materials:
+- LangChain Education Channel: https://www.youtube.com/@LangChain
+- LangChain Tutorials: https://langchain-ai.github.io/langgraph/tutorials/
+- OpenAI Practical Guide to Building Agents: https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf
+- Prompt Engineering and LLMs Guides: https://www.promptingguide.ai/research/llm-agents 
+
 
