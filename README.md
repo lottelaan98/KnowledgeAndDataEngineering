@@ -14,9 +14,8 @@ Knowledge graph accuracy: How does integrating a medical knowledge graph (UMLS s
 *Resources*
 
 LLM guides and materials:
+- LangChain/LangGraph courses: https://academy.langchain.com/collections. You need to make an account then you can follow the course for free. 
 - LangChain Education Channel: https://www.youtube.com/@LangChain
-- LangChain Tutorials: https://docs.langchain.com/oss/python/langchain/overview
-- LangGraph: https://docs.langchain.com/oss/python/langgraph/overview
 - OpenAI Practical Guide to Building Agents: https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf
 - Prompt Engineering and LLMs Guides: https://www.promptingguide.ai/research/llm-agents 
 
