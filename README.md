@@ -15,7 +15,8 @@ Knowledge graph accuracy: How does integrating a medical knowledge graph (UMLS s
 
 - Article: Leveraging Medical Knowledge Graphs Into Large Language Models for Diagnosis Prediction: Design and Application Study - https://arxiv.org/abs/2308.14321
 - UMLS ontology: links different medical terms and coding systems so they can be used together for healthcare, research, and information retrieval.- https://www.nlm.nih.gov/research/umls/index.html
-- Kaggle dataset: The dataset includes 24 different diseases, each with 50 symptom descriptions, resulting in a total of 1,200 data points. https://www.kaggle.com/datasets/niyarrbarman/symptom2disease. 
+- Kaggle dataset: The dataset includes 24 different diseases, each with 50 symptom descriptions, resulting in a total of 1,200 data points. https://www.kaggle.com/datasets/niyarrbarman/symptom2disease.
+- Medical LLM leaderboard: https://huggingface.co/blog/leaderboard-medicalllm
 
 *Resources*
 
