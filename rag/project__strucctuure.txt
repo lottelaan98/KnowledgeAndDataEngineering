@@ -1,0 +1,23 @@
+project/
+│
+├── data/
+│   └── symptom2disease.csv
+│
+├── models/
+│   └── classifier.joblib
+│
+├── ontology/
+│   ├── symptoms.json
+│   └── diseases.json
+│
+├── rag/
+│   ├── docs/
+│   └── rag_engine.py
+│
+├── reasoning/
+│   └── reasoning_engine.py
+│
+├── classifier/
+│   └── train_classifier.py
+│
+└── main.py

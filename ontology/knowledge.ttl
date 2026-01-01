@@ -1,0 +1,299 @@
+@prefix ex: <http://uu.nl/medical/> .
+
+ex:Acne a ex:Disease .
+
+ex:Arthritis a ex:Disease ;
+    ex:hasExplanation "Arthritis is commonly associated with pain." ;
+    ex:hasSymptom ex:pain .
+
+ex:BronchialAsthma a ex:Disease ;
+    ex:hasExplanation "Bronchial Asthma is commonly associated with cough.",
+        "Bronchial Asthma is commonly associated with fever, cough, fatigue.",
+        "Bronchial Asthma is commonly associated with fever, cough.",
+        "Bronchial Asthma is commonly associated with fever." ;
+    ex:hasSymptom ex:cough,
+        ex:fatigue,
+        ex:fever .
+
+ex:Cervicalspondylosis a ex:Disease ;
+    ex:hasExplanation "Cervical spondylosis is commonly associated with cough, pain.",
+        "Cervical spondylosis is commonly associated with cough." ;
+    ex:hasSymptom ex:cough,
+        ex:pain .
+
+ex:Chickenpox a ex:Disease ;
+    ex:hasExplanation "Chicken pox is commonly associated with fatigue.",
+        "Chicken pox is commonly associated with fever, headache, fatigue, pain.",
+        "Chicken pox is commonly associated with fever, headache, fatigue.",
+        "Chicken pox is commonly associated with fever, headache, vomiting.",
+        "Chicken pox is commonly associated with fever, headache.",
+        "Chicken pox is commonly associated with fever.",
+        "Chicken pox is commonly associated with headache.",
+        "Chicken pox is commonly associated with pain.",
+        "Chicken pox is commonly associated with vomiting." ;
+    ex:hasSymptom ex:fatigue,
+        ex:fever,
+        ex:headache,
+        ex:pain,
+        ex:vomiting .
+
+ex:CommonCold a ex:Disease ;
+    ex:hasExplanation "Common Cold is commonly associated with cough, fatigue.",
+        "Common Cold is commonly associated with cough, pain.",
+        "Common Cold is commonly associated with cough, sore throat.",
+        "Common Cold is commonly associated with cough.",
+        "Common Cold is commonly associated with fatigue.",
+        "Common Cold is commonly associated with fever, cough, pain.",
+        "Common Cold is commonly associated with fever, cough.",
+        "Common Cold is commonly associated with fever.",
+        "Common Cold is commonly associated with pain." ;
+    ex:hasSymptom ex:cough,
+        ex:fatigue,
+        ex:fever,
+        ex:pain,
+        ex:sorethroat .
+
+ex:Dengue a ex:Disease ;
+    ex:hasExplanation "Dengue is commonly associated with fatigue.",
+        "Dengue is commonly associated with fever, headache, pain.",
+        "Dengue is commonly associated with fever, headache.",
+        "Dengue is commonly associated with fever, nausea.",
+        "Dengue is commonly associated with fever, pain.",
+        "Dengue is commonly associated with fever, vomiting.",
+        "Dengue is commonly associated with fever.",
+        "Dengue is commonly associated with headache, fatigue, pain.",
+        "Dengue is commonly associated with headache, pain.",
+        "Dengue is commonly associated with headache, vomiting, pain.",
+        "Dengue is commonly associated with nausea, pain.",
+        "Dengue is commonly associated with pain.",
+        "Dengue is commonly associated with vomiting, pain." ;
+    ex:hasSymptom ex:fatigue,
+        ex:fever,
+        ex:headache,
+        ex:nausea,
+        ex:pain,
+        ex:vomiting .
+
+ex:DimorphicHemorrhoids a ex:Disease ;
+    ex:hasExplanation "Dimorphic Hemorrhoids is commonly associated with pain." ;
+    ex:hasSymptom ex:pain .
+
+ex:Fungalinfection a ex:Disease ;
+    ex:hasExplanation "Fungal infection is commonly associated with pain." ;
+    ex:hasSymptom ex:pain .
+
+ex:Hypertension a ex:Disease ;
+    ex:hasExplanation "Hypertension is commonly associated with headache, pain.",
+        "Hypertension is commonly associated with headache.",
+        "Hypertension is commonly associated with pain." ;
+    ex:hasSymptom ex:headache,
+        ex:pain .
+
+ex:Impetigo a ex:Disease ;
+    ex:hasExplanation "Impetigo is commonly associated with fever, fatigue.",
+        "Impetigo is commonly associated with fever, headache.",
+        "Impetigo is commonly associated with fever, pain.",
+        "Impetigo is commonly associated with fever.",
+        "Impetigo is commonly associated with pain." ;
+    ex:hasSymptom ex:fatigue,
+        ex:fever,
+        ex:headache,
+        ex:pain .
+
+ex:Jaundice a ex:Disease ;
+    ex:hasExplanation "Jaundice is commonly associated with fever, fatigue, pain.",
+        "Jaundice is commonly associated with fever, nausea, fatigue.",
+        "Jaundice is commonly associated with fever, nausea, pain.",
+        "Jaundice is commonly associated with fever, nausea.",
+        "Jaundice is commonly associated with fever, pain.",
+        "Jaundice is commonly associated with fever, vomiting, fatigue, pain.",
+        "Jaundice is commonly associated with fever, vomiting, pain.",
+        "Jaundice is commonly associated with fever.",
+        "Jaundice is commonly associated with nausea, pain.",
+        "Jaundice is commonly associated with nausea, vomiting, pain.",
+        "Jaundice is commonly associated with nausea.",
+        "Jaundice is commonly associated with pain." ;
+    ex:hasSymptom ex:fatigue,
+        ex:fever,
+        ex:nausea,
+        ex:pain,
+        ex:vomiting .
+
+ex:Malaria a ex:Disease ;
+    ex:hasExplanation "Malaria is commonly associated with fever, headache, nausea, pain.",
+        "Malaria is commonly associated with fever, headache, nausea, vomiting, pain.",
+        "Malaria is commonly associated with fever, headache, nausea, vomiting.",
+        "Malaria is commonly associated with fever, headache, nausea.",
+        "Malaria is commonly associated with fever, headache, vomiting, pain.",
+        "Malaria is commonly associated with fever, headache, vomiting.",
+        "Malaria is commonly associated with fever, headache.",
+        "Malaria is commonly associated with headache, nausea, pain.",
+        "Malaria is commonly associated with headache, nausea, vomiting.",
+        "Malaria is commonly associated with headache, nausea.",
+        "Malaria is commonly associated with headache, vomiting." ;
+    ex:hasSymptom ex:fever,
+        ex:headache,
+        ex:nausea,
+        ex:pain,
+        ex:vomiting .
+
+ex:Migraine a ex:Disease ;
+    ex:hasExplanation "Migraine is commonly associated with headache, pain.",
+        "Migraine is commonly associated with headache." ;
+    ex:hasSymptom ex:headache,
+        ex:pain .
+
+ex:Pneumonia a ex:Disease ;
+    ex:hasExplanation "Pneumonia is commonly associated with cough, pain.",
+        "Pneumonia is commonly associated with cough.",
+        "Pneumonia is commonly associated with fever, cough, fatigue.",
+        "Pneumonia is commonly associated with fever, cough.",
+        "Pneumonia is commonly associated with fever, fatigue.",
+        "Pneumonia is commonly associated with fever." ;
+    ex:hasSymptom ex:cough,
+        ex:fatigue,
+        ex:fever,
+        ex:pain .
+
+ex:Psoriasis a ex:Disease ;
+    ex:hasExplanation "Psoriasis is commonly associated with fatigue.",
+        "Psoriasis is commonly associated with pain." ;
+    ex:hasSymptom ex:fatigue,
+        ex:pain .
+
+ex:Typhoid a ex:Disease ;
+    ex:hasExplanation "Typhoid is commonly associated with diarrhea, pain.",
+        "Typhoid is commonly associated with diarrhea.",
+        "Typhoid is commonly associated with fatigue, pain.",
+        "Typhoid is commonly associated with fever, fatigue, pain.",
+        "Typhoid is commonly associated with fever, headache, diarrhea.",
+        "Typhoid is commonly associated with fever, headache, nausea, vomiting, pain.",
+        "Typhoid is commonly associated with fever, headache, pain.",
+        "Typhoid is commonly associated with fever, headache, vomiting, diarrhea, pain.",
+        "Typhoid is commonly associated with fever, headache, vomiting, diarrhea.",
+        "Typhoid is commonly associated with fever, headache.",
+        "Typhoid is commonly associated with fever, nausea, diarrhea.",
+        "Typhoid is commonly associated with fever, nausea, pain.",
+        "Typhoid is commonly associated with fever, pain.",
+        "Typhoid is commonly associated with fever, vomiting, diarrhea, pain.",
+        "Typhoid is commonly associated with fever, vomiting, fatigue.",
+        "Typhoid is commonly associated with fever.",
+        "Typhoid is commonly associated with headache, diarrhea, pain.",
+        "Typhoid is commonly associated with headache, diarrhea.",
+        "Typhoid is commonly associated with headache, pain.",
+        "Typhoid is commonly associated with headache, vomiting, diarrhea, pain.",
+        "Typhoid is commonly associated with nausea, vomiting, pain.",
+        "Typhoid is commonly associated with nausea, vomiting.",
+        "Typhoid is commonly associated with pain.",
+        "Typhoid is commonly associated with vomiting, diarrhea, pain.",
+        "Typhoid is commonly associated with vomiting, diarrhea.",
+        "Typhoid is commonly associated with vomiting, pain.",
+        "Typhoid is commonly associated with vomiting." ;
+    ex:hasSymptom ex:diarrhea,
+        ex:fatigue,
+        ex:fever,
+        ex:headache,
+        ex:nausea,
+        ex:pain,
+        ex:vomiting .
+
+ex:VaricoseVeins a ex:Disease ;
+    ex:hasExplanation "Varicose Veins is commonly associated with fatigue, pain.",
+        "Varicose Veins is commonly associated with fatigue.",
+        "Varicose Veins is commonly associated with pain." ;
+    ex:hasSymptom ex:fatigue,
+        ex:pain .
+
+ex:allergy a ex:Disease ;
+    ex:hasExplanation "allergy is commonly associated with cough.",
+        "allergy is commonly associated with fatigue.",
+        "allergy is commonly associated with fever, headache.",
+        "allergy is commonly associated with fever, sore throat.",
+        "allergy is commonly associated with headache.",
+        "allergy is commonly associated with nausea, diarrhea, pain.",
+        "allergy is commonly associated with nausea.",
+        "allergy is commonly associated with pain.",
+        "allergy is commonly associated with sore throat." ;
+    ex:hasSymptom ex:cough,
+        ex:diarrhea,
+        ex:fatigue,
+        ex:fever,
+        ex:headache,
+        ex:nausea,
+        ex:pain,
+        ex:sorethroat .
+
+ex:diabetes a ex:Disease ;
+    ex:hasExplanation "diabetes is commonly associated with cough, pain.",
+        "diabetes is commonly associated with cough, sore throat.",
+        "diabetes is commonly associated with cough.",
+        "diabetes is commonly associated with fatigue." ;
+    ex:hasSymptom ex:cough,
+        ex:fatigue,
+        ex:pain,
+        ex:sorethroat .
+
+ex:drugreaction a ex:Disease ;
+    ex:hasExplanation "drug reaction is commonly associated with fever.",
+        "drug reaction is commonly associated with headache.",
+        "drug reaction is commonly associated with nausea, pain.",
+        "drug reaction is commonly associated with nausea.",
+        "drug reaction is commonly associated with pain." ;
+    ex:hasSymptom ex:fever,
+        ex:headache,
+        ex:nausea,
+        ex:pain .
+
+ex:gastroesophagealrefluxdisease a ex:Disease ;
+    ex:hasExplanation "gastroesophageal reflux disease is commonly associated with nausea.",
+        "gastroesophageal reflux disease is commonly associated with pain, sore throat.",
+        "gastroesophageal reflux disease is commonly associated with pain.",
+        "gastroesophageal reflux disease is commonly associated with sore throat." ;
+    ex:hasSymptom ex:nausea,
+        ex:pain,
+        ex:sorethroat .
+
+ex:pepticulcerdisease a ex:Disease ;
+    ex:hasExplanation "peptic ulcer disease is commonly associated with diarrhea.",
+        "peptic ulcer disease is commonly associated with fatigue, diarrhea.",
+        "peptic ulcer disease is commonly associated with fatigue, pain.",
+        "peptic ulcer disease is commonly associated with nausea.",
+        "peptic ulcer disease is commonly associated with pain." ;
+    ex:hasSymptom ex:diarrhea,
+        ex:fatigue,
+        ex:nausea,
+        ex:pain .
+
+ex:urinarytractinfection a ex:Disease ;
+    ex:hasExplanation "urinary tract infection is commonly associated with fever, nausea, vomiting, pain.",
+        "urinary tract infection is commonly associated with fever, nausea.",
+        "urinary tract infection is commonly associated with fever, pain.",
+        "urinary tract infection is commonly associated with fever.",
+        "urinary tract infection is commonly associated with headache, pain.",
+        "urinary tract infection is commonly associated with headache.",
+        "urinary tract infection is commonly associated with nausea.",
+        "urinary tract infection is commonly associated with pain." ;
+    ex:hasSymptom ex:fever,
+        ex:headache,
+        ex:nausea,
+        ex:pain,
+        ex:vomiting .
+
+ex:diarrhea a ex:Symptom .
+
+ex:sorethroat a ex:Symptom .
+
+ex:cough a ex:Symptom .
+
+ex:vomiting a ex:Symptom .
+
+ex:nausea a ex:Symptom .
+
+ex:headache a ex:Symptom .
+
+ex:fever a ex:Symptom .
+
+ex:fatigue a ex:Symptom .
+
+ex:pain a ex:Symptom .
+
