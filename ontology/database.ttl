@@ -1,0 +1,1130 @@
+PREFIX wd:  <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+PREFIX ex:  <http://example.org/med#>
+
+
+# Psoriasis (symptoms wikidata: no results)
+CONSTRUCT {
+  wd:Q179945 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q179945 wdt:P780 ?symptom .
+
+  wd:Q179945 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/red_inflamed_skin_patches a ex:symptom ;
+  skos:prefLabel "red, inflamed skin patches" ;
+  skos:altLabel "red skin patches" ;
+  skos:altLabel "inflamed skin patches" ;
+  skos:altLabel "itchy skin patches" ;
+  skos:altLabel "burning skin patches" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q179945 ex:symptom ex:symptom/red_inflamed_skin_patches .
+
+ex:symptom/nail_symptoms a ex:symptom ;
+  skos:prefLabel "nail pitting" ;
+  skos:altLabel "nail discoloration" ;
+  skos:altLabel "yellow spots on nails" ;
+  skos:altLabel "brown spots on nails" ;
+  skos:altLabel "crumbly nails" ;
+  skos:altLabel "separation nails from nail bed" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q179945 ex:symptom ex:symptom/nail_symptoms .
+
+ex:symptom/joint_pain a ex:symptom ;
+  skos:prefLabel "joint pain" ;
+  skos:altLabel "swollen joints" ;
+  skos:altLabel "stiff joints" ;
+  skos:altLabel "painfull joints" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q179945 ex:symptom ex:symptom/joint_pain .
+
+ex:symptom/fatigue a ex:symptom ;
+  skos:prefLabel "fatigue" ;
+  skos:altLabel "tired" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q179945 ex:symptom ex:symptom/fatigue .
+
+ex:symptom/eye_inflammation a ex:symptom ;
+  skos:prefLabel "eye inflammation" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q179945 ex:symptom ex:symptom/eye_inflammation .
+
+
+# Varicose veins (symptoms wikidata: no results)
+CONSTRUCT {
+  wd:Q201180 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q201180 wdt:P780 ?symptom .
+
+  wd:Q201180 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/bulging_blue_veins a ex:symptom ;
+  skos:prefLabel "bulging blue veins" ;
+  skos:altLabel "bulging purple veins" ;
+  skos:altLabel "twisting blue veins" ;
+  skos:altLabel "twisting purple veins" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q201180 ex:symptom ex:symptom/bulging_blue_veins .
+
+ex:symptom/aching_legs a ex:symptom ;
+  skos:prefLabel "aching legs" ;
+  skos:prefLabel "aching skin"
+  ex:mappingStatus "unmapped" .
+
+wd:Q201180 ex:symptom ex:symptom/aching_legs .
+
+ex:symptom/heavy_legs a ex:symptom ;
+  skos:prefLabel "heavy legs" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q201180 ex:symptom ex:symptom/heavy_legs .
+
+ex:symptom/cramping_legs a ex:symptom ;
+  skos:prefLabel "cramping legs" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q201180 ex:symptom ex:symptom/cramping_legs .
+
+ex:symptom/swollen_ankles a ex:symptom ;
+  skos:prefLabel "swollen ankles" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q201180 ex:symptom ex:symptom/swollen_ankles .
+
+ex:symptom/skin_decoloration a ex:symptom ;
+  skos:prefLabel "skin decoloration" ;
+  skos:altLabel "brown skin" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q201180 ex:symptom ex:symptom/skin_decoloration .
+
+
+# Typhoid (symptoms wikidata: headache, hepatomegaly, insomnia, gastroinstinal bleeding, fatigue, diarrhea, constipation, pallor, prostration, abdominal perforation, 
+# continuous fever, confusion or consciousness, delusion, bradycardia, leukopenia, rash, splenomegaly)
+CONSTRUCT {
+  wd:Q83319 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q83319 wdt:P780 ?symptom .
+
+  wd:Q83319 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/loss_of_appetite a ex:Symptom ;
+  skos:prefLabel "loss of appitite" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q83319 ex:hasSymptom ex:symptom/loss_of_appetite .
+
+ex:symptom/weakness a ex:Symptom ;
+  skos:prefLabel "weakness" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q83319 ex:hasSymptom ex:symptom/weakness .
+
+ex:symptom/tired a ex:symptom ;
+skos:altLabel "tired" ;
+mapsTo wd:Q9690 .
+
+
+
+# Chickenpox (symptoms wikidata: headache, fever, fatigue, mucula, papule, vesicle, erosion, low-grade fever, lymphadenopathy, itch)
+CONSTRUCT {
+  wd:Q44727 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q44727 wdt:P780 ?symptom .
+
+  wd:Q44727 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/loss_of_appetite a ex:Symptom ;
+  skos:prefLabel "loss of appitite" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q44727 ex:hasSymptom ex:symptom/loss_of_appetite .
+
+ex:symptom/rash a ex:Symptom ;
+  skos:prefLabel "rash" ;
+  skos:altLabel "red rash" ;
+  skos:altLabel "itchy rash"
+  ex:mappingStatus "unmapped" .
+
+wd:Q44727 ex:hasSymptom ex:symptom/rash .
+
+ex:symptom/blisters a ex:Symptom ;
+  skos:prefLabel "blisters" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q44727 ex:hasSymptom ex:symptom/blisters .
+
+
+# Impetigo (symptoms wikidata: no results)
+CONSTRUCT {
+  wd:Q28971 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q28971 wdt:P780 ?symptom .
+
+  wd:Q28971 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/red_sores a ex:Symptom ;
+  skos:prefLabel "red sores" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q28971 ex:hasSymptom ex:symptom/red_sores .
+
+ex:symptom/blisters a ex:Symptom ;
+  skos:prefLabel "blisters" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q28971 ex:hasSymptom ex:symptom/blisters .
+
+
+ex:symptom/honey_colored_crust a ex:Symptom ;
+  skos:prefLabel "honey colored crust" ;
+  skos:altLabel "cornflakes crust"
+  ex:mappingStatus "unmapped" .
+
+wd:Q28971 ex:hasSymptom ex:symptom/honey_colored_crust .
+
+ex:symptom/itching a ex:Symptom ;
+  skos:prefLabel "itching" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q28971 ex:hasSymptom ex:symptom/itching .
+
+ex:symptom/fever a ex:Symptom ;
+  skos:prefLabel "fever" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q28971 ex:hasSymptom ex:symptom/fever .
+
+
+# Dengue (symptoms wikidata: headache, fatigue vomiting, bleeding, bradycardia, nausea, maculopapular rash, anorexia, lymphadenopathy, arthralgia, adymania, myalgia)
+CONSTRUCT {
+  wd:Q30953 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q30953 wdt:P780 ?symptom .
+
+  wd:Q30953 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/joint_pain a ex:Symptom ;
+  skos:prefLabel "joint pain" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q30953 ex:hasSymptom ex:symptom/joint_pain .
+
+ex:symptom/skin_rash a ex:Symptom ;
+  skos:prefLabel "skin rash" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q30953 ex:hasSymptom ex:symptom/skin_rash .
+
+ex:symptom/loss_of_appetite a ex:Symptom ;
+  skos:prefLabel "loss of appetite" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q30953 ex:hasSymptom ex:symptom/loss_of_appetite .
+
+
+# Fungal infection (symptoms wikidata: no results)
+CONSTRUCT {
+  wd:Q464067 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q464067 wdt:P780 ?symptom .
+
+  wd:Q464067 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/red_skin a ex:Symptom ;
+  skos:prefLabel "red skin" ;
+  skos:altLabel "itchy skin" ;
+  skos:altLabel "scaly skin" ;
+  skos:altLabel "cracked skin" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q464067 ex:hasSymptom ex:symptom/red_skin .
+
+ex:symptom/discolored_nails a ex:Symptom ;
+  skos:prefLabel "discolored nails" ;
+  skos:altLabel "thick nails" ;
+  skos:altLabel "cracked skin" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q464067 ex:hasSymptom ex:symptom/discolored_nails .
+
+ex:symptom/white_patches a ex:Symptom ;
+  skos:prefLabel "white patches in mouth" ;
+  skos:altLabel "white patches around genitals" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q464067 ex:hasSymptom ex:symptom/white_patches .
+
+ex:symptom/fever a ex:Symptom ;
+  skos:prefLabel "fever" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q464067 ex:hasSymptom ex:symptom/fever .
+
+ex:symptom/chest_pain a ex:Symptom ;
+  skos:prefLabel "chest pain" ;
+  skos:altLabel "lung pain"
+  ex:mappingStatus "unmapped" .
+
+wd:Q464067 ex:hasSymptom ex:symptom/chest_pain .
+
+ex:symptom/coughing a ex:Symptom ;
+  skos:prefLabel "coughing" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q464067 ex:hasSymptom ex:symptom/coughing .
+
+ex:symptom/headache a ex:Symptom ;
+  skos:prefLabel "headache" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q464067 ex:hasSymptom ex:symptom/headeache .
+
+ex:symptom/confusion a ex:Symptom ;
+  skos:prefLabel "confusion" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q464067 ex:hasSymptom ex:symptom/confusion .
+
+
+# COmmon cold (symptoms wikidata: headache, cough, sneeze, fever, tinnitus, snoring, nasal congestion, runny nose, sore throat)
+CONSTRUCT {
+  wd:Q12125 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q12125 wdt:P780 ?symptom .
+
+  wd:Q12125 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/fatigue a ex:Symptom ;
+  skos:prefLabel "fatigue" ;
+  skos:altLabel "tiredness" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q12125 ex:hasSymptom ex:symptom/fatigue .
+
+
+# Pneumonia (symptoms wikidata: fever, cough, dyspnea, snoring, tachypnea, hemoptysis, chills)
+CONSTRUCT {
+  wd:Q12192 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q12192 wdt:P780 ?symptom .
+
+  wd:Q12192 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/shortness_of_breath a ex:Symptom ;
+  skos:prefLabel "shortness of breath" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q12192 ex:hasSymptom ex:symptom/shortness_of_breath .
+
+ex:symptom/chest_pain a ex:Symptom ;
+  skos:prefLabel "chest_pain" ;
+  skos:altLabel "chest_pain with breathing" ;
+  skos:altLabel "chest_pain with coughing" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q12192 ex:hasSymptom ex:symptom/chest_pain .
+
+ex:symptom/fatigue a ex:Symptom ;
+  skos:prefLabel "fatigue" ;
+  skos:altLabel "tiredness" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q12192 ex:hasSymptom ex:symptom/fatigue .
+
+ex:symptom/rapid_heart_rate a ex:Symptom ;
+  skos:prefLabel "rapid heart rate" ;
+  skos:altLabel "rapid heartbeat"
+  ex:mappingStatus "unmapped" .
+
+wd:Q12192 ex:hasSymptom ex:symptom/rapid_heart_rate .
+
+
+# Dimorphic hemorrhoids (symptoms wikidata: no results)
+CONSTRUCT {
+  wd:Q41478 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q41478 wdt:P780 ?symptom .
+
+  wd:Q41478 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/bleeding a ex:Symptom ;
+  skos:prefLabel "bleeding" ;
+  skos:altLabel "bright red bleeding" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q41478 ex:hasSymptom ex:symptom/bleeding .
+
+ex:symptom/itching_anus a ex:Symptom ;
+  skos:prefLabel "itching anus" ;
+  skos:prefLabel "itching around anus" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q41478 ex:hasSymptom ex:symptom/anus .
+
+ex:symptom/mucus_discharge a ex:Symptom ;
+  skos:prefLabel "mucus discharge" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q41478 ex:hasSymptom ex:symptom/mucus_discharge .
+
+ex:symptom/feeling_incomplete_bowel_emptying a ex:Symptom ;
+  skos:prefLabel "feeling of incomplete bowel emptying" ;
+  skos:prefLabel "sensation of incomplete bowel emptying" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q41478 ex:hasSymptom ex:symptom/feeling_incomplete_bowel_emptying .
+
+ex:symptom/disconfort_sitting a ex:Symptom ;
+  skos:prefLabel "disconfort by sitting" ;
+  skos:prefLabel "pain by sitting" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q41478 ex:hasSymptom ex:symptom/disconfort_sitting .
+
+ex:symptom/swelling_lumbs_anus a ex:Symptom ;
+  skos:prefLabel "swelling lumbs near the anus" ;
+  skos:prefLabel "hard lumbs near the anus" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q41478 ex:hasSymptom ex:symptom/anus .
+
+
+# Arthritis (symptoms wikidata: joint inflammation)
+CONSTRUCT {
+  wd:Q170990 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q170990 wdt:P780 ?symptom .
+
+  wd:Q170990 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/joint_pain a ex:Symptom ;
+  skos:prefLabel "joint pain" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q170990 ex:hasSymptom ex:symptom/joint_pain .
+
+ex:symptom/stiff_joints a ex:Symptom ;
+  skos:prefLabel "stiff joints" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q170990 ex:hasSymptom ex:symptom/stiff_joints .
+
+ex:symptom/swelling a ex:Symptom ;
+  skos:prefLabel "swelling" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q170990 ex:hasSymptom ex:symptom/swelling .
+
+
+# Acne (symptoms wikidata: pimple)
+CONSTRUCT {
+  wd:Q79928 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q79928 wdt:P780 ?symptom .
+
+  wd:Q79928 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/skin_bumps a ex:Symptom ;
+  skos:prefLabel "skin bumps" ;
+  skos:altLabel "whiteheads" ;
+  skos:altLabel "blackheads" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q79928 ex:hasSymptom ex:symptom/skin_bumps .
+
+
+# Bronchial asthma (symptoms wikidata: cough, inflammation, wheeze, chest pain)
+CONSTRUCT {
+  wd:Q35869 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q35869 wdt:P780 ?symptom .
+
+  wd:Q35869 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/shortness_of_breath a ex:Symptom ;
+  skos:prefLabel "shortness of breath" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q35869 ex:hasSymptom ex:symptom/shortness_of_breath .
+
+
+# Hypertension (symptoms wikidata: no results)
+CONSTRUCT {
+  wd:Q95566669 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q95566669 wdt:P780 ?symptom .
+
+  wd:Q95566669 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/headache a ex:Symptom ;
+  skos:prefLabel "headache" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q95566669 ex:hasSymptom ex:symptom/headache .
+
+ex:symptom/shortness_of_breath a ex:Symptom ;
+  skos:prefLabel "shortness of breath" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q95566669 ex:hasSymptom ex:symptom/shortness_of_breath .
+
+ex:symptom/nosebleeds a ex:Symptom ;
+  skos:prefLabel "nosebleeds" ;
+  skos:altLabel "bleeding nose" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q95566669 ex:hasSymptom ex:symptom/nosebleeds .
+
+ex:symptom/dizziness a ex:Symptom ;
+  skos:prefLabel "dizziness" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q95566669 ex:hasSymptom ex:symptom/dizziness .
+
+ex:symptom/chest_pain a ex:Symptom ;
+  skos:prefLabel "chest pain" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q95566669 ex:hasSymptom ex:symptom/chest_pain .
+
+ex:symptom/vision_changes a ex:Symptom ;
+  skos:prefLabel "vision changes" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q95566669 ex:hasSymptom ex:symptom/vision_changes .
+
+ex:symptom/confusion a ex:Symptom ;
+  skos:prefLabel "confusion" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q95566669 ex:hasSymptom ex:symptom/confusion .
+
+ex:symptom/fatigue a ex:Symptom ;
+  skos:prefLabel "fatigue" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q95566669 ex:hasSymptom ex:symptom/fatigue .
+
+
+# Migraine (symptoms wikidata: headache, vomiting, nausea, photophobia, burping)
+CONSTRUCT {
+  wd:Q133823 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q133823 wdt:P780 ?symptom .
+
+  wd:Q133823 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/sensitivity_to_light a ex:Symptom ;
+  skos:prefLabel "sensitivity to light" ;
+  ex:mapsTo wd:Q281289 .
+
+ex:symptom/sensitivity_to_sound a ex:Symptom ;
+  skos:prefLabel "sensitivity to sound" ;
+  skos:altLabel "sensitivity to noise" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q133823 ex:hasSymptom ex:symptom/sensitivity_to_sound .
+
+
+# Allergy (symptoms wikidata: no results)
+CONSTRUCT {
+  wd:Q42982 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q42982 wdt:P780 ?symptom .
+
+  wd:Q42982 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/respiratory_issues a ex:Symptom ;
+  skos:prefLabel "respiratory issues" ;
+  skos:altLabel "sneezing" ;
+  skos:altLabel "runny nose" ;
+  skos:altLabel "stuffy nose" ;
+  skos:altLabel "coughing" ;
+  skos:altLabel "wheezing" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q42982 ex:hasSymptom ex:symptom/respiratory_issues .
+
+ex:symptom/itchy_eyes a ex:Symptom ;
+  skos:prefLabel "itchy eyes" ;
+  skos:altLabel "watery eyes" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q42982 ex:hasSymptom ex:symptom/itchy_eyes .
+
+ex:symptom/skin_rash a ex:Symptom ;
+  skos:prefLabel "skin rash" ;
+  skos:altLabel "hives" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q42982 ex:hasSymptom ex:symptom/skin_rash .
+
+ex:symptom/digestive_problems a ex:Symptom ;
+  skos:prefLabel "digestive problems" ;
+  skos:altLabel "cramps" ;
+  skos:altLabel "vomiting" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q42982 ex:hasSymptom ex:symptom/digestive_problems .
+
+
+# Gastroesophageal reflux disease (symptoms wikidata: gastroesophageal reflux, precordial pain, cough, heartburn)
+CONSTRUCT {
+  wd:Q223591 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q223591 wdt:P780 ?symptom .
+
+  wd:Q223591 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/regurgitation a ex:Symptom ;
+  skos:prefLabel "regurgitation" ;
+  skos:altLabel "sour taste" ;
+  skos:altLabel "food in throat" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q223591 ex:hasSymptom ex:symptom/regurgitation .
+
+ex:symptom/difficulty_swallowing a ex:Symptom ;
+  skos:prefLabel "difficulty swallowing" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q223591 ex:hasSymptom ex:symptom/difficulty_swallowing .
+
+ex:symptom/chronic_cough a ex:Symptom ;
+  skos:prefLabel "chronic cough" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q223591 ex:hasSymptom ex:symptom/chronic_cough .
+
+
+# peptic ulcer disease (symptoms wikidata: hematemesis, epigastric pain, heartburn, melena)
+CONSTRUCT {
+  wd:Q172941 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q172941 wdt:P780 ?symptom .
+
+  wd:Q172941 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/burning_pain_abdomen a ex:Symptom ;
+  skos:prefLabel "burning pain in upper abdomen" ;
+  skos:altLabel "gnawing pain in upper abdomen" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q172941 ex:hasSymptom ex:symptom/burning_pain_abdomen .
+
+ex:symptom/bloating a ex:Symptom ;
+  skos:prefLabel "bloating" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q172941 ex:hasSymptom ex:symptom/bloating .
+
+ex:symptom/nausea a ex:Symptom ;
+  skos:prefLabel "nausea" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q172941 ex:hasSymptom ex:symptom/nausea .
+
+ex:symptom/belching a ex:Symptom ;
+  skos:prefLabel "belching" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q172941 ex:hasSymptom ex:symptom/belching .
+
+
+# drug reaction (symptoms wikidata: no results)
+CONSTRUCT {
+  wd:Q3931183 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q3931183 wdt:P780 ?symptom .
+
+  wd:Q3931183 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/skin_rash a ex:Symptom ;
+  skos:prefLabel "skin rash" ;
+  skos:altLabel "hives" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q3931183 ex:hasSymptom ex:symptom/skin_rash .
+
+ex:symptom/difficulty_breathing a ex:Symptom ;
+  skos:prefLabel "difficulty breathing" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q3931183 ex:hasSymptom ex:symptom/difficulty_breathing .
+
+ex:symptom/swelling_throat a ex:Symptom ;
+  skos:prefLabel "swelling throat" ;
+  skos:altLabel "swelling face" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q3931183 ex:hasSymptom ex:symptom/swelling_throat .
+
+ex:symptom/wheezing a ex:Symptom ;
+  skos:prefLabel "wheezing" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q3931183 ex:hasSymptom ex:symptom/wheezing .
+
+ex:symptom/rapid_heart_rate a ex:Symptom ;
+  skos:prefLabel "rapid heart rate" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q3931183 ex:hasSymptom ex:symptom/rapid_heart_rate .
+
+ex:symptom/dizziness a ex:Symptom ;
+  skos:prefLabel "dizziness" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q3931183 ex:hasSymptom ex:symptom/dizziness .
+
+
+# diabetes (symptoms wikidata: polyuria, polydipsia, polyphagia)
+CONSTRUCT {
+  wd:Q12206 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q12206 wdt:P780 ?symptom .
+
+  wd:Q12206 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/frequent_urination a ex:Symptom ;
+  skos:prefLabel "frequent urination" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q12206 ex:hasSymptom ex:symptom/frequent_urination .
+
+ex:symptom/hunger a ex:Symptom ;
+  skos:prefLabel "excessive hunger" ;
+  skos:altLabel "excessive thirst"
+  ex:mappingStatus "unmapped" .
+
+wd:Q12206 ex:hasSymptom ex:symptom/hunger .
+
+ex:symptom/fatigue a ex:Symptom ;
+  skos:prefLabel "fatigue" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q12206 ex:hasSymptom ex:symptom/fatigue .
+
+ex:symptom/blurred_vision a ex:Symptom ;
+  skos:prefLabel "blurred vision" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q12206 ex:hasSymptom ex:symptom/blurred_vision .
+
+ex:symptom/slow_healing_sores a ex:Symptom ;
+  skos:prefLabel "frequent slow healing sores" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q12206 ex:hasSymptom ex:symptom/slow healing sores .
+
+
+# Urinary tract infection (symptoms wikidata: fever, abdominal pain, hematuria, frequent urination, dysuria)
+CONSTRUCT {
+  wd:Q221668 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q221668 wdt:P780 ?symptom .
+
+  wd:Q221668 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/burning_feeling_peeing a ex:Symptom ;
+  skos:prefLabel "burning feeling by peeing" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q221668 ex:hasSymptom ex:symptom/burning_feeling_peeing .
+
+ex:symptom/persistent_urge_urinate a ex:Symptom ;
+  skos:prefLabel "persistent urge to unrinate" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q221668 ex:hasSymptom ex:symptom/persistent_urge_urinate .
+
+ex:symptom/cloudy_urine a ex:Symptom ;
+  skos:prefLabel "cloudy urine" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q221668 ex:hasSymptom ex:symptom/cloudy_urine .
+
+ex:symptom/strong_smelling_urine a ex:Symptom ;
+  skos:prefLabel "strong smelling urine" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q221668 ex:hasSymptom ex:symptom/strong_smelling_urine .
+
+ex:symptom/lower_belly_pain a ex:Symptom ;
+  skos:prefLabel "lower belly pain" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q221668 ex:hasSymptom ex:symptom/lower_belly_pain .
+
+
+# Cervical spondylosis (symptoms wikidata: no results)
+CONSTRUCT {
+  wd:Q11664912 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q11664912 wdt:P780 ?symptom .
+
+  wd:Q11664912 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/neck_pain a ex:Symptom ;
+  skos:prefLabel "neck pain" ;
+  skos:altLabel "stiff neck" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q11664912 ex:hasSymptom ex:symptom/neck_pain .
+
+ex:symptom/headache a ex:Symptom ;
+  skos:prefLabel "headache" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q11664912 ex:hasSymptom ex:symptom/headache .
+
+ex:symptom/numb_arms a ex:Symptom ;
+  skos:prefLabel "numb arms" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q11664912 ex:hasSymptom ex:symptom/numb_arms .
+
+ex:symptom/tingling a ex:Symptom ;
+  skos:prefLabel "tingling feeling" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q11664912 ex:hasSymptom ex:symptom/tingling .
+
+
+# Jaundice (symptoms wikidata: no results)
+CONSTRUCT {
+  wd:Q133244 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q133244 wdt:P780 ?symptom .
+
+  wd:Q133244 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/yellow_skin a ex:Symptom ;
+  skos:prefLabel "yellow skin" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q133244 ex:hasSymptom ex:symptom/yellow_skin .
+
+ex:symptom/yellow_eyes a ex:Symptom ;
+  skos:prefLabel "yellow eyes" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q133244 ex:hasSymptom ex:symptom/yellow_eyes .
+
+ex:symptom/dark_urine a ex:Symptom ;
+  skos:prefLabel "dark urine" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q133244 ex:hasSymptom ex:symptom/dark_urine .
+
+ex:symptom/pale_stools a ex:Symptom ;
+  skos:prefLabel "pale stools" ;
+  skos:altLabel "clay colored stools"
+  ex:mappingStatus "unmapped" .
+
+wd:Q133244 ex:hasSymptom ex:symptom/pale_stools .
+
+ex:symptom/intense_itching a ex:Symptom ;
+  skos:prefLabel "intense itching" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q133244 ex:hasSymptom ex:symptom/intense_itching .
+
+
+# Malaria (symptoms wikidata: fever, jaundice, coma, anemia, intermittent fever, periodic fever, hepatomegaly, chills, splenomegaly)
+CONSTRUCT {
+  wd:Q12156 a ex:Disease ;
+      skos:prefLabel ?dLabel ;
+      ex:hasSymptom ?symptom .
+
+  ?symptom a ex:Symptom ;
+      skos:prefLabel ?sLabel .
+}
+WHERE {
+  wd:Q12156 wdt:P780 ?symptom .
+
+  wd:Q12156 rdfs:label ?dLabel .
+  FILTER(lang(?dLabel) = "en")
+
+  ?symptom rdfs:label ?sLabel .
+  FILTER(lang(?sLabel) = "en")
+}
+
+ex:symptom/headache a ex:Symptom ;
+  skos:prefLabel "headache" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q12156 ex:hasSymptom ex:symptom/headache .
+
+ex:symptom/muscle_aches a ex:Symptom ;
+  skos:prefLabel "muscle aches" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q12156 ex:hasSymptom ex:symptom/muscle_aches .
+
+ex:symptom/fatigue a ex:Symptom ;
+  skos:prefLabel "fatigue" ;
+  ex:mappingStatus "unmapped" .
+
+wd:Q12156 ex:hasSymptom ex:symptom/fatigue .
