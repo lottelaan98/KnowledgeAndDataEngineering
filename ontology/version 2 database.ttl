@@ -1,0 +1,938 @@
+PREFIX wd:  <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+PREFIX ex:  <http://example.org/med#>
+
+
+# Classes
+ex:Disease a owl:Class ;
+    rdfs:label "Disease"@en .
+
+ex:Symptom a owl:Class ;
+    rdfs:label "Symptom"@en .
+
+# ex:SkinSymptom a owl:Class ;
+#    rdfs:label "Skin symptom" ;
+#    rdfs:subClassOf ex:Symptom .
+
+ex:Explanation a owl:Class ;
+    rdfs
+
+# Object properties
+ex:hasSymptom a owl:ObjectProperty ;
+    rdfs:domain ex:Disease ;
+    rdfs:range ex:Symptom .
+
+ex:hasExplanation a owl:ObjectProperty ;
+    rdfs:domain ex:Disease ;
+    rdfs:range ex:Explanation .
+
+
+
+
+# New symptoms
+
+ex:symptom/aching_legs a ex:Symptom ;
+    skos:prefLabel "aching legs"@en .
+  
+ex:symptom/bulging_blue_veins a ex:Symptom ;
+    skos:prefLabel "bulging blue veins"@en .
+
+ex:symptom/disconfort_sitting a ex:Symptom ;
+  skos:prefLabel "disconfort by sitting"@en .
+
+ex:symptom/feeling_incomplete_bowel_emptying a ex:Symptom ;
+    skos:prefLabel "feeling of incomplete bowel emptying"@en .
+
+ex:symptom/honey_colored_crust a ex:Symptom ;
+    skos:prefLabel "honey colored crust"@en .
+
+ex:symptom/itching_anus a ex:Symptom ;
+    skos:prefLabel "itching anus"@en .
+
+ex:symptom/itching_eyes a ex:Symptom ;
+    skos:prefLabel "itching eyes"@en .
+
+ex:symptom/joint_pain a ex:Symptom ;
+    skos:prefLabel "joint pain"@en .
+# or Q683498 = arthralgia
+
+ex:symptom/loss_of_appetite a ex:Symptom ;
+    skos:prefLabel "loss of appitite"@en .
+
+ex:symptom/mucus_discharge a ex:Symptom ;
+  skos:prefLabel "mucus discharge"@en .
+
+ex:symptom/rapid_heart_rate a ex:Symptom ;
+    skos:prefLabel "rapid heart rate"@en .
+
+ex:symptom/red_inflamed_skin_patches a ex:Symptom ;
+    skos:prefLabel "red, inflamed skin patches"@en .
+
+ex:symptom/red_sores a ex:Symptom ;
+    skos:prefLabel "red sores"@en .
+
+ex:symptom/red_skin a ex:Symptom ;
+    skos:prefLabel "red skin"@en .
+
+ex:symptom/sensitivity_to_sound a ex:Symptom ;
+    skos:prefLabel "sensitivity to sound"@en .
+
+ex:symptom/skin_bumps a ex:Symptom ;
+    skos:prefLabel "skin bumps"@en .
+
+ex:symptom/swelling_lumbs_anus a ex:Symptom ;
+    skos:prefLabel "swelling lumbs near the anus"@en .
+
+ex:symptom/swollen_ankles a ex:Symptom ;
+    skos:prefLabel "swollen ankles" ;
+
+ex:symptom/vision_changes a ex:Symptom ;
+    skos:prefLabel "vision changes"@en .
+
+ex:symptom/white_patches_around_genitals a ex:Symptom ;
+    skos:prefLabel "white patches around genitals"@en .
+
+ex:symptom/white_patches_in_mouth a ex:Symptom ;
+    skos:prefLabel "white patches in mouth"@en .
+
+ex:symptom/yellow_eyes a ex:Symptom ;
+    skos:prefLabel "yellow eyes"@en .
+
+ex:symptom/yellow_skin a ex:Symptom ;
+    skos:prefLabel "yellow skin"@en .
+
+
+
+# Diseases
+
+# Psoriasis (symptoms wikidata: no results)
+CONSTRUCT {
+    wd:Q179945 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q179945 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q179945 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q179945 ex:hasExplanation "Psoriasis is commonly associated with fatigue.",
+        "Psoriasis is commonly associated with pain." ;
+    ex:hasSymptom ex:symptom/red_inflamed_skin_patches, 
+        wd:Q9690, # fatigue
+        wd:Q81938, # pain
+        wd:Q29971784, # nail pitting
+        wd:Q102187111, # nail discoloration
+        ex:symptom/joint_pain, 
+        wd:Q2971524 . # eye inflammation
+
+
+# Varicose veins (symptoms wikidata: no results)
+CONSTRUCT {
+    wd:Q201180 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q201180 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q201180 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q201180 ex:hasExplanation "Varicose Veins is commonly associated with fatigue, pain.",
+        "Varicose Veins is commonly associated with fatigue.",
+        "Varicose Veins is commonly associated with pain." ;
+    ex:hasSymptom wd:Q9690, # fatigue
+        wd:Q81938, # pain
+        ex:symptom/bulging_blue_veins,
+        ex:symptom/aching_legs,  
+        wd:Q3160831, # heavy legs
+        ex:symptom/swollen_ankles,
+        wd:Q48970753 . # skin discoloration
+
+
+# Typhoid (symptoms wikidata: headache, hepatomegaly, insomnia, gastroinstinal bleeding, fatigue, diarrhea, constipation, pallor, prostration, abdominal perforation, 
+# continuous fever, confusion or consciousness, delusion, bradycardia, leukopenia, rash, splenomegaly)
+CONSTRUCT {
+    wd:Q83319 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q83319 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q83319 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q83319 ex:hasExplanation "Typhoid is commonly associated with diarrhea, pain.",
+        "Typhoid is commonly associated with diarrhea.",
+        "Typhoid is commonly associated with fatigue, pain.",
+        "Typhoid is commonly associated with fever, fatigue, pain.",
+        "Typhoid is commonly associated with fever, headache, diarrhea.",
+        "Typhoid is commonly associated with fever, headache, nausea, vomiting, pain.",
+        "Typhoid is commonly associated with fever, headache, pain.",
+        "Typhoid is commonly associated with fever, headache, vomiting, diarrhea, pain.",
+        "Typhoid is commonly associated with fever, headache, vomiting, diarrhea.",
+        "Typhoid is commonly associated with fever, headache.",
+        "Typhoid is commonly associated with fever, nausea, diarrhea.",
+        "Typhoid is commonly associated with fever, nausea, pain.",
+        "Typhoid is commonly associated with fever, pain.",
+        "Typhoid is commonly associated with fever, vomiting, diarrhea, pain.",
+        "Typhoid is commonly associated with fever, vomiting, fatigue.",
+        "Typhoid is commonly associated with fever.",
+        "Typhoid is commonly associated with headache, diarrhea, pain.",
+        "Typhoid is commonly associated with headache, diarrhea.",
+        "Typhoid is commonly associated with headache, pain.",
+        "Typhoid is commonly associated with headache, vomiting, diarrhea, pain.",
+        "Typhoid is commonly associated with nausea, vomiting, pain.",
+        "Typhoid is commonly associated with nausea, vomiting.",
+        "Typhoid is commonly associated with pain.",
+        "Typhoid is commonly associated with vomiting, diarrhea, pain.",
+        "Typhoid is commonly associated with vomiting, diarrhea.",
+        "Typhoid is commonly associated with vomiting, pain.",
+        "Typhoid is commonly associated with vomiting." ;
+    ex:hasSymptom wd:Q38933, # fever
+        wd:Q81938, # pain
+        wd:Q186889, # nausea
+        wd:Q127076, # vomiting
+        ex:symptom/loss_of_appetite .
+
+
+# Chickenpox (symptoms wikidata: headache, fever, fatigue, mucula, papule, vesicle, erosion, low-grade fever, lymphadenopathy, itch)
+CONSTRUCT {
+    wd:Q44727 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q44727 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q44727 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q44727 ex:hasExplanation "Chicken pox is commonly associated with fatigue.",
+        "Chicken pox is commonly associated with fever, headache, fatigue, pain.",
+        "Chicken pox is commonly associated with fever, headache, fatigue.",
+        "Chicken pox is commonly associated with fever, headache, vomiting.",
+        "Chicken pox is commonly associated with fever, headache.",
+        "Chicken pox is commonly associated with fever.",
+        "Chicken pox is commonly associated with headache.",
+        "Chicken pox is commonly associated with pain.",
+        "Chicken pox is commonly associated with vomiting." ;
+    ex:hasSymptom wd:Q81938, # pain
+        wd:Q127076, # vomiting
+        ex:symptom/loss_of_appetite, 
+        wd:Q653197, # rash
+        wd:Q276469. # blister
+
+
+# Impetigo (symptoms wikidata: no results)
+CONSTRUCT {
+    wd:Q28971 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q28971 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q28971 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q28971 ex:hasExplanation "Impetigo is commonly associated with fever, fatigue.",
+        "Impetigo is commonly associated with fever, headache.",
+        "Impetigo is commonly associated with fever, pain.",
+        "Impetigo is commonly associated with fever.",
+        "Impetigo is commonly associated with pain." ;
+    ex:hasSymptom wd:Q9690, # fatigue
+        wd:Q38933, # fever
+        wd:Q86, # headache
+        wd:Q81938, # pain
+        ex:symptom/red_sores,
+        wd:Q276469, # blister
+        ex:symptom/honey_colored_crust, 
+        wd:Q199602. # itch
+
+
+# Dengue (symptoms wikidata: headache, fatigue, vomiting, bleeding, bradycardia, nausea, maculopapular rash, anorexia, lymphadenopathy, arthralgia, adymania, myalgia)
+CONSTRUCT {
+    wd:Q30953 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q30953 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q30953 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q30953 ex:hasExplanation "Dengue is commonly associated with fatigue.",
+        "Dengue is commonly associated with fever, headache, pain.",
+        "Dengue is commonly associated with fever, headache.",
+        "Dengue is commonly associated with fever, nausea.",
+        "Dengue is commonly associated with fever, pain.",
+        "Dengue is commonly associated with fever, vomiting.",
+        "Dengue is commonly associated with fever.",
+        "Dengue is commonly associated with headache, fatigue, pain.",
+        "Dengue is commonly associated with headache, pain.",
+        "Dengue is commonly associated with headache, vomiting, pain.",
+        "Dengue is commonly associated with nausea, pain.",
+        "Dengue is commonly associated with pain.",
+        "Dengue is commonly associated with vomiting, pain." ;
+    ex:hasSymptom wd:Q9690, # fatigue
+        wd:Q81938, # pain
+        ex:symptom/joint_pain,
+        wd:Q653197, # rash
+        ex:symptom/loss_of_appetite.
+
+
+# Fungal infection (symptoms wikidata: no results)
+CONSTRUCT {
+    wd:Q464067 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q464067 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q464067 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q464067 ex:hasExplanation "Fungal infection is commonly associated with pain." ;
+    hasSymptom wd:Q81938, # pain
+        ex:symptom/red_skin, 
+        wd:Q102187111, # nail discoloration
+        ex:symptom/white_patches_in_mouth,
+        ex:symptom/white_patches_around_genitals
+        wd:Q38933, # fever
+        wd:Q693058, # chest pain
+        wd:Q35805, # cough
+        wd:Q86, # headache
+        wd:Q557945. # confusion
+        
+
+# Common cold (symptoms wikidata: headache, cough, sneeze, fever, tinnitus, snoring, nasal congestion, runny nose, sore throat)
+CONSTRUCT {
+    wd:Q12125 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q12125 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q12125 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q12125 ex:hasExplanation "Common Cold is commonly associated with cough, fatigue.",
+        "Common Cold is commonly associated with cough, pain.",
+        "Common Cold is commonly associated with cough, sore throat.",
+        "Common Cold is commonly associated with cough.",
+        "Common Cold is commonly associated with fatigue.",
+        "Common Cold is commonly associated with fever, cough, pain.",
+        "Common Cold is commonly associated with fever, cough.",
+        "Common Cold is commonly associated with fever.",
+        "Common Cold is commonly associated with pain." ;
+    hasSymptom wd:Q9690, # fatigue
+        wd:Q81938. # pain
+
+
+# Pneumonia (symptoms wikidata: fever, cough, dyspnea, snoring, tachypnea, hemoptysis, chills)
+CONSTRUCT {
+    wd:Q12192 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q12192 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q12192 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q12192 ex:hasExplanation "Pneumonia is commonly associated with cough, pain.",
+        "Pneumonia is commonly associated with cough.",
+        "Pneumonia is commonly associated with fever, cough, fatigue.",
+        "Pneumonia is commonly associated with fever, cough.",
+        "Pneumonia is commonly associated with fever, fatigue.",
+        "Pneumonia is commonly associated with fever." ;
+    ex:hasSymptom wd:Q9690, # fatigue
+        wd:Q81938, # pain
+        wd:Q693058, # chest pain
+        ex:symptom/rapid_heart_rate.
+
+
+# Dimorphic hemorrhoids (symptoms wikidata: no results)
+CONSTRUCT {
+    wd:Q41478 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q41478 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q41478 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q41478 ex:hasExplanation "Dimorphic Hemorrhoids is commonly associated with pain." ;
+    ex:hasSymptom wd:Q81938, # pain
+        wd:Q166019, # bleeding
+        ex:symptom/itching_anus, 
+        ex:symptom/mucus_discharge, 
+        ex:symptom/feeling_incomplete_bowel_emptying, 
+        ex:symptom/disconfort_sitting, 
+        ex:symptom/swelling_lumbs_anus.
+
+
+# Arthritis (symptoms wikidata: joint inflammation)
+CONSTRUCT {
+    wd:Q170990 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q170990 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q170990 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}    
+
+wd:Q170990 ex:hasExplanation "Arthritis is commonly associated with pain." ;
+    hasSymptom wd:Q81938, # pain
+        ex:symptom/joint_pain, 
+        wd:Q559210, # joint stiffness
+        wd:Q109186. # swelling
+
+
+# Acne (symptoms wikidata: pimple)
+CONSTRUCT {
+    wd:Q79928 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q79928 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q79928 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q79928 ex:hasExplanation ***;
+    ex:hasSymptom ex:symptom/skin_bumps. 
+
+
+# Bronchial asthma (symptoms wikidata: cough, inflammation, wheeze, chest pain)
+CONSTRUCT {
+    wd:Q35869 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q35869 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q35869 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q35869 ex:hasExplanation "Bronchial Asthma is commonly associated with cough.",
+        "Bronchial Asthma is commonly associated with fever, cough, fatigue.",
+        "Bronchial Asthma is commonly associated with fever, cough.",
+        "Bronchial Asthma is commonly associated with fever." ;
+    ex:hasSymptom wd:Q9690, # fatigue
+        wd:Q38933, # fever
+        wd:Q188008. # dyspnea
+
+# Hypertension (symptoms wikidata: no results)
+CONSTRUCT {
+    wd:Q95566669 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q95566669 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q95566669 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q95566669 ex:hasExplanation "Hypertension is commonly associated with headache, pain.",
+        "Hypertension is commonly associated with headache.",
+        "Hypertension is commonly associated with pain." ;
+    ex:hasSymptom wd:Q81938, # pain
+    wd:Q86, # headache
+    wd:Q188008, # dyspnea
+    wd:Q202013, # nosebleed
+    wd:Q10916362, # dizziness
+    wd:Q693058, # chest pain
+    ex:symptom/vision_changes, 
+    wd:Q557945, # confusion
+    wd:Q9690. # fatigue
+
+
+# Migraine (symptoms wikidata: headache, vomiting, nausea, photophobia, burping)
+CONSTRUCT {
+    wd:Q133823 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q133823 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q133823 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q133823 ex:hasExplanation "Migraine is commonly associated with headache, pain.",
+        "Migraine is commonly associated with headache." ;
+    ex:hasSymptom wd:Q81938, # pain
+        ex:symptom/sensitivity_to_sound .
+
+
+# Allergy (symptoms wikidata: no results)
+CONSTRUCT {
+    wd:Q42982 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q42982 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q42982 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q42982 ex:hasExplanation "allergy is commonly associated with cough.",
+        "allergy is commonly associated with fatigue.",
+        "allergy is commonly associated with fever, headache.",
+        "allergy is commonly associated with fever, sore throat.",
+        "allergy is commonly associated with headache.",
+        "allergy is commonly associated with nausea, diarrhea, pain.",
+        "allergy is commonly associated with nausea.",
+        "allergy is commonly associated with pain.",
+        "allergy is commonly associated with sore throat." ;
+    ex:hasSymptom wd:Q35805, # cough
+        wd:Q86, # headache
+        wd:Q40878, # diarrhea
+        wd:Q38933, # fever
+        wd:Q9690, # fatigue
+        wd:Q186889, # nausea
+        wd:Q81938, # pain
+        wd:Q1292082, # sore throat
+        wd:Q1115038, # runny nose
+        ex:symptom/itching_eyes, 
+        wd:Q653197. # rash
+
+
+# Gastroesophageal reflux disease (symptoms wikidata: gastroesophageal reflux, precordial pain, cough, heartburn)
+CONSTRUCT {
+    wd:Q223591 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q223591 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q223591 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q223591 ex:hasExplanation "gastroesophageal reflux disease is commonly associated with nausea.",
+        "gastroesophageal reflux disease is commonly associated with pain, sore throat.",
+        "gastroesophageal reflux disease is commonly associated with pain.",
+        "gastroesophageal reflux disease is commonly associated with sore throat." ;
+    ex:hasSymptom wd:Q186889, # nausea
+        wd:Q81938, # pain
+        wd:Q1292082, # sore throat
+        wd:Q30597356, # regurgitation
+        wd:Q623289. # dysphagia
+
+
+# peptic ulcer disease (symptoms wikidata: hematemesis, epigastric pain, heartburn, melena)
+CONSTRUCT {
+    wd:Q172941 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q172941 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q172941 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q172941 ex:hasExplanation "peptic ulcer disease is commonly associated with diarrhea.",
+        "peptic ulcer disease is commonly associated with fatigue, diarrhea.",
+        "peptic ulcer disease is commonly associated with fatigue, pain.",
+        "peptic ulcer disease is commonly associated with nausea.",
+        "peptic ulcer disease is commonly associated with pain." ;
+    ex:hasSymptom wd:Q40878, # diarrhea
+        wd:Q186889, # nausea
+        wd:Q81938, # pain
+        wd:Q183425, # abdominal pain
+        wd:Q4927059, # bloating
+        wd:Q209789. # burping
+
+
+# drug reaction (symptoms wikidata: no results)
+CONSTRUCT {
+    wd:Q3931183 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q3931183 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q3931183 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q3931183 ex:hasExplanation "drug reaction is commonly associated with fever.",
+        "drug reaction is commonly associated with headache.",
+        "drug reaction is commonly associated with nausea, pain.",
+        "drug reaction is commonly associated with nausea.",
+        "drug reaction is commonly associated with pain." ;
+    ex:hasSymptom wd:Q40878, # diarrhea
+        wd:Q38933, # fever
+        wd:Q186889, # nausea
+        wd:Q81938, # pain
+        wd:Q188008, # dyspnea
+        wd:Q653197, # rash
+        wd:Q517104, # wheeze
+        ex:symptom/rapid_heart_rate, 
+        wd:Q10916362. # dizziness 
+
+
+# diabetes (symptoms wikidata: polyuria, polydipsia, polyphagia)
+CONSTRUCT {
+    wd:Q12206 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q12206 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q12206 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q12206 ex:hasExplanation "diabetes is commonly associated with cough, pain.",
+        "diabetes is commonly associated with cough, sore throat.",
+        "diabetes is commonly associated with cough.",
+        "diabetes is commonly associated with fatigue." ;
+    ex:hasSymptom wd:Q35805, # cough
+        wd:Q81938, # pain
+        wd:Q9690, # fatigue
+        wd:Q1292082, # sore throat
+        wd:Q352585, # frequent urination
+        wd:Q165947, # hunger
+        wd:Q4930803, # blurred vision
+        wd:Q2078852. # chronic wound
+
+
+# Urinary tract infection (symptoms wikidata: fever, abdominal pain, hematuria, frequent urination, dysuria)
+CONSTRUCT {
+    wd:Q221668 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q221668 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q221668 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q221668 ex:hasExplanation "urinary tract infection is commonly associated with fever, nausea, vomiting, pain.",
+        "urinary tract infection is commonly associated with fever, nausea.",
+        "urinary tract infection is commonly associated with fever, pain.",
+        "urinary tract infection is commonly associated with fever.",
+        "urinary tract infection is commonly associated with headache, pain.",
+        "urinary tract infection is commonly associated with headache.",
+        "urinary tract infection is commonly associated with nausea.",
+        "urinary tract infection is commonly associated with pain." ;
+    ex:hasSymptom wd:Q86, # headache
+        wd:Q186889, # nausea
+        wd:Q81938, # pain
+        wd:Q127076, # vomiting
+        wd:Q778731. # pyuria
+
+
+# Cervical spondylosis (symptoms wikidata: no results)
+CONSTRUCT {
+    wd:Q11664912 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q11664912 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q11664912 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q11664912 ex:hasExplanation "Cervical spondylosis is commonly associated with cough, pain.",
+        "Cervical spondylosis is commonly associated with cough." ;
+    ex:hasSymptom wd:Q35805, # cough
+        wd:Q81938, # pain
+        wd:Q3567802, # neck pain
+        wd:Q86, # headache
+        wd:Q769220. # paresthesia
+
+
+# Jaundice (symptoms wikidata: no results)
+CONSTRUCT {
+    wd:Q133244 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q133244 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q133244 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q133244 ex:hasExplanation "Jaundice is commonly associated with fever, fatigue, pain.",
+        "Jaundice is commonly associated with fever, nausea, fatigue.",
+        "Jaundice is commonly associated with fever, nausea, pain.",
+        "Jaundice is commonly associated with fever, nausea.",
+        "Jaundice is commonly associated with fever, pain.",
+        "Jaundice is commonly associated with fever, vomiting, fatigue, pain.",
+        "Jaundice is commonly associated with fever, vomiting, pain.",
+        "Jaundice is commonly associated with fever.",
+        "Jaundice is commonly associated with nausea, pain.",
+        "Jaundice is commonly associated with nausea, vomiting, pain.",
+        "Jaundice is commonly associated with nausea.",
+        "Jaundice is commonly associated with pain." ;
+    ex:hasSymptom wd:Q81938, # pain
+        wd:Q9690, # fatigue
+        wd:Q186889, # nausea
+        wd:Q127076, # vomiting
+        wd:Q38933, # fever
+        ex:symptom/yellow_skin, 
+        ex:symptom/yellow_eyes, 
+        wd:Q21110084, # dark urine
+        wd:Q199602. # itch
+
+
+# Malaria (symptoms wikidata: fever, jaundice, coma, anemia, intermittent fever, periodic fever, hepatomegaly, chills, splenomegaly)
+CONSTRUCT {
+    wd:Q12156 a ex:Disease ;
+        skos:prefLabel ?dLabel ;
+        ex:hasSymptom ?symptom .
+
+    ?symptom a ex:Symptom ;
+        skos:prefLabel ?sLabel .
+}
+WHERE {
+    wd:Q12156 rdfs:label ?dLabel .
+    FILTER(lang(?dLabel) = "en")
+
+    OPTIONAL {
+        wd:Q12156 wdt:P780 ?symptom .
+        ?symptom rdfs:label ?sLabel .
+        FILTER(lang(?sLabel) = "en")
+  }
+}
+
+wd:Q12156 ex:hasExplanation "Malaria is commonly associated with fever, headache, nausea, pain.",
+        "Malaria is commonly associated with fever, headache, nausea, vomiting, pain.",
+        "Malaria is commonly associated with fever, headache, nausea, vomiting.",
+        "Malaria is commonly associated with fever, headache, nausea.",
+        "Malaria is commonly associated with fever, headache, vomiting, pain.",
+        "Malaria is commonly associated with fever, headache, vomiting.",
+        "Malaria is commonly associated with fever, headache.",
+        "Malaria is commonly associated with headache, nausea, pain.",
+        "Malaria is commonly associated with headache, nausea, vomiting.",
+        "Malaria is commonly associated with headache, nausea.",
+        "Malaria is commonly associated with headache, vomiting." ;
+    ex:hasSymptom wd:Q86, # headache
+        wd:Q186889, # nausea
+        wd:Q81938, # pain
+        wd:Q127076, # vomiting
+        wd:Q474959, # myalgia
+        wd:Q9690. # fatigue
+
+
+
+
+
+
+
+
+
+
+
+
+
