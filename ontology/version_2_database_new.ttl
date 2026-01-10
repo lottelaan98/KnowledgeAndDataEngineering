@@ -1,0 +1,227 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wd:   <http://www.wikidata.org/entity/> .
+@prefix ex:   <http://uu.nl/medical/> .
+
+#################################################################
+# CLASSES
+#################################################################
+
+ex:Disease a owl:Class ;
+  rdfs:label "Disease"@en ;
+  owl:equivalentClass wd:Q12136 .
+
+ex:Symptom a owl:Class ;
+  rdfs:label "Symptom"@en ;
+  owl:equivalentClass wd:Q169872 .
+
+#################################################################
+# SYMPTOM SUBCLASSES
+#################################################################
+
+ex:SkinSymptom a owl:Class ; rdfs:subClassOf ex:Symptom .
+ex:GastrointestinalSymptom a owl:Class ; rdfs:subClassOf ex:Symptom .
+ex:RespiratorySymptom a owl:Class ; rdfs:subClassOf ex:Symptom .
+ex:NeurologicalSymptom a owl:Class ; rdfs:subClassOf ex:Symptom .
+ex:CardiovascularSymptom a owl:Class ; rdfs:subClassOf ex:Symptom .
+ex:SystemicSymptom a owl:Class ; rdfs:subClassOf ex:Symptom .
+
+#################################################################
+# PROPERTIES
+#################################################################
+
+ex:hasPrimarySymptom a owl:ObjectProperty ;
+  rdfs:domain ex:Disease ;
+  rdfs:range ex:Symptom .
+
+ex:hasSecondarySymptom a owl:ObjectProperty ;
+  rdfs:domain ex:Disease ;
+  rdfs:range ex:Symptom .
+
+ex:hasComplication a owl:ObjectProperty ;
+  rdfs:domain ex:Disease ;
+  rdfs:range ex:Symptom .
+
+ex:definition a owl:DatatypeProperty ;
+  rdfs:domain ex:Disease ;
+  rdfs:range rdf:langString .
+
+#################################################################
+# SYMPTOMS (NORMALIZED CORE SET)
+#################################################################
+
+ex:symptom-pain a ex:SystemicSymptom ; skos:prefLabel "pain"@en ; skos:exactMatch wd:Q81938 .
+ex:symptom-fatigue a ex:SystemicSymptom ; skos:prefLabel "fatigue"@en ; skos:exactMatch wd:Q9690 .
+ex:symptom-fever a ex:SystemicSymptom ; skos:prefLabel "fever"@en ; skos:exactMatch wd:Q38933 .
+ex:symptom-headache a ex:NeurologicalSymptom ; skos:prefLabel "headache"@en ; skos:exactMatch wd:Q86 .
+ex:symptom-nausea a ex:GastrointestinalSymptom ; skos:prefLabel "nausea"@en ; skos:exactMatch wd:Q186889 .
+ex:symptom-vomiting a ex:GastrointestinalSymptom ; skos:prefLabel "vomiting"@en ; skos:exactMatch wd:Q127076 .
+ex:symptom-diarrhea a ex:GastrointestinalSymptom ; skos:prefLabel "diarrhea"@en ; skos:exactMatch wd:Q40878 .
+ex:symptom-cough a ex:RespiratorySymptom ; skos:prefLabel "cough"@en ; skos:exactMatch wd:Q35805 .
+ex:symptom-dyspnea a ex:RespiratorySymptom ; skos:prefLabel "shortness of breath"@en ; skos:exactMatch wd:Q188008 .
+ex:symptom-rash a ex:SkinSymptom ; skos:prefLabel "rash"@en ; skos:exactMatch wd:Q653197 .
+ex:symptom-itching a ex:SkinSymptom ; skos:prefLabel "itching"@en ; skos:exactMatch wd:Q199602 .
+ex:symptom-joint-pain a ex:SystemicSymptom ; skos:prefLabel "joint pain"@en ; skos:exactMatch wd:Q683498 .
+ex:symptom-chest-pain a ex:CardiovascularSymptom ; skos:prefLabel "chest pain"@en ; skos:exactMatch wd:Q693058 .
+ex:symptom-rapid-heart-rate a ex:CardiovascularSymptom ; skos:prefLabel "rapid heart rate"@en ; skos:exactMatch wd:Q192304 .
+
+#################################################################
+# DISEASES (ALL REFACTORED)
+#################################################################
+
+ex:disease-psoriasis a ex:Disease ;
+  skos:prefLabel "Psoriasis"@en ;
+  owl:sameAs wd:Q179945 ;
+  ex:definition "Chronic autoimmune skin disease."@en ;
+  ex:hasPrimarySymptom ex:symptom-rash ;
+  ex:hasSecondarySymptom ex:symptom-itching ;
+  ex:hasComplication ex:symptom-joint-pain .
+
+ex:disease-varicose-veins a ex:Disease ;
+  skos:prefLabel "Varicose veins"@en ;
+  owl:sameAs wd:Q201180 ;
+  ex:definition "Dilated superficial veins due to venous insufficiency."@en ;
+  ex:hasPrimarySymptom ex:symptom-pain ;
+  ex:hasSecondarySymptom ex:symptom-fatigue .
+
+ex:disease-typhoid a ex:Disease ;
+  skos:prefLabel "Typhoid fever"@en ;
+  owl:sameAs wd:Q83319 ;
+  ex:definition "Systemic bacterial infection caused by Salmonella Typhi."@en ;
+  ex:hasPrimarySymptom ex:symptom-fever ;
+  ex:hasPrimarySymptom ex:symptom-diarrhea ;
+  ex:hasSecondarySymptom ex:symptom-headache ;
+  ex:hasComplication ex:symptom-pain .
+
+ex:disease-chickenpox a ex:Disease ;
+  skos:prefLabel "Chickenpox"@en ;
+  owl:sameAs wd:Q44727 ;
+  ex:definition "Viral infection caused by varicella-zoster virus."@en ;
+  ex:hasPrimarySymptom ex:symptom-rash ;
+  ex:hasSecondarySymptom ex:symptom-fever ;
+  ex:hasSecondarySymptom ex:symptom-fatigue .
+
+ex:disease-impetigo a ex:Disease ;
+  skos:prefLabel "Impetigo"@en ;
+  owl:sameAs wd:Q28971 ;
+  ex:definition "Contagious bacterial skin infection."@en ;
+  ex:hasPrimarySymptom ex:symptom-rash ;
+  ex:hasSecondarySymptom ex:symptom-itching ;
+  ex:hasSecondarySymptom ex:symptom-pain .
+
+ex:disease-dengue a ex:Disease ;
+  skos:prefLabel "Dengue"@en ;
+  owl:sameAs wd:Q30953 ;
+  ex:definition "Mosquito-borne viral infection."@en ;
+  ex:hasPrimarySymptom ex:symptom-fever ;
+  ex:hasPrimarySymptom ex:symptom-joint-pain ;
+  ex:hasSecondarySymptom ex:symptom-headache ;
+  ex:hasComplication ex:symptom-pain .
+
+ex:disease-common-cold a ex:Disease ;
+  skos:prefLabel "Common cold"@en ;
+  owl:sameAs wd:Q12125 ;
+  ex:definition "Viral upper respiratory tract infection."@en ;
+  ex:hasPrimarySymptom ex:symptom-cough ;
+  ex:hasSecondarySymptom ex:symptom-fatigue .
+
+ex:disease-pneumonia a ex:Disease ;
+  skos:prefLabel "Pneumonia"@en ;
+  owl:sameAs wd:Q12192 ;
+  ex:definition "Infection causing inflammation of lung alveoli."@en ;
+  ex:hasPrimarySymptom ex:symptom-cough ;
+  ex:hasPrimarySymptom ex:symptom-fever ;
+  ex:hasComplication ex:symptom-dyspnea .
+
+ex:disease-arthritis a ex:Disease ;
+  skos:prefLabel "Arthritis"@en ;
+  owl:sameAs wd:Q170990 ;
+  ex:definition "Joint inflammation disorder."@en ;
+  ex:hasPrimarySymptom ex:symptom-joint-pain ;
+  ex:hasSecondarySymptom ex:symptom-fatigue .
+
+ex:disease-acne a ex:Disease ;
+  skos:prefLabel "Acne"@en ;
+  owl:sameAs wd:Q79928 ;
+  ex:definition "Inflammatory disease of sebaceous glands."@en ;
+  ex:hasPrimarySymptom ex:symptom-rash .
+
+ex:disease-asthma a ex:Disease ;
+  skos:prefLabel "Bronchial asthma"@en ;
+  owl:sameAs wd:Q35869 ;
+  ex:definition "Chronic inflammatory airway disease."@en ;
+  ex:hasPrimarySymptom ex:symptom-dyspnea ;
+  ex:hasSecondarySymptom ex:symptom-cough .
+
+ex:disease-hypertension a ex:Disease ;
+  skos:prefLabel "Hypertension"@en ;
+  owl:sameAs wd:Q95566669 ;
+  ex:definition "Chronically elevated blood pressure."@en ;
+  ex:hasSecondarySymptom ex:symptom-headache ;
+  ex:hasComplication ex:symptom-chest-pain .
+
+ex:disease-migraine a ex:Disease ;
+  skos:prefLabel "Migraine"@en ;
+  owl:sameAs wd:Q133823 ;
+  ex:definition "Primary headache disorder."@en ;
+  ex:hasPrimarySymptom ex:symptom-headache ;
+  ex:hasSecondarySymptom ex:symptom-nausea .
+
+ex:disease-allergy a ex:Disease ;
+  skos:prefLabel "Allergy"@en ;
+  owl:sameAs wd:Q42982 ;
+  ex:definition "Immune hypersensitivity reaction."@en ;
+  ex:hasPrimarySymptom ex:symptom-itching ;
+  ex:hasSecondarySymptom ex:symptom-rash .
+
+ex:disease-gerd a ex:Disease ;
+  skos:prefLabel "Gastroesophageal reflux disease"@en ;
+  owl:sameAs wd:Q223591 ;
+  ex:definition "Chronic acid reflux disorder."@en ;
+  ex:hasPrimarySymptom ex:symptom-pain ;
+  ex:hasSecondarySymptom ex:symptom-nausea .
+
+ex:disease-peptic-ulcer a ex:Disease ;
+  skos:prefLabel "Peptic ulcer disease"@en ;
+  owl:sameAs wd:Q172941 ;
+  ex:definition "Ulceration of stomach or duodenum lining."@en ;
+  ex:hasPrimarySymptom ex:symptom-pain ;
+  ex:hasSecondarySymptom ex:symptom-nausea .
+
+ex:disease-drug-reaction a ex:Disease ;
+  skos:prefLabel "Drug reaction"@en ;
+  owl:sameAs wd:Q3931183 ;
+  ex:definition "Adverse physiological response to medication."@en ;
+  ex:hasPrimarySymptom ex:symptom-rash ;
+  ex:hasComplication ex:symptom-dyspnea .
+
+ex:disease-diabetes a ex:Disease ;
+  skos:prefLabel "Diabetes mellitus"@en ;
+  owl:sameAs wd:Q12206 ;
+  ex:definition "Metabolic disorder characterized by hyperglycemia."@en ;
+  ex:hasSecondarySymptom ex:symptom-fatigue ;
+  ex:hasComplication ex:symptom-pain .
+
+ex:disease-uti a ex:Disease ;
+  skos:prefLabel "Urinary tract infection"@en ;
+  owl:sameAs wd:Q221668 ;
+  ex:definition "Bacterial infection of urinary tract."@en ;
+  ex:hasPrimarySymptom ex:symptom-pain ;
+  ex:hasSecondarySymptom ex:symptom-fever .
+
+ex:disease-jaundice a ex:Disease ;
+  skos:prefLabel "Jaundice"@en ;
+  owl:sameAs wd:Q133244 ;
+  ex:definition "Yellow discoloration due to bilirubin accumulation."@en ;
+  ex:hasPrimarySymptom ex:symptom-fever ;
+  ex:hasSecondarySymptom ex:symptom-fatigue .
+
+ex:disease-malaria a ex:Disease ;
+  skos:prefLabel "Malaria"@en ;
+  owl:sameAs wd:Q12156 ;
+  ex:definition "Parasitic mosquito-borne disease."@en ;
+  ex:hasPrimarySymptom ex:symptom-fever ;
+  ex:hasSecondarySymptom ex:symptom-headache ;
+  ex:hasComplication ex:symptom-pain .
