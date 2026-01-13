@@ -15,7 +15,7 @@ class RAGExplainer:
     NEVER predicts diseases.
     """
 
-    def __init__(self, docs_path="rag/docs"):
+    def __init__(self, docs_path="KnowledgeAndDataEngineering-main/rag/docs"):
         self.embedder = SentenceTransformer("all-MiniLM-L6-v2")
         self.docs = []
         self._load_docs(docs_path)
@@ -40,7 +40,7 @@ class RAGExplainer:
         response = requests.post(
         "http://localhost:11434/api/chat",
         json={
-            "model": "llama3",
+            "model": OLLAMA_MODEL,
             "messages": [
                 {"role": "system", "content": "You are a medical explanation assistant."},
                 {"role": "user", "content": prompt}

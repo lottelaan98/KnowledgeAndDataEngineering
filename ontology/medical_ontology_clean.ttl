@@ -1,0 +1,161 @@
+@prefix ex: <http://uu.nl/medical/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+############################
+# Classes
+############################
+
+ex:Disease a owl:Class .
+ex:Symptom a owl:Class .
+
+############################
+# Properties
+############################
+
+ex:hasPrimarySymptom a owl:ObjectProperty .
+ex:hasSecondarySymptom a owl:ObjectProperty .
+ex:hasComplication a owl:ObjectProperty .
+
+############################
+# Symptoms
+############################
+
+ex:symptom/fever a ex:Symptom ; skos:prefLabel "fever"@en .
+ex:symptom/headache a ex:Symptom ; skos:prefLabel "headache"@en .
+ex:symptom/fatigue a ex:Symptom ; skos:prefLabel "fatigue"@en .
+ex:symptom/pain a ex:Symptom ; skos:prefLabel "pain"@en .
+ex:symptom/cough a ex:Symptom ; skos:prefLabel "cough"@en .
+ex:symptom/dyspnea a ex:Symptom ; skos:prefLabel "shortness of breath"@en .
+ex:symptom/rash a ex:Symptom ; skos:prefLabel "rash"@en .
+ex:symptom/itching a ex:Symptom ; skos:prefLabel "itching"@en .
+ex:symptom/joint-pain a ex:Symptom ; skos:prefLabel "joint pain"@en .
+ex:symptom/nausea a ex:Symptom ; skos:prefLabel "nausea"@en .
+ex:symptom/vomiting a ex:Symptom ; skos:prefLabel "vomiting"@en .
+ex:symptom/diarrhea a ex:Symptom ; skos:prefLabel "diarrhea"@en .
+ex:symptom/chest-pain a ex:Symptom ; skos:prefLabel "chest pain"@en .
+ex:symptom/yellow-skin a ex:Symptom ; skos:prefLabel "yellow skin"@en .
+ex:symptom/yellow-eyes a ex:Symptom ; skos:prefLabel "yellow eyes"@en .
+ex:symptom/frequent-urination a ex:Symptom ; skos:prefLabel "frequent urination"@en .
+ex:symptom/blurred-vision a ex:Symptom ; skos:prefLabel "blurred vision"@en .
+
+############################
+# Diseases
+############################
+
+ex:disease/psoriasis a ex:Disease ;
+  skos:prefLabel "Psoriasis"@en ;
+  ex:hasPrimarySymptom ex:symptom/rash ;
+  ex:hasSecondarySymptom ex:symptom/itching ;
+  ex:hasComplication ex:symptom/joint-pain .
+
+ex:disease/varicose-veins a ex:Disease ;
+  skos:prefLabel "Varicose veins"@en ;
+  ex:hasPrimarySymptom ex:symptom/pain ;
+  ex:hasSecondarySymptom ex:symptom/fatigue .
+
+ex:disease/typhoid a ex:Disease ;
+  skos:prefLabel "Typhoid fever"@en ;
+  ex:hasPrimarySymptom ex:symptom/fever ;
+  ex:hasPrimarySymptom ex:symptom/diarrhea ;
+  ex:hasSecondarySymptom ex:symptom/headache ;
+  ex:hasSecondarySymptom ex:symptom/fatigue .
+
+ex:disease/chickenpox a ex:Disease ;
+  skos:prefLabel "Chickenpox"@en ;
+  ex:hasPrimarySymptom ex:symptom/rash ;
+  ex:hasSecondarySymptom ex:symptom/fever ;
+  ex:hasSecondarySymptom ex:symptom/fatigue .
+
+ex:disease/impetigo a ex:Disease ;
+  skos:prefLabel "Impetigo"@en ;
+  ex:hasPrimarySymptom ex:symptom/rash ;
+  ex:hasSecondarySymptom ex:symptom/itching ;
+  ex:hasSecondarySymptom ex:symptom/pain .
+
+ex:disease/dengue a ex:Disease ;
+  skos:prefLabel "Dengue"@en ;
+  ex:hasPrimarySymptom ex:symptom/fever ;
+  ex:hasPrimarySymptom ex:symptom/joint-pain ;
+  ex:hasSecondarySymptom ex:symptom/headache ;
+  ex:hasSecondarySymptom ex:symptom/pain .
+
+ex:disease/common-cold a ex:Disease ;
+  skos:prefLabel "Common cold"@en ;
+  ex:hasPrimarySymptom ex:symptom/cough ;
+  ex:hasSecondarySymptom ex:symptom/headache ;
+  ex:hasSecondarySymptom ex:symptom/fatigue .
+
+ex:disease/pneumonia a ex:Disease ;
+  skos:prefLabel "Pneumonia"@en ;
+  ex:hasPrimarySymptom ex:symptom/cough ;
+  ex:hasPrimarySymptom ex:symptom/fever ;
+  ex:hasComplication ex:symptom/dyspnea .
+
+ex:disease/arthritis a ex:Disease ;
+  skos:prefLabel "Arthritis"@en ;
+  ex:hasPrimarySymptom ex:symptom/joint-pain ;
+  ex:hasSecondarySymptom ex:symptom/fatigue .
+
+ex:disease/acne a ex:Disease ;
+  skos:prefLabel "Acne"@en ;
+  ex:hasPrimarySymptom ex:symptom/rash .
+
+ex:disease/asthma a ex:Disease ;
+  skos:prefLabel "Bronchial asthma"@en ;
+  ex:hasPrimarySymptom ex:symptom/dyspnea ;
+  ex:hasSecondarySymptom ex:symptom/cough .
+
+ex:disease/hypertension a ex:Disease ;
+  skos:prefLabel "Hypertension"@en ;
+  ex:hasSecondarySymptom ex:symptom/headache ;
+  ex:hasComplication ex:symptom/chest-pain .
+
+ex:disease/migraine a ex:Disease ;
+  skos:prefLabel "Migraine"@en ;
+  ex:hasPrimarySymptom ex:symptom/headache ;
+  ex:hasSecondarySymptom ex:symptom/nausea .
+
+ex:disease/allergy a ex:Disease ;
+  skos:prefLabel "Allergy"@en ;
+  ex:hasPrimarySymptom ex:symptom/itching ;
+  ex:hasSecondarySymptom ex:symptom/rash .
+
+ex:disease/gerd a ex:Disease ;
+  skos:prefLabel "Gastroesophageal reflux disease"@en ;
+  ex:hasPrimarySymptom ex:symptom/chest-pain ;
+  ex:hasSecondarySymptom ex:symptom/nausea .
+
+ex:disease/peptic-ulcer a ex:Disease ;
+  skos:prefLabel "Peptic ulcer disease"@en ;
+  ex:hasPrimarySymptom ex:symptom/pain ;
+  ex:hasSecondarySymptom ex:symptom/nausea .
+
+ex:disease/drug-reaction a ex:Disease ;
+  skos:prefLabel "Drug reaction"@en ;
+  ex:hasPrimarySymptom ex:symptom/rash ;
+  ex:hasComplication ex:symptom/dyspnea .
+
+ex:disease/diabetes a ex:Disease ;
+  skos:prefLabel "Diabetes mellitus"@en ;
+  ex:hasSecondarySymptom ex:symptom/fatigue ;
+  ex:hasComplication ex:symptom/blurred-vision ;
+  ex:hasComplication ex:symptom/frequent-urination .
+
+ex:disease/uti a ex:Disease ;
+  skos:prefLabel "Urinary tract infection"@en ;
+  ex:hasPrimarySymptom ex:symptom/pain ;
+  ex:hasSecondarySymptom ex:symptom/fever .
+
+ex:disease/jaundice a ex:Disease ;
+  skos:prefLabel "Jaundice"@en ;
+  ex:hasPrimarySymptom ex:symptom/yellow-skin ;
+  ex:hasPrimarySymptom ex:symptom/yellow-eyes ;
+  ex:hasSecondarySymptom ex:symptom/fatigue .
+
+ex:disease/malaria a ex:Disease ;
+  skos:prefLabel "Malaria"@en ;
+  ex:hasPrimarySymptom ex:symptom/fever ;
+  ex:hasSecondarySymptom ex:symptom/headache ;
+  ex:hasSecondarySymptom ex:symptom/fatigue .

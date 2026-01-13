@@ -1,0 +1,19 @@
+@prefix ex: <http://uu.nl/medical/> .
+@prefix disease: <http://uu.nl/medical/disease/> .
+@prefix symptom: <http://uu.nl/medical/symptom/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+ex:Disease a owl:Class .
+ex:Symptom a owl:Class .
+
+ex:hasPrimarySymptom a owl:ObjectProperty .
+ex:hasSecondarySymptom a owl:ObjectProperty .
+ex:hasComplication a owl:ObjectProperty .
+
+symptom:fever a ex:Symptom ;
+  skos:prefLabel "fever"@en .
+
+disease:test a ex:Disease ;
+  skos:prefLabel "Test disease"@en ;
+  ex:hasPrimarySymptom symptom:fever .
