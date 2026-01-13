@@ -12,7 +12,7 @@ from rdflib.plugins.parsers.notation3 import BadSyntax
 
 g = Graph()
 try:
-    g.parse("/content/drive/MyDrive/UU/Period2/KDE/Assignement/databaseV4.ttl", format="turtle")
+    g.parse("/content/drive/MyDrive/UU/Period2/KDE/Assignement/databaseV5.ttl", format="turtle")
     print("OK. Triples:", len(g))
 except BadSyntax as e:
     print("BadSyntax:", e)
