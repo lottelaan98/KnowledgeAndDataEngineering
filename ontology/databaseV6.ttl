@@ -438,7 +438,7 @@ wd:Q179945 a ex:Disease ;
     ex:seeDoctor "If symptoms persist, worsen, or joint pain appears."@en ;
     ex:treatment "Treatment usually requires medical guidance; do not rely on self-treatment alone."@en ; #REPLACED . WITH ;
     ex:hasPrimarySymptom
-        wd:Q199602         # itch
+        wd:Q199602 ,       # itch
         wd:Q29971784,      # nail pitting
         wd:Q102187111,     # nail discoloration
         sym:red_inflamed_skin_patches;
@@ -615,7 +615,7 @@ wd:Q12192 a ex:Disease ;
     ex:hasSecondarySymptom
         wd:Q570920 ,        # tachypnea
         wd:Q647099 ,        # hemoptysis
-        sym:rapid_heart_rate ;
+        sym:rapid_heart_rate ,
         wd:Q81938.          # pain                                   
 
 # Dimorphic hemorrhoids
@@ -742,7 +742,7 @@ wd:Q223591 a ex:Disease ;
         wd:Q30597356;       # regurgitation
     ex:hasSecondarySymptom
         wd:Q21120264 ,      # precordial pain
-        wd:Q623289 ;        # dysphagia
+        wd:Q623289 ,        # dysphagia
         wd:Q35805 ,         # cough
         wd:Q186889,         # nausea
         wd:Q81938,          # pain
