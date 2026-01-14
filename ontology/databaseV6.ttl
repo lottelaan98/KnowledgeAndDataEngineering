@@ -508,8 +508,8 @@ wd:Q44727 a ex:Disease ;
         wd:Q480971 ,        # low-grade fever
         wd:Q997862 ,        # papule
         wd:Q276469 ,        # blister
-        wd:Q199602 ;        # itch
-        wd:Q653197.         # rash
+        wd:Q199602 ,        # itch
+        wd:Q653197;         # rash
     ex:hasSecondarySymptom
         wd:Q86 ,            # headache
         sym:loss_of_appetite ,
@@ -517,7 +517,7 @@ wd:Q44727 a ex:Disease ;
         wd:Q991153 ,        # erosion
         wd:Q38933 ,         # fever
         wd:Q81938,          # pain
-        wd:Q127076,         # vomiting                                       
+        wd:Q127076.         # vomiting                                       
 
 # Impetigo
 wd:Q28971 a ex:Disease ;
@@ -739,7 +739,7 @@ wd:Q223591 a ex:Disease ;
     ex:hasPrimarySymptom
         wd:Q537297 ,        # heartburn
         wd:Q16595080 ,      # gastroesophageal reflux
-        wd:Q30597356,       # regurgitation
+        wd:Q30597356;       # regurgitation
     ex:hasSecondarySymptom
         wd:Q21120264 ,      # precordial pain
         wd:Q623289 ;        # dysphagia
@@ -778,7 +778,6 @@ wd:Q3931183 a ex:Disease ;
     ex:hasPrimarySymptom
         wd:Q653197,         # rash 
         wd:Q199602 ;        # itch 
-
     ex:hasSecondarySymptom
         wd:Q517104,         # wheeze
         wd:Q10916362 ,      # dizziness
