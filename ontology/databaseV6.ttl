@@ -11,7 +11,9 @@
 @prefix ex:  <http://example.org/med#> .                           
 @prefix sym: <http://example.org/med#symptom/> .                  
 @prefix owl: <http://www.w3.org/2002/07/owl#> .                    
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .       
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .    
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
 
 
 ### CLASSES ###
@@ -30,43 +32,46 @@ ex:AlarmSymptom a owl:Class ;
 
 ex:SkinSymptom a owl:Class ; 
     rdfs:subClassOf ex:Symptom ;
-    owl:distinctWith ex:GastrointestinalSymptom, ex:RespiratorySymptom, ex:NeurologicalSymptom, 
+    owl:disjointWith ex:GastrointestinalSymptom, ex:RespiratorySymptom, ex:NeurologicalSymptom, 
         ex:CardiovascularSymptom, ex:SystemicSymptom, ex:GeneralSymptom, ex:ClinicalFinding.
 
 ex:GastrointestinalSymptom a owl:Class ; 
     rdfs:subClassOf ex:Symptom ; 
-    owl:distinctWith ex:SkinSymptom, ex:RespiratorySymptom, ex:NeurologicalSymptom, 
+    owl:disjointWith ex:SkinSymptom, ex:RespiratorySymptom, ex:NeurologicalSymptom, 
         ex:CardiovascularSymptom, ex:SystemicSymptom, ex:GeneralSymptom, ex:ClinicalFinding.
 
 ex:RespiratorySymptom a owl:Class ; 
     rdfs:subClassOf ex:Symptom ;
-    owl:distinctWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:NeurologicalSymptom, 
+    owl:disjointWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:NeurologicalSymptom, 
         ex:CardiovascularSymptom, ex:SystemicSymptom, ex:GeneralSymptom, ex:ClinicalFinding.
 
 ex:NeurologicalSymptom a owl:Class ; 
     rdfs:subClassOf ex:Symptom ;
-    owl:distinctWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:RespiratorySymptom, 
+    owl:disjointWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:RespiratorySymptom, 
         ex:CardiovascularSymptom, ex:SystemicSymptom, ex:GeneralSymptom, ex:ClinicalFinding.
 
 ex:CardiovascularSymptom a owl:Class ; 
     rdfs:subClassOf ex:Symptom ;
-    owl:distinctWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:RespiratorySymptom, 
+    owl:disjointWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:RespiratorySymptom, 
         ex:NeurologicalSymptom, ex:SystemicSymptom, ex:GeneralSymptom, ex:ClinicalFinding.
 
 ex:SystemicSymptom a owl:Class ; 
     rdfs:subClassOf ex:Symptom ;
-    owl:distinctWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:RespiratorySymptom, 
+    owl:disjointWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:RespiratorySymptom, 
         ex:NeurologicalSymptom, ex:CardiovascularSymptom, ex:GeneralSymptom, ex:ClinicalFinding.
 
 ex:GeneralSymptom a owl:Class ; 
     rdfs:subClassOf ex:Symptom ;
-    owl:distinctWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:RespiratorySymptom, 
+    owl:disjointWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:RespiratorySymptom, 
         ex:NeurologicalSymptom, ex:CardiovascularSymptom, ex:SystemicSymptom, ex:ClinicalFinding.
 
 ex:ClinicalFinding a owl:Class ; 
     rdfs:subClassOf ex:Symptom ;
-    owl:distinctWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:RespiratorySymptom, 
+    owl:disjointWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:RespiratorySymptom, 
         ex:NeurologicalSymptom, ex:CardiovascularSymptom, ex:SystemicSymptom, ex:GeneralSymptom.
+
+ex:Symptom owl:equivalentClass [owl:unionOf (ex:SkinSymptom ex:GastrointestinalSymptom ex:RespiratorySymptom 
+        ex:NeurologicalSymptom ex:CardiovascularSymptom ex:SystemicSymptom ex:GeneralSymptom)] .
 
 
 ### PROPERTIES ###
@@ -101,6 +106,15 @@ ex:seeDoctor a owl:DatatypeProperty ;
 ex:treatment a owl:DatatypeProperty ;
     rdfs:domain ex:Disease ;
     rdfs:range rdfs:Literal . 
+
+ex:alarm a owl:DatatypeProperty ;   
+    rdfs:domain ex:AlarmSymptom ;
+    rdfs:range rdfs:Literal .
+
+ex:treshold a owl:DatatypeProperty ;
+    rdfs:domain ex:AlarmSymptom ;
+    rdfs:range xsd:decimal .
+
 
 ### WIKIDATA SYMPTOMS ###
 
@@ -455,16 +469,21 @@ sym:yellow_skin a ex:SystemicSymptom ;
 
 ### ALARM SYMTPOMS ###
 
+ex:alarmMessage ex:alarm "Please contact your GP Immediately!"@en .
+
 sym:high_temprature a ex:AlarmSymptom ;
     rdfs:label "high body temprature"@en ;
-    skos:closeMatch wd:Q38933 .         # fever
+    skos:closeMatch wd:Q38933 ;         # fever
+    ex:treshold "40"^^xsd:decimal .
 
 sym:extreme_pain a ex:AlarmSymptom ;
     rdfs:label "extreme pain"@en ;
-    skos:closeMatch Q81938 .            # pain
+    skos:closeMatch wd:Q81938 ;            # pain
+    ex:treshold "9"^^xsd:decimal . 
 
 sym:high_blood_pressure a ex:AlarmSymptom ;
-    rdfs:label "high blood pressure" .
+    rdfs:label "high blood pressure" ;
+    ex:treshold "180"^^xsd:decimal . 
 
 
 ### DISEASES ###
