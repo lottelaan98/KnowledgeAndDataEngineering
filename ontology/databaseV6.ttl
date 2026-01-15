@@ -23,31 +23,50 @@ ex:Symptom a owl:Class ;
     rdfs:label "Symptom"@en .
 
 ex:Explanation a owl:Class ;                                        
-    rdfs:label "Explanation"@en .                                  
+    rdfs:label "Explanation"@en .   
+
+ex:AlarmSymptom a owl:Class ;
+    rdfs:label "Alarm Symptom"@en .                               
 
 ex:SkinSymptom a owl:Class ; 
-    rdfs:subClassOf ex:Symptom .
+    rdfs:subClassOf ex:Symptom ;
+    owl:distinctWith ex:GastrointestinalSymptom, ex:RespiratorySymptom, ex:NeurologicalSymptom, 
+        ex:CardiovascularSymptom, ex:SystemicSymptom, ex:GeneralSymptom, ex:ClinicalFinding.
 
 ex:GastrointestinalSymptom a owl:Class ; 
-    rdfs:subClassOf ex:Symptom .
+    rdfs:subClassOf ex:Symptom ; 
+    owl:distinctWith ex:SkinSymptom, ex:RespiratorySymptom, ex:NeurologicalSymptom, 
+        ex:CardiovascularSymptom, ex:SystemicSymptom, ex:GeneralSymptom, ex:ClinicalFinding.
 
 ex:RespiratorySymptom a owl:Class ; 
-    rdfs:subClassOf ex:Symptom .
+    rdfs:subClassOf ex:Symptom ;
+    owl:distinctWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:NeurologicalSymptom, 
+        ex:CardiovascularSymptom, ex:SystemicSymptom, ex:GeneralSymptom, ex:ClinicalFinding.
 
 ex:NeurologicalSymptom a owl:Class ; 
-    rdfs:subClassOf ex:Symptom .
+    rdfs:subClassOf ex:Symptom ;
+    owl:distinctWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:RespiratorySymptom, 
+        ex:CardiovascularSymptom, ex:SystemicSymptom, ex:GeneralSymptom, ex:ClinicalFinding.
 
 ex:CardiovascularSymptom a owl:Class ; 
-    rdfs:subClassOf ex:Symptom .
+    rdfs:subClassOf ex:Symptom ;
+    owl:distinctWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:RespiratorySymptom, 
+        ex:NeurologicalSymptom, ex:SystemicSymptom, ex:GeneralSymptom, ex:ClinicalFinding.
 
 ex:SystemicSymptom a owl:Class ; 
-    rdfs:subClassOf ex:Symptom .
+    rdfs:subClassOf ex:Symptom ;
+    owl:distinctWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:RespiratorySymptom, 
+        ex:NeurologicalSymptom, ex:CardiovascularSymptom, ex:GeneralSymptom, ex:ClinicalFinding.
 
 ex:GeneralSymptom a owl:Class ; 
-    rdfs:subClassOf ex:Symptom .
+    rdfs:subClassOf ex:Symptom ;
+    owl:distinctWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:RespiratorySymptom, 
+        ex:NeurologicalSymptom, ex:CardiovascularSymptom, ex:SystemicSymptom, ex:ClinicalFinding.
 
 ex:ClinicalFinding a owl:Class ; 
-    rdfs:subClassOf ex:Symptom .
+    rdfs:subClassOf ex:Symptom ;
+    owl:distinctWith ex:SkinSymptom, ex:GastrointestinalSymptom, ex:RespiratorySymptom, 
+        ex:NeurologicalSymptom, ex:CardiovascularSymptom, ex:SystemicSymptom, ex:GeneralSymptom.
 
 
 ### PROPERTIES ###
@@ -66,6 +85,11 @@ ex:hasSecondarySymptom a owl:ObjectProperty ;
     rdfs:range ex:Symptom ;
     rdfs:subPropertyOf ex:hasSymptom .                               # ADDED SPACE AFTER .
 
+ex:hasRareSymptom a owl:ObjectProperty ;
+    rdfs:domain ex:Disease ;
+    rdfs:range ex:Symptom ;
+    rdfs:subPropertyOf ex:hasSymptom .     
+
 ex:hasExplanation a owl:DatatypeProperty ;                          
     rdfs:domain ex:Disease ;
     rdfs:range rdfs:Literal .    
@@ -76,8 +100,7 @@ ex:seeDoctor a owl:DatatypeProperty ;
 
 ex:treatment a owl:DatatypeProperty ;
     rdfs:domain ex:Disease ;
-    rdfs:range rdfs:Literal .                           
-
+    rdfs:range rdfs:Literal . 
 
 ### WIKIDATA SYMPTOMS ###
 
@@ -428,6 +451,21 @@ sym:yellow_eyes a ex:SystemicSymptom ;
 
 sym:yellow_skin a ex:SystemicSymptom ;
     skos:prefLabel "yellow skin"@en .
+
+
+### ALARM SYMTPOMS ###
+
+sym:high_temprature a ex:AlarmSymptom ;
+    rdfs:label "high body temprature"@en ;
+    skos:closeMatch wd:Q38933 .         # fever
+
+sym:extreme_pain a ex:AlarmSymptom ;
+    rdfs:label "extreme pain"@en ;
+    skos:closeMatch Q81938 .            # pain
+
+sym:high_blood_pressure a ex:AlarmSymptom ;
+    rdfs:label "high blood pressure" .
+
 
 ### DISEASES ###
 
