@@ -115,6 +115,19 @@ ex:treshold a owl:DatatypeProperty ;
     rdfs:domain ex:AlarmSymptom ;
     rdfs:range xsd:decimal .
 
+ex:Disease rdfs:subClassOf
+  [ a owl:Restriction ;
+    owl:onProperty ex:hasPrimarySymptom ;
+    owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    owl:onClass ex:Symptom
+  ] .
+
+ex:isSymptomOf a owl:ObjectProperty ;
+  rdfs:label "is symptom of"@en ;
+  owl:inverseOf ex:hasSymptom ;
+  rdfs:domain ex:Symptom ;
+  rdfs:range ex:Disease .
+
 
 ### WIKIDATA SYMPTOMS ###
 
