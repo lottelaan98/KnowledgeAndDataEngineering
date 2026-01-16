@@ -1,0 +1,519 @@
+{
+  "Q79928": {
+    "q_id": "Q79928",
+    "disease_name": "Acne",
+    "source_title": "Acne",
+    "source_url": "https://medlineplus.gov/acne.html",
+    "summary": {
+      "explanation_100_words_max": "Acne is a common skin disease that causes pimples when hair follicles under your skin clog up. It's not serious, but it can cause scars. Hormone changes may play a role, and stress can make it worse.",
+      "symptoms": [
+        "pimples",
+        "blackheads"
+      ],
+      "treatment_options": "Treatments for acne include medicines and creams.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "If you have acne: Clean your skin gently, Try not to touch your skin, Avoid the sun"
+      }
+    }
+  },
+  "Q42982": {
+    "q_id": "Q42982",
+    "disease_name": "Allergy",
+    "source_title": "Allergy",
+    "source_url": "https://medlineplus.gov/allergy.html",
+    "summary": {
+      "explanation_100_words_max": "An allergy is a reaction by your immune system to something that does not bother most other people. It can cause symptoms such as a runny nose, sneezing, itching, rashes, swelling, or asthma.",
+      "symptoms": [
+        "runny nose",
+        "sneezing",
+        "itching",
+        "rashes",
+        "swelling",
+        "asthma"
+      ],
+      "treatment_options": "Treatments include medicines, allergy shots, and avoiding the substances that cause the reactions.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "Doctors use skin and blood tests to diagnose allergies."
+      }
+    }
+  },
+  "Q170990": {
+    "q_id": "Q170990",
+    "disease_name": "Arthritis",
+    "source_title": "Arthritis",
+    "source_url": "https://medlineplus.gov/arthritis.html",
+    "summary": {
+      "explanation_100_words_max": "Arthritis is a disorder that affects joints, causing pain, stiffness, and inflammation. There are many types, including osteoarthritis, autoimmune arthritis, rheumatoid arthritis, juvenile arthritis, infectious arthritis, reactive arthritis, psoriatic arthritis, gout, and ankylosing spondylitis. Symptoms include pain, redness, warmth, and joint inflammation, as well as fever, weight loss, breathing difficulties, or a rash. Treatment depends on the type of arthritis and may include medicine or surgery.",
+      "symptoms": [
+        "Pain",
+        "Redness",
+        "Warmth",
+        "Joint inflammation",
+        "Fever",
+        "Weight loss",
+        "Breathing difficulties",
+        "Rash"
+      ],
+      "treatment_options": "Treatment depends on the type of arthritis and may include medicine or surgery. A few ways to help manage symptoms include: hot or cold packs, relaxation techniques, use of splints, braces, and/or assistive devices.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "Your health care provider may ask you about your medical history, including your symptoms, do a physical exam, order blood tests or take x-rays. Your provider may refer you to a rheumatologist for tests, diagnosis, and care."
+      }
+    }
+  },
+  "Q35869": {
+    "q_id": "Q35869",
+    "disease_name": "Asthma",
+    "source_title": "Asthma",
+    "source_url": "https://medlineplus.gov/asthma.html",
+    "summary": {
+      "explanation_100_words_max": "Asthma is a chronic lung disease that affects airways, causing wheezing, coughing, and tightness in the chest. The exact cause is unknown, but genetics, environment, and triggers like allergens or household chemicals may play a role. Symptoms include chest tightness, coughing, shortness of breath, and wheezing. Treatment involves avoiding triggers, using quick-relief medicines for attacks, and taking daily control medicines to prevent symptoms.",
+      "symptoms": [
+        "Chest tightness",
+        "Coughing, especially at night or early morning",
+        "Shortness of breath",
+        "Wheezing, which causes a whistling sound when you breathe out"
+      ],
+      "treatment_options": "Treatment involves avoiding triggers, using quick-relief medicines for attacks, and taking daily control medicines to prevent symptoms.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "If you are experiencing symptoms or having asthma attacks, see a doctor to create a treatment plan."
+      }
+    }
+  },
+  "Q11664912": {
+    "q_id": "Q11664912",
+    "disease_name": "Cervical spondylosis",
+    "source_title": "Neck Injuries and Disorders",
+    "source_url": "https://medlineplus.gov/neckinjuriesanddisorders.html",
+    "summary": {
+      "explanation_100_words_max": "Neck problems can occur in any part of your neck, including muscles, bones, joints, tendons, ligaments, or nerves. Neck pain is common and may also come from your shoulder, jaw, head, or upper arms. Muscle strain or tension often causes neck pain due to overuse, awkward sleeping positions, or exercise.",
+      "symptoms": [
+        "Pain",
+        "Strain"
+      ],
+      "treatment_options": "Treatment depends on the cause, but may include applying ice, taking pain relievers, getting physical therapy, or wearing a cervical collar. Surgery is rarely needed.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "If you experience neck pain, it's recommended to see a doctor for proper diagnosis and treatment."
+      }
+    }
+  },
+  "Q44727": {
+    "q_id": "Q44727",
+    "disease_name": "Chickenpox",
+    "source_title": "Chickenpox",
+    "source_url": "https://medlineplus.gov/chickenpox.html",
+    "summary": {
+      "explanation_100_words_max": "Chickenpox is an infection caused by the varicella-zoster virus. It spreads easily from one person to another. The classic symptom is an uncomfortable, itchy rash that turns into fluid-filled blisters and eventually scabs. Other symptoms include fever, headache, tiredness, and loss of appetite. Chickenpox usually lasts 5-10 days and can be treated with calamine lotions, oatmeal baths, and acetaminophen.",
+      "symptoms": [
+        "Fever",
+        "Headache",
+        "Tiredness",
+        "Loss of appetite",
+        "Itchy rash"
+      ],
+      "treatment_options": "Chickenpox can be treated with calamine lotions, oatmeal baths, and acetaminophen. Antiviral medicines may be needed for adults, babies, teenagers, pregnant women, and those with weak immune systems.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "If you experience severe symptoms or have concerns about your condition, see a doctor."
+      }
+    }
+  },
+  "Q12125": {
+    "q_id": "Q12125",
+    "disease_name": "Common cold",
+    "source_title": "Common Cold",
+    "source_url": "https://medlineplus.gov/commoncold.html",
+    "summary": {
+      "explanation_100_words_max": "The common cold is a mild infection of the upper respiratory tract, caused by over 200 different viruses. Symptoms include sneezing, stuffy nose, runny nose, sore throat, coughing, and headache. There is no cure, but treatments can help relieve symptoms. Rest, fluids, and over-the-counter medicines can help.",
+      "symptoms": [
+        "Sneezing",
+        "Stuffy nose (congestion)",
+        "Runny nose",
+        "Sore throat",
+        "Coughing",
+        "Headache"
+      ],
+      "treatment_options": "Rest, drinking plenty of fluids, using a clean humidifier or cool mist vaporizer, gargling with warm salt water, using saline nose drops or sprays, and taking over-the-counter pain or cold and cough medicines.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "Contact your provider if you or your child have symptoms that concern you, such as trouble breathing or fast breathing, dehydration, fever that lasts longer than 4 days, symptoms that last more than 10 days without improvement, or worsening of chronic medical conditions."
+      }
+    }
+  },
+  "Q30953": {
+    "q_id": "Q30953",
+    "disease_name": "Dengue",
+    "source_title": "Dengue",
+    "source_url": "https://medlineplus.gov/dengue.html",
+    "summary": {
+      "explanation_100_words_max": "Dengue is a viral infection caused by four related viruses spread through mosquito bites. It's common in warm, wet areas of the world, although rare in some parts of the United States. Symptoms include high fever, nausea and vomiting, rash, aches and pains, and can be mild or severe.",
+      "symptoms": [
+        "A high fever",
+        "Nausea and vomiting",
+        "Rash",
+        "Aches and pains (eye pain, usually behind the eyes, and pain in the muscles, joints, or bones)"
+      ],
+      "treatment_options": "There is no specific medicine to treat dengue. Most people will get better after about a week. Rest as much as possible, take acetaminophen to control fever and relieve pain, but do not take aspirin or ibuprofen, and drink plenty of fluids to prevent dehydration.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "See a health care provider and mention any recent travel."
+      }
+    }
+  },
+  "Q12206": {
+    "q_id": "Q12206",
+    "disease_name": "Diabetes mellitus",
+    "source_title": "Diabetes",
+    "source_url": "https://medlineplus.gov/diabetes.html",
+    "summary": {
+      "explanation_100_words_max": "Diabetes is a disease where your blood glucose levels are too high. Your body can't make insulin, can't use insulin well, or both. This causes glucose to stay in your blood and not reach your cells. There are different types of diabetes: Type 1, Type 2, and Gestational. The symptoms may include feeling thirsty, hungry, urinating more often, fatigue, blurry vision, numbness, and sores that don't heal.",
+      "symptoms": [
+        "Feeling very thirsty",
+        "Feeling very hungry",
+        "Urinating (peeing) more often, including at night",
+        "Fatigue",
+        "Blurry vision",
+        "Numbness or tingling in the feet or hands",
+        "Sores that do not heal",
+        "Losing weight without trying"
+      ],
+      "treatment_options": "Treatment for diabetes involves managing your blood glucose levels. For Type 1 diabetes, you may need to take daily doses of insulin. For Type 2 diabetes, lifestyle changes such as eating a healthy diet and getting regular physical activity can help manage or reverse the condition. Gestational diabetes usually goes away after giving birth.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "If you have symptoms of diabetes, it's recommended to see a doctor for diagnosis and treatment."
+      }
+    }
+  },
+  "Q3931183": {
+    "q_id": "Q3931183",
+    "disease_name": "Drug reaction",
+    "source_title": "Drug Reactions",
+    "source_url": "https://medlineplus.gov/drugreactions.html",
+    "summary": {
+      "explanation_100_words_max": "Medicines can cause unwanted reactions such as drug interactions, side effects, and allergies. Drug interactions occur when a medicine acts differently in the body with certain other drugs, foods, or supplements. Side effects are usually unpleasant and go away after stopping the medicine. Drug allergies range from mild to life-threatening.",
+      "symptoms": [
+        "stomachache",
+        "dry mouth",
+        "drowsiness",
+        "hives",
+        "rashes",
+        "rapid heartbeat",
+        "anaphylaxis"
+      ],
+      "treatment_options": "If you experience side effects or an allergic reaction, stop taking the medicine and consult your healthcare provider. For severe reactions, seek emergency medical attention.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "Talk to your health care provider or pharmacist if you have questions about your medicines."
+      }
+    }
+  },
+  "Q464067": {
+    "q_id": "Q464067",
+    "disease_name": "Fungal infection",
+    "source_title": "Fungal Infections",
+    "source_url": "https://medlineplus.gov/fungalinfections.html",
+    "summary": {
+      "explanation_100_words_max": "Fungal infections occur when a fungus grows in or on the body. Fungi live in air, soil, plants, and water, and some can infect humans. About half of all fungi are harmful. Infections often start in the lungs or skin and can be caused by inhaling spores or touching contaminated surfaces.",
+      "symptoms": [
+        "Fungal infections can cause symptoms such as",
+        "Not specified in the source."
+      ],
+      "treatment_options": "For skin and nail infections, you can apply medicine directly to the infected area. Oral antifungal medicines are also available for serious infections.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "If you experience symptoms of a fungal infection, see your doctor for proper diagnosis and treatment."
+      }
+    }
+  },
+  "Q223591": {
+    "q_id": "Q223591",
+    "disease_name": "Gastroesophageal reflux disease",
+    "source_title": "GERD",
+    "source_url": "https://medlineplus.gov/gerd.html",
+    "summary": {
+      "explanation_100_words_max": "GERD (gastroesophageal reflux disease) is a chronic condition where stomach contents move back up into the esophagus, causing discomfort and potentially leading to other health problems. It can be caused by a weak or relaxed muscle at the bottom of the esophagus, obesity, pregnancy, smoking, hiatal hernia, certain foods, drinks, or medicines.",
+      "symptoms": [
+        "Tasting acid or food in the back of your mouth",
+        "A dry cough or hoarse voice",
+        "Asthma-like symptoms",
+        "Trouble swallowing"
+      ],
+      "treatment_options": "Most people can manage GERD with lifestyle changes and medicine. Lifestyle changes include eating smaller meals, avoiding lying down after eating, avoiding trigger foods, losing weight if needed, raising the head of your bed, quitting smoking. Medicines include over-the-counter antacids and prescription medicines.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "Get medical help right away if you have chest pain with shortness of breath, or pain in your jaw or arm. These can be signs of a heart problem."
+      }
+    }
+  },
+  "Q41478": {
+    "q_id": "Q41478",
+    "disease_name": "Hemorrhoids",
+    "source_title": "Hemorrhoids",
+    "source_url": "https://medlineplus.gov/hemorrhoids.html",
+    "summary": {
+      "explanation_100_words_max": "Hemorrhoids are swollen, inflamed veins around your anus or lower part of your rectum. They can be caused by straining during bowel movements, sitting on the toilet for long periods, chronic constipation or diarrhea, a low-fiber diet, and other factors. Symptoms include anal itching, pain, bleeding, and discomfort.",
+      "symptoms": [
+        "Anal itching",
+        "One or more hard, tender lumps near your anus",
+        "Anal pain, especially when sitting",
+        "Bleeding from your rectum"
+      ],
+      "treatment_options": "You can treat hemorrhoids at home by eating foods high in fiber, taking stool softeners or supplements, drinking enough fluids, not straining during bowel movements, and using over-the-counter creams or suppositories. If symptoms persist, you may need a medical procedure.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "You should see your health care provider if you still have symptoms after 1 week of at-home treatment, have bleeding from your rectum, or are unsure about the cause of your symptoms."
+      }
+    }
+  },
+  "Q95566669": {
+    "q_id": "Q95566669",
+    "disease_name": "Hypertension",
+    "source_title": "High Blood Pressure",
+    "source_url": "https://medlineplus.gov/highbloodpressure.html",
+    "summary": {
+      "explanation_100_words_max": "High blood pressure is diagnosed through regular blood pressure checks from a healthcare provider. It usually has no symptoms, so diagnosis relies on these checks. There are two main types: primary (essential) and secondary high blood pressure. Primary high blood pressure develops over time as you get older, while secondary high blood pressure is caused by another medical condition or medicine.",
+      "symptoms": [
+        "Not specified in the source."
+      ],
+      "treatment_options": "Treatments for high blood pressure include heart-healthy lifestyle changes and medicines. You will work with your provider to come up with a treatment plan.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "You should get regular blood pressure checks from your healthcare provider."
+      }
+    }
+  },
+  "Q28971": {
+    "q_id": "Q28971",
+    "disease_name": "Impetigo",
+    "source_title": "Impetigo",
+    "source_url": "https://medlineplus.gov/impetigo.html",
+    "summary": {
+      "explanation_100_words_max": "Impetigo is a skin infection caused by bacteria, usually staph or strep bacteria. It starts when bacteria get into a break in the skin and can occur on the face, arms, and legs. Symptoms include red or pimple-like sores surrounded by red skin that fill with pus and form a crust.",
+      "symptoms": [
+        "Red or pimple-like sores",
+        "Sores surrounded by red skin",
+        "Pus-filled sores",
+        "Itchy sores"
+      ],
+      "treatment_options": "You can treat impetigo with antibiotics.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "See a doctor if you suspect you or your child has impetigo."
+      }
+    }
+  },
+  "Q133244": {
+    "q_id": "Q133244",
+    "disease_name": "Jaundice",
+    "source_title": "Jaundice",
+    "source_url": "https://medlineplus.gov/jaundice.html",
+    "summary": {
+      "explanation_100_words_max": "Jaundice causes your skin and the whites of your eyes to turn yellow due to too much bilirubin. Bilirubin builds up when the liver can't process old red blood cells. Many healthy babies have some jaundice, but it can happen at any age and may be a sign of a problem.",
+      "symptoms": [
+        "yellow skin",
+        "yellow whites of eyes"
+      ],
+      "treatment_options": "Treatment options depend on the underlying cause of jaundice. If caused by a liver disease or blockage, treatment will focus on addressing that condition.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "If you experience yellowing skin and eyes, see your doctor to determine the underlying cause."
+      }
+    }
+  },
+  "Q12156": {
+    "q_id": "Q12156",
+    "disease_name": "Malaria",
+    "source_title": "Malaria",
+    "source_url": "https://medlineplus.gov/malaria.html",
+    "summary": {
+      "explanation_100_words_max": "Malaria is a serious disease caused by a parasite, spread through infected mosquito bites. It's a major cause of death worldwide, but rare in the US. Travelers to developing countries with warm climates are at risk. There are four types of malaria, with different symptoms and treatments.",
+      "symptoms": [
+        "chills",
+        "flu-like symptoms",
+        "fever",
+        "vomiting",
+        "diarrhea",
+        "jaundice"
+      ],
+      "treatment_options": "Malaria can be treated with drugs, depending on the type and location of infection.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "See your doctor for medicines that protect you when traveling to areas where malaria is found."
+      }
+    }
+  },
+  "Q133823": {
+    "q_id": "Q133823",
+    "disease_name": "Migraine",
+    "source_title": "Migraine",
+    "source_url": "https://medlineplus.gov/migraine.html",
+    "summary": {
+      "explanation_100_words_max": "Migraines are a recurring type of headache that causes moderate to severe pain, often on one side of the head. Symptoms may include nausea, weakness, sensitivity to light and sound, and throbbing or pulsing pain. Migraines can be triggered by various factors, including stress, hormonal changes, certain foods and ingredients, and environmental factors.",
+      "symptoms": [
+        "Nausea",
+        "Weakness",
+        "Sensitivity to light and sound",
+        "Increased sensitivity to light, noise, and odors",
+        "Nausea and vomiting",
+        "Worsened pain when you move, cough, or sneeze"
+      ],
+      "treatment_options": "Treatment focuses on relieving symptoms and preventing additional attacks. Medicines include triptan drugs, ergotamine drugs, and pain relievers. Lifestyle changes such as stress management, biofeedback, and maintaining a consistent sleep schedule can also help.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "Talk with your health care provider about which drug would be right for you."
+      }
+    }
+  },
+  "Q172941": {
+    "q_id": "Q172941",
+    "disease_name": "Peptic ulcer disease",
+    "source_title": "Peptic Ulcer",
+    "source_url": "https://medlineplus.gov/pepticulcer.html",
+    "summary": {
+      "explanation_100_words_max": "A peptic ulcer is a sore in the lining of your stomach or duodenum, caused by infection with Helicobacter pylori or long-term use of nonsteroidal anti-inflammatory medicines (NSAIDs). Symptoms include burning stomach pain that starts between meals or at night. Treatment may include medicines to reduce stomach acids or antibiotics to kill H. pylori.",
+      "symptoms": [
+        "Burning stomach pain",
+        "Pain that starts between meals or during the night",
+        "Pain that briefly stops if you eat or take antacids",
+        "Pain that lasts for minutes to hours"
+      ],
+      "treatment_options": "Treatment may include medicines to reduce stomach acids or antibiotics to kill H. pylori.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "Your doctor will test your blood, breath, or stool and may look inside your stomach and duodenum by doing an endoscopy or x-ray."
+      }
+    }
+  },
+  "Q12192": {
+    "q_id": "Q12192",
+    "disease_name": "Pneumonia",
+    "source_title": "Pneumonia",
+    "source_url": "https://medlineplus.gov/pneumonia.html",
+    "summary": {
+      "explanation_100_words_max": "Pneumonia is an infection in one or both of the lungs that can range from mild to severe. It's caused by bacterial, viral, or fungal infections. Symptoms include fever, chills, cough, and shortness of breath. Treatment depends on the type of pneumonia and may involve antibiotics, antiviral medicines, or antifungal medicines.",
+      "symptoms": [
+        "Fever",
+        "Chills",
+        "Cough",
+        "Shortness of breath",
+        "Chest pain when you breathe or cough",
+        "Nausea and/or vomiting",
+        "Diarrhea"
+      ],
+      "treatment_options": "Treatment for pneumonia depends on the type of pneumonia, which germ is causing it, and how severe it is. Antibiotics treat bacterial pneumonia and some types of fungal pneumonia. Antiviral medicines treat viral pneumonia. Antifungal medicines treat other types of fungal pneumonia.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "If you have symptoms, see a doctor to get diagnosed and treated."
+      }
+    }
+  },
+  "Q179945": {
+    "q_id": "Q179945",
+    "disease_name": "Psoriasis",
+    "source_title": "Psoriasis",
+    "source_url": "https://medlineplus.gov/psoriasis.html",
+    "summary": {
+      "explanation_100_words_max": "Psoriasis is a skin disease that causes itchy or sore patches of thick, red skin with silvery scales. It usually occurs on elbows, knees, scalp, back, face, palms and feet, but can appear elsewhere. Some people also get psoriatic arthritis. A problem with the immune system causes rapid cell turnover, leading to symptoms.",
+      "symptoms": [
+        "Itchy or sore patches",
+        "Patches of thick, red skin with silvery scales"
+      ],
+      "treatment_options": "Treatments include creams, medicines, and light therapy.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "Your doctor might need to look at a small skin sample under a microscope."
+      }
+    }
+  },
+  "Q83319": {
+    "q_id": "Q83319",
+    "disease_name": "Typhoid",
+    "source_title": "Salmonella Infections",
+    "source_url": "https://medlineplus.gov/salmonellainfections.html",
+    "summary": {
+      "explanation_100_words_max": "Salmonella is a group of bacteria that can cause foodborne illness in the US. You can get infected from raw poultry, eggs, beef, or unwashed fruit and vegetables. Handling pets, especially reptiles, can also spread the infection. Symptoms include fever, diarrhea, abdominal cramps, headache, nausea, vomiting, and loss of appetite.",
+      "symptoms": [
+        "Fever",
+        "Diarrhea",
+        "Abdominal cramps",
+        "Headache",
+        "Nausea",
+        "Vomiting",
+        "Loss of appetite"
+      ],
+      "treatment_options": "The usual treatment is antibiotics. Most people get better without treatment.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "If you experience symptoms, see a doctor for a stool test to diagnose the infection."
+      }
+    }
+  },
+  "Q221668": {
+    "q_id": "Q221668",
+    "disease_name": "Urinary tract infection",
+    "source_title": "Urinary Tract Infections",
+    "source_url": "https://medlineplus.gov/urinarytractinfections.html",
+    "summary": {
+      "explanation_100_words_max": "Urinary tract infections (UTIs) are the second most common type of infection in the body. You may have a UTI if you notice pain or burning when you urinate, fever, tiredness, or shakiness, an urge to urinate often, pressure in your lower belly, urine that smells bad or looks cloudy or reddish, or pain in your back or side below the ribs.",
+      "symptoms": [
+        "Pain or burning when you urinate",
+        "Fever, tiredness, or shakiness",
+        "An urge to urinate often",
+        "Pressure in your lower belly",
+        "Urine that smells bad or looks cloudy or reddish",
+        "Pain in your back or side below the ribs"
+      ],
+      "treatment_options": "Treatment is with antibiotics.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "If you think you have a UTI it is important to see your doctor."
+      }
+    }
+  },
+  "Q201180": {
+    "q_id": "Q201180",
+    "disease_name": "Varicose veins",
+    "source_title": "Varicose Veins",
+    "source_url": "https://medlineplus.gov/varicoseveins.html",
+    "summary": {
+      "explanation_100_words_max": "Varicose veins are swollen, twisted veins that can be seen just under the skin, usually occurring in the legs but also forming in other parts of the body. They can be caused by weak or damaged one-way valves that allow blood to back up and pool in the veins.",
+      "symptoms": [
+        "swollen",
+        "twisted"
+      ],
+      "treatment_options": "Exercising, losing weight, elevating your legs when resting, and not crossing them when sitting can help keep varicose veins from getting worse. Wearing loose clothing and avoiding long periods of standing can also help. If varicose veins are painful or you don't like the way they look, your doctor may recommend procedures to remove them.",
+      "see_a_doctor": {
+        "recommended": true,
+        "urgency": "routine",
+        "guidance": "Doctors often diagnose varicose veins from a physical exam. Sometimes you may need additional tests."
+      }
+    }
+  }
+}

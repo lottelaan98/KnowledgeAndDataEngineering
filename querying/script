@@ -1,23 +1,29 @@
 ### MOUNTED ON GOOGLE DRIVE USING GOOGLE COLAB ###
-from google.colab import drive
-drive.mount('/content/drive')
+# from google.colab import drive
+# drive.mount('/content/drive')
 
-### INSTAL RDF LIB ###
-pip install rdflib
+# ### INSTAL RDF LIB ###
+# pip install rdflib
 
 ### CHECK GRAPH CAN BE PARSED ###
 
+from pathlib import Path
 from rdflib import Graph
 from rdflib.plugins.parsers.notation3 import BadSyntax
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+DB_PATH = BASE_DIR / "ontology" / "databaseV6.ttl"
+
 g = Graph()
 try:
-    g.parse("/content/drive/MyDrive/UU/Period2/KDE/Assignement/databaseV5.ttl", format="turtle")
+    g.parse(str(DB_PATH), format="turtle")
     print("OK. Triples:", len(g))
 except BadSyntax as e:
     print("BadSyntax:", e)
 except Exception as e:
     print(type(e).__name__, e)
+
+
 
 ### EXECUTE QUERY USING CUSTOM SYMPTOMS AS INPUT ###
 symps_list = [
