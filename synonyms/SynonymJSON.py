@@ -8,7 +8,7 @@ import faiss
 # --------- paths ----------
 BASE_DIR = Path(__file__).resolve().parent
 
-MODEL_PATH = BASE_DIR / "BioWordVec_PubMed_MIMICIII_d200.bin"
+MODEL_PATH = BASE_DIR / "BioSentVec_PubMed_MIMICIII-bigram_d700.bin"
 INDEX_PATH = BASE_DIR / "faiss_subset" / "index.faiss"
 WORDS_PATH = BASE_DIR / "faiss_subset" / "words.json"
 OUT_JSON   = BASE_DIR / "faiss_subset" / "symptom_synonyms.json"
