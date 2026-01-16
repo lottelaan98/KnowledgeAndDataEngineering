@@ -1,0 +1,345 @@
+### MOUNTED ON GOOGLE DRIVE USING GOOGLE COLAB ###
+from google.colab import drive
+drive.mount('/content/drive')
+
+### INSTAL RDF LIB ###
+pip install rdflib
+
+### CHECK GRAPH CAN BE PARSED ###
+
+from rdflib import Graph
+from rdflib.plugins.parsers.notation3 import BadSyntax
+
+g = Graph()
+try:
+    g.parse("/content/drive/MyDrive/UU/Period2/KDE/Assignement/databaseV5.ttl", format="turtle")
+    print("OK. Triples:", len(g))
+except BadSyntax as e:
+    print("BadSyntax:", e)
+except Exception as e:
+    print(type(e).__name__, e)
+
+### QUERY 1:Top k Diseases by Score + optionally exclude diseases based on user input ###
+symps_list = [
+   "wd:Q9690",          # fatigue
+   "wd:Q38933",          # fever
+   "wd:Q81938",          # pain
+   "wd:Q186889",         # nausea
+   "wd:Q127076"         # vomiting
+]
+
+exclude_label = "Typhoid" ### EXCLUDE THIS DISEASE GIVEN BY LABEL
+
+top_k_results = 3
+
+input_symps = " ".join(symps_list)
+
+q = f"""
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX ex:   <http://example.org/med#>
+PREFIX wd:   <http://www.wikidata.org/entity/>
+PREFIX sym:  <http://example.org/med#symptom/>
+
+SELECT ?disease ?label
+       ?catNorm
+       ?baseScore ?finalScore
+WHERE {{
+
+  ### USER INPUT SYMPTOMS ###
+  VALUES ?inSym {{ {input_symps} }}
+
+  ### DISEASE + LABEL ###
+  ?disease a ex:Disease ;
+           skos:prefLabel ?label .
+  FILTER(lang(?label) = "en") 
+  FILTER(LCASE(STR(?label)) != LCASE("Typhoid"))
+
+
+
+  ### COUNT INPUT SYMPTOMS ###
+  {{
+    SELECT (COUNT(DISTINCT ?in) AS ?inputCount)
+    WHERE {{
+      VALUES ?in {{ {input_symps} }}
+    }}
+  }}
+
+  ### MATCHED COUNT: COUNT INPUT SYMPTOMS EXISTING IN DEASEASE SYMPTOMATOLOGY ###
+  {{
+    SELECT ?disease (COUNT(DISTINCT ?m) AS ?matchedCount)
+    WHERE {{
+      VALUES ?m {{ {input_symps} }}
+      ?disease (ex:hasPrimarySymptom|ex:hasSecondarySymptom) ?m .
+    }}
+    GROUP BY ?disease
+  }}
+
+  ### DISEASE TOTAL SYMPTOMS ###
+  {{
+    SELECT ?disease (COUNT(DISTINCT ?sAll) AS ?diseaseSymptomCount)
+    WHERE {{
+      ?disease (ex:hasPrimarySymptom|ex:hasSecondarySymptom) ?sAll .
+    }}
+    GROUP BY ?disease
+  }}
+
+  ### JACCARD SIMILARITY ###
+  BIND(
+    IF(
+      (xsd:decimal(?inputCount) + xsd:decimal(?diseaseSymptomCount) - xsd:decimal(?matchedCount)) = 0,
+      0.0,
+      xsd:decimal(?matchedCount) /
+      (xsd:decimal(?inputCount) + xsd:decimal(?diseaseSymptomCount) - xsd:decimal(?matchedCount))
+    ) AS ?jaccard
+  )
+
+  ### COVERAGE ###
+  BIND(
+    IF(
+      xsd:decimal(?diseaseSymptomCount) = 0,
+      0.0,
+      xsd:decimal(?matchedCount) / xsd:decimal(?diseaseSymptomCount)
+    ) AS ?coverage
+  )
+
+
+  ### RARE SYMPTOM CONTRIBUTION PER DISEASE ###
+
+  ### IDF RAW: idfRaw(disease) = 1/df(m), df(m) = #diseases containing symptom m ###
+
+  {{
+    SELECT ?disease (SUM(?w) AS ?idfRaw)
+    WHERE {{
+      VALUES ?t {{ {input_symps} }}
+      ?disease (ex:hasPrimarySymptom|ex:hasSecondarySymptom) ?t .
+
+      {{
+        SELECT ?t (COUNT(DISTINCT ?d2) AS ?df)
+        WHERE {{
+          ?d2 a ex:Disease ;
+              (ex:hasPrimarySymptom|ex:hasSecondarySymptom) ?t .
+        }}
+        GROUP BY ?t
+      }}
+
+      BIND( IF(?df = 0, 0.0, (1.0 / xsd:decimal(?df))) AS ?w )
+    }}
+    GROUP BY ?disease
+  }}
+
+  ### IDF MAX: idfMax = SUM_ ( x in input) --- (1/df(x))  (upper bound for this input) ###
+  {{
+    SELECT (SUM(?wIn) AS ?idfMax)
+    WHERE {{
+      VALUES ?x {{ {input_symps} }}
+
+      {{
+        SELECT ?x (COUNT(DISTINCT ?d3) AS ?dfIn)
+        WHERE {{
+          ?d3 a ex:Disease ;
+              (ex:hasPrimarySymptom|ex:hasSecondarySymptom) ?x .
+        }}
+        GROUP BY ?x
+      }}
+
+      BIND( IF(?dfIn = 0, 0.0, (1.0 / xsd:decimal(?dfIn))) AS ?wIn )
+    }}
+  }}
+
+  BIND( IF(?idfMax = 0, 0.0, xsd:decimal(?idfRaw) / xsd:decimal(?idfMax)) AS ?idfNorm )
+
+
+  ### PRIMARY SYMPTOMS MENTIONED IN USER INPUT ###
+  OPTIONAL {{
+    SELECT ?disease (COUNT(DISTINCT ?cm) AS ?coreMatchedRaw)
+    WHERE {{
+      VALUES ?cm {{ {input_symps} }}
+      ?disease ex:hasPrimarySymptom ?cm .
+    }}
+    GROUP BY ?disease
+  }}
+  BIND(COALESCE(?coreMatchedRaw, 0) AS ?coreMatched)
+
+  BIND(
+    IF(?coreMatched >= 3, 1.00,
+      IF(?coreMatched = 2, 0.90,
+        IF(?coreMatched = 1, 0.70, 0.40)
+      )
+    ) AS ?coreCoeff
+  )
+
+  ### SYMPTOM TYPE BONUS ###
+  {{
+    SELECT (COUNT(DISTINCT ?pType) AS ?patientCatCount)
+    WHERE {{
+      VALUES ?s {{ {input_symps} }}
+      ?s a ?pType .
+      ?pType rdfs:subClassOf ex:Symptom .
+    }}
+  }}
+
+  OPTIONAL {{
+    SELECT ?disease (COUNT(DISTINCT ?overCat) AS ?catOverlapRaw)
+    WHERE {{
+      VALUES ?s {{ {input_symps} }}
+
+      ?s a ?pType .
+      ?pType rdfs:subClassOf ex:Symptom .
+
+      ?disease (ex:hasPrimarySymptom|ex:hasSecondarySymptom) ?ds .
+      ?ds a ?dType .
+      ?dType rdfs:subClassOf ex:Symptom .
+
+      FILTER(?pType = ?dType)
+      BIND(?pType AS ?overCat)
+    }}
+    GROUP BY ?disease
+  }}
+  BIND(COALESCE(?catOverlapRaw, 0) AS ?catOverlap)
+
+  BIND(
+    IF(?patientCatCount = 0, 0.0,
+      xsd:decimal(?catOverlap) / xsd:decimal(?patientCatCount)
+    ) AS ?catNorm
+  )
+
+  ### TOTAL SCORE FORMULA ###
+  BIND( (0.6 * ?idfNorm + 0.2 * ?jaccard + 0.2 * ?coverage) AS ?baseScore )
+  BIND( (?baseScore * ?coreCoeff + 0.10 * ?catNorm) AS ?finalScore )
+}}
+GROUP BY ?disease
+
+ORDER BY DESC(?finalScore)
+LIMIT {top_k_results}
+"""
+
+results=[]
+for row in g.query(q):
+    print(f"Disease:{row[1]}   Score:{float(row[-1]):.3f}")
+    results.append(f"<{row[0]}>")
+
+### QUERY 2: Give wiki info on Top 1 Disease ###
+disease = "<http://www.wikidata.org/entity/Q83319>" #using previous example Typhoid's URI
+
+q = f"""
+PREFIX ex:  <http://example.org/med#>
+PREFIX wd:  <http://www.wikidata.org/entity/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?label ?explanation ?visitDoctor ?treatment
+WHERE {{
+      {disease} a ex:Disease ;
+                skos:prefLabel ?label ;
+                ex:hasExplanation ?explanation ;
+                ex:seeDoctor ?visitDoctor ;
+                ex:treatment ?treatment .   
+}}
+"""
+
+for row in g.query(q):
+  print(f"Disease: {row[0]}\nExplanation: {row[1]}\nVisit to the doctor: {row[2]}\nTreatment: {row[3]}")
+
+### QUERY 3: Matching and missing symptoms ###
+# Matching Symptoms #
+disease = "<http://www.wikidata.org/entity/Q83319>" #using previous example Typhoid's URI
+
+
+symps_list = [
+     "wd:Q2536390" ,       # abdominal distention
+     "wd:Q29644032" ,      # continuous fever
+     "wd:Q38933",          # fever
+     "wd:Q9690" ,          # fatigue
+     "wd:Q86" ,            # headache
+     "wd:Q87"              # NOT PART OF TYPHOIDS SYMPTOMS
+]
+
+input_symps = " ".join(symps_list)
+
+
+
+q = f"""
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX ex:   <http://example.org/med#>
+PREFIX wd:   <http://www.wikidata.org/entity/>
+PREFIX sym:  <http://example.org/med#symptom/>
+
+SELECT ?label ?SympName
+
+WHERE {{
+
+  ### USER INPUT SYMPTOMS ###
+  VALUES ?inSym {{ {input_symps} }}
+
+  ### DISEASE + LABEL ###
+  {disease} a ex:Disease ;
+           skos:prefLabel ?label .
+  FILTER(lang(?label) = "en")
+
+  ### FIND SYMPTOMS MENTIONED BY THE USER ###
+  {disease} (ex:hasPrimarySymptom|ex:hasSecondarySymptom) ?inSym .
+  ?inSym skos:prefLabel ?SympName .
+  
+}}
+GROUP BY ?SympName
+ORDER BY ?SympName
+LIMIT 25
+"""
+
+for row in g.query(q):
+    print(f"{row[0]}'s Matched Symptom: {row[1]}")
+
+# Missing Symptoms #
+disease = "<http://www.wikidata.org/entity/Q83319>" #using previous example Typhoid's URI
+
+
+symps_list = [
+     "wd:Q2536390" ,       # abdominal distention
+     "wd:Q29644032" ,      # continuous fever
+     "wd:Q38933",          # fever
+     "wd:Q9690" ,          # fatigue
+     "wd:Q86" ,            # headache
+     "wd:Q87"              # NOT PART OF TYPHOIDS SYMPTOMS
+]
+
+input_symps = " ".join(symps_list)
+
+
+
+q = f"""
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX ex:   <http://example.org/med#>
+PREFIX wd:   <http://www.wikidata.org/entity/>
+PREFIX sym:  <http://example.org/med#symptom/>   
+
+SELECT ?label ?SympName
+WHERE {{
+
+  ### USER INPUT SYMPTOMS ###
+  VALUES ?inSym {{ {input_symps} }}
+
+  ### DISEASE + LABEL ###
+  {disease} a ex:Disease ;
+           skos:prefLabel ?label .
+  FILTER(lang(?label) = "en")
+
+  ### FIND SYMPTOMS MENTIONED BY THE USER ###
+  {disease} (ex:hasPrimarySymptom|ex:hasSecondarySymptom) ?symptom .
+  ?symptom skos:prefLabel ?SympName .
+
+  # NEGATION: Keep only symptoms NOT in the user's list
+  MINUS {{
+    VALUES ?symptom {{ {input_symps} }}
+  }}
+}}
+GROUP BY ?SympName
+ORDER BY ?SympName
+LIMIT 25
+"""
+
+for row in g.query(q):
+    # row[0] is the disease label, row[1] is the missing symptom name
+    print(f"{row[0]}'s Missing Symptom: {row[1]}")
