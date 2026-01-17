@@ -1,0 +1,384 @@
+Acne | skin | 90
+Acne | blackheads | 50
+Acne | pimples | 50
+Acne | rash | 48
+Acne | pusfilled | 33
+Acne | pusfilled pimples | 33
+Acne | scurrying | 18
+Acne | nasty | 12
+Acne | nasty rash | 12
+Acne | sensitive | 12
+Acne | additionally | 11
+allergy | throat | 25
+allergy | eyes | 22
+allergy | occasionally | 18
+allergy | feel | 17
+allergy | nose | 15
+allergy | skin | 13
+allergy | sore | 12
+allergy | breathing | 11
+allergy | sore throat | 11
+allergy | time | 11
+Arthritis | stiff | 51
+Arthritis | joints | 50
+Arthritis | neck | 50
+Arthritis | muscles | 41
+Arthritis | walking | 39
+Arthritis | weak | 31
+Arthritis | difficult | 28
+Arthritis | feeling | 28
+Arthritis | swollen | 27
+Arthritis | uncomfortable | 27
+Arthritis | extremely | 20
+Arthritis | walk | 20
+Arthritis | stiffness | 16
+Arthritis | tight | 15
+Arthritis | weakness | 15
+Arthritis | stiff walking | 14
+Arthritis | experiencing | 13
+Arthritis | painful | 13
+Arthritis | making | 12
+Arthritis | swelling | 12
+Bronchial Asthma | cough | 55
+Bronchial Asthma | fever | 47
+Bronchial Asthma | high | 39
+Bronchial Asthma | feeling | 29
+Bronchial Asthma | breathing | 28
+Bronchial Asthma | coughing | 25
+Bronchial Asthma | high fever | 22
+Bronchial Asthma | mucoid | 22
+Bronchial Asthma | weak | 19
+Bronchial Asthma | sputum | 18
+Bronchial Asthma | mucoid sputum | 17
+Bronchial Asthma | persistent | 16
+Bronchial Asthma | persistent cough | 16
+Bronchial Asthma | mucus | 14
+Bronchial Asthma | producing | 14
+Bronchial Asthma | tired | 14
+Bronchial Asthma | exhausted | 13
+Bronchial Asthma | having | 12
+Cervical spondylosis | pain | 51
+Cervical spondylosis | neck | 50
+Cervical spondylosis | cough | 43
+Cervical spondylosis | hurts | 33
+Cervical spondylosis | weakness | 33
+Cervical spondylosis | neck hurts | 30
+Cervical spondylosis | balance | 22
+Cervical spondylosis | feeling | 20
+Cervical spondylosis | experiencing | 18
+Cervical spondylosis | arms | 17
+Cervical spondylosis | dizziness | 17
+Cervical spondylosis | legs | 17
+Cervical spondylosis | bothering | 14
+Cervical spondylosis | persistent | 14
+Cervical spondylosis | persistent cough | 14
+Cervical spondylosis | issues | 13
+Cervical spondylosis | dizzy | 11
+Chicken pox | fever | 24
+Chicken pox | spots | 21
+Chicken pox | feel | 17
+Chicken pox | body | 15
+Chicken pox | causing | 15
+Chicken pox | appetite | 14
+Chicken pox | arms | 14
+Chicken pox | itching | 14
+Chicken pox | lost | 14
+Chicken pox | headache | 13
+Chicken pox | skin | 13
+Chicken pox | high | 11
+Chicken pox | high fever | 11
+Common Cold | throat | 29
+Common Cold | coughing | 22
+Common Cold | feel | 22
+Common Cold | nose | 21
+Common Cold | chest | 19
+Common Cold | exhausted | 18
+Common Cold | eyes | 17
+Common Cold | sinuses | 17
+Common Cold | smell | 17
+Common Cold | hurts | 16
+Common Cold | feeling | 15
+Common Cold | sneezing | 15
+Common Cold | feels | 14
+Common Cold | high | 14
+Common Cold | muscles | 14
+Common Cold | cough | 13
+Common Cold | chest hurts | 11
+Common Cold | tired | 11
+Dengue | pain | 39
+Dengue | fever | 24
+Dengue | feel | 22
+Dengue | experiencing | 20
+Dengue | body | 18
+Dengue | accompanied | 17
+Dengue | arms | 16
+Dengue | chills | 15
+Dengue | eyes | 15
+Dengue | severe | 15
+Dengue | developed | 14
+Dengue | spots | 14
+Dengue | feeling | 13
+Dengue | headache | 13
+Dengue | lost | 13
+Dengue | rashes | 13
+diabetes | feel | 25
+diabetes | throat | 15
+diabetes | infections | 13
+diabetes | skin | 13
+diabetes | frequently | 12
+Dimorphic Hemorrhoids | anus | 60
+Dimorphic Hemorrhoids | painful | 32
+Dimorphic Hemorrhoids | hurts | 31
+Dimorphic Hemorrhoids | stool | 26
+Dimorphic Hemorrhoids | having | 23
+Dimorphic Hemorrhoids | bowel | 20
+Dimorphic Hemorrhoids | bloody | 19
+Dimorphic Hemorrhoids | difficult | 19
+Dimorphic Hemorrhoids | uncomfortable | 18
+Dimorphic Hemorrhoids | lately | 17
+Dimorphic Hemorrhoids | experiencing | 16
+Dimorphic Hemorrhoids | restroom | 16
+Dimorphic Hemorrhoids | bleeding | 15
+Dimorphic Hemorrhoids | going | 15
+Dimorphic Hemorrhoids | discomfort | 14
+Dimorphic Hemorrhoids | bathroom | 13
+Dimorphic Hemorrhoids | pain | 13
+Dimorphic Hemorrhoids | constipation | 12
+Dimorphic Hemorrhoids | itchy | 11
+drug reaction | chest | 15
+drug reaction | skin | 14
+drug reaction | body | 12
+drug reaction | feel | 11
+drug reaction | having | 11
+Fungal infection | skin | 100
+Fungal infection | different | 28
+Fungal infection | rest | 28
+Fungal infection | bumps | 25
+Fungal infection | patches | 24
+Fungal infection | little | 22
+Fungal infection | spots | 21
+Fungal infection | itching | 20
+Fungal infection | lumps | 20
+Fungal infection | rash | 18
+Fungal infection | itchy | 17
+Fungal infection | pimples | 17
+Fungal infection | body | 16
+Fungal infection | areas | 15
+Fungal infection | resemble | 13
+Fungal infection | look | 11
+Fungal infection | rashy | 11
+gastroesophageal reflux disease | throat | 39
+gastroesophageal reflux disease | chest | 24
+gastroesophageal reflux disease | eating | 22
+gastroesophageal reflux disease | frequently | 21
+gastroesophageal reflux disease | heartburn | 19
+gastroesophageal reflux disease | food | 14
+gastroesophageal reflux disease | indigestion | 14
+gastroesophageal reflux disease | pain | 14
+gastroesophageal reflux disease | sour | 14
+gastroesophageal reflux disease | feel | 12
+gastroesophageal reflux disease | mouth | 12
+gastroesophageal reflux disease | taste | 12
+Hypertension | chest | 42
+Hypertension | headache | 40
+Hypertension | pain | 40
+Hypertension | chest pain | 38
+Hypertension | dizziness | 33
+Hypertension | headache chest | 27
+Hypertension | balance | 23
+Hypertension | concentrate | 19
+Hypertension | focus | 19
+Hypertension | feeling | 18
+Hypertension | experiencing | 14
+Hypertension | hard | 11
+Impetigo | sores | 62
+Impetigo | nose | 33
+Impetigo | face | 28
+Impetigo | rash | 24
+Impetigo | painful | 21
+Impetigo | fever | 19
+Impetigo | high | 19
+Impetigo | near | 18
+Impetigo | rashes | 18
+Impetigo | high fever | 15
+Impetigo | skin | 15
+Impetigo | yellow | 15
+Impetigo | fluid | 12
+Impetigo | lesions | 11
+Jaundice | weight | 50
+Jaundice | yellow | 50
+Jaundice | skin | 45
+Jaundice | lost | 40
+Jaundice | lost weight | 40
+Jaundice | stomach | 38
+Jaundice | urine | 38
+Jaundice | fever | 36
+Jaundice | pain | 34
+Jaundice | experiencing | 31
+Jaundice | dark | 28
+Jaundice | high | 26
+Jaundice | turned | 24
+Jaundice | turned yellow | 24
+Jaundice | stomach pain | 21
+Jaundice | having | 18
+Jaundice | itching | 18
+Jaundice | additionally | 17
+Jaundice | high fever | 17
+Jaundice | addition | 16
+Jaundice | scratchy | 16
+Jaundice | feeling | 15
+Jaundice | abdominal | 14
+Jaundice | nausea | 14
+Jaundice | temperature | 14
+Jaundice | vomiting | 14
+Jaundice | abdominal pain | 13
+Jaundice | exhausted | 13
+Jaundice | severe | 13
+Jaundice | worn | 12
+Jaundice | yellow additionally | 12
+Jaundice | ache | 11
+Jaundice | black | 11
+Jaundice | fatigue | 11
+Jaundice | having stomach | 11
+Malaria | nausea | 53
+Malaria | chills | 50
+Malaria | headache | 50
+Malaria | high | 48
+Malaria | fever | 39
+Malaria | high fever | 36
+Malaria | perspiring | 36
+Malaria | muscle | 35
+Malaria | itching | 34
+Malaria | vomiting | 29
+Malaria | severe | 27
+Malaria | ache | 24
+Malaria | muscle ache | 22
+Malaria | severe itching | 21
+Malaria | intense | 17
+Malaria | itching chills | 17
+Malaria | chills vomiting | 14
+Malaria | sweating | 14
+Malaria | intense itching | 13
+Malaria | muscles | 13
+Malaria | chills nausea | 12
+Malaria | experiencing | 11
+Malaria | high temperature | 11
+Malaria | temperature | 11
+Migraine | headaches | 42
+Migraine | neck | 39
+Migraine | indigestion | 38
+Migraine | vision | 35
+Migraine | visual | 32
+Migraine | acid | 28
+Migraine | acid reflux | 27
+Migraine | excessive | 27
+Migraine | reflux | 27
+Migraine | irritability | 23
+Migraine | disturbance | 22
+Migraine | visual disturbance | 22
+Migraine | blurred | 21
+Migraine | experiencing | 20
+Migraine | depression | 19
+Migraine | distorted | 19
+Migraine | neck depression | 19
+Migraine | appetite | 18
+Migraine | sore | 18
+Migraine | sore neck | 18
+Migraine | stiff | 18
+Migraine | stiff neck | 18
+Migraine | hunger | 17
+Migraine | depression irritability | 15
+Migraine | regular | 15
+Migraine | excessive hunger | 14
+Migraine | frequent | 14
+Migraine | distorted vision | 13
+Migraine | regular headaches | 13
+Migraine | excessive appetite | 12
+Migraine | frequent headaches | 12
+Migraine | reflux indigestion | 12
+Migraine | vision excessive | 12
+Migraine | acidity | 11
+Migraine | blurred vision | 11
+Migraine | impatience | 11
+peptic ulcer disease | feel | 26
+peptic ulcer disease | stools | 15
+peptic ulcer disease | weight | 13
+peptic ulcer disease | appetite | 12
+peptic ulcer disease | mouth | 12
+peptic ulcer disease | stomach | 12
+peptic ulcer disease | food | 11
+peptic ulcer disease | occasionally | 11
+Pneumonia | heart | 41
+Pneumonia | phlegm | 33
+Pneumonia | chest | 32
+Pneumonia | coughing | 32
+Pneumonia | feeling | 27
+Pneumonia | sweating | 25
+Pneumonia | cough | 24
+Pneumonia | breathing | 22
+Pneumonia | racing | 22
+Pneumonia | brownish | 21
+Pneumonia | high | 20
+Pneumonia | mucus | 19
+Pneumonia | chills | 18
+Pneumonia | throat | 18
+Pneumonia | having | 17
+Pneumonia | aches | 15
+Pneumonia | chest aches | 15
+Pneumonia | feel | 15
+Pneumonia | hurts | 14
+Pneumonia | breath | 13
+Pneumonia | mucous | 13
+Pneumonia | chest hurts | 12
+Pneumonia | fever | 12
+Pneumonia | weak | 12
+Psoriasis | skin | 56
+Psoriasis | nails | 18
+Psoriasis | pain | 18
+Psoriasis | peeling | 14
+Psoriasis | rash | 14
+Psoriasis | arms | 13
+Psoriasis | body | 13
+Psoriasis | joints | 13
+Psoriasis | dents | 12
+Psoriasis | rashes | 12
+Psoriasis | elbows | 11
+Typhoid | pain | 31
+Typhoid | constipation | 24
+Typhoid | fever | 24
+Typhoid | stomach | 19
+Typhoid | vomiting | 17
+Typhoid | diarrhea | 16
+Typhoid | headache | 15
+Typhoid | belly | 14
+Typhoid | feel | 14
+Typhoid | having | 14
+Typhoid | mild | 14
+Typhoid | abdominal | 12
+Typhoid | experiencing | 12
+urinary tract infection | urinate | 25
+urinary tract infection | urine | 20
+urinary tract infection | blood | 19
+urinary tract infection | urges | 16
+urinary tract infection | occasionally | 15
+urinary tract infection | frequently | 14
+urinary tract infection | pain | 13
+urinary tract infection | night | 12
+urinary tract infection | hurts | 11
+urinary tract infection | smells | 11
+urinary tract infection | temperatures | 11
+Varicose Veins | legs | 40
+Varicose Veins | causing | 23
+Varicose Veins | veins | 22
+Varicose Veins | calves | 20
+Varicose Veins | cramps | 16
+Varicose Veins | skin | 16
+Varicose Veins | time | 16
+Varicose Veins | long | 13
+Varicose Veins | periods | 13
+Varicose Veins | swollen | 13
+Varicose Veins | blood | 12
+Varicose Veins | blood vessels | 12
+Varicose Veins | long periods | 12
+Varicose Veins | vessels | 12
+Varicose Veins | discomfort | 11

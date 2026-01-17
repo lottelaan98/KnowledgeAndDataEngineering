@@ -1,0 +1,807 @@
+[
+  {
+    "row": 0,
+    "key": "sym:aching_legs",
+    "uri": "http://example.org/med#symptom/aching_legs",
+    "wd_qid": null,
+    "text": "aching legs"
+  },
+  {
+    "row": 1,
+    "key": "sym:bulging_blue_veins",
+    "uri": "http://example.org/med#symptom/bulging_blue_veins",
+    "wd_qid": null,
+    "text": "bulging blue veins"
+  },
+  {
+    "row": 2,
+    "key": "sym:disconfort_sitting",
+    "uri": "http://example.org/med#symptom/disconfort_sitting",
+    "wd_qid": null,
+    "text": "disconfort sitting"
+  },
+  {
+    "row": 3,
+    "key": "sym:feeling_incomplete_bowel_emptying",
+    "uri": "http://example.org/med#symptom/feeling_incomplete_bowel_emptying",
+    "wd_qid": null,
+    "text": "feeling incomplete bowel emptying"
+  },
+  {
+    "row": 4,
+    "key": "sym:honey_colored_crust",
+    "uri": "http://example.org/med#symptom/honey_colored_crust",
+    "wd_qid": null,
+    "text": "honey colored crust"
+  },
+  {
+    "row": 5,
+    "key": "sym:itching_anus",
+    "uri": "http://example.org/med#symptom/itching_anus",
+    "wd_qid": null,
+    "text": "itching anus"
+  },
+  {
+    "row": 6,
+    "key": "sym:itching_eyes",
+    "uri": "http://example.org/med#symptom/itching_eyes",
+    "wd_qid": null,
+    "text": "itching eyes"
+  },
+  {
+    "row": 7,
+    "key": "sym:joint_pain",
+    "uri": "http://example.org/med#symptom/joint_pain",
+    "wd_qid": null,
+    "text": "joint pain"
+  },
+  {
+    "row": 8,
+    "key": "sym:loss_of_appetite",
+    "uri": "http://example.org/med#symptom/loss_of_appetite",
+    "wd_qid": null,
+    "text": "loss of appetite"
+  },
+  {
+    "row": 9,
+    "key": "sym:mucus_discharge",
+    "uri": "http://example.org/med#symptom/mucus_discharge",
+    "wd_qid": null,
+    "text": "mucus discharge"
+  },
+  {
+    "row": 10,
+    "key": "sym:rapid_heart_rate",
+    "uri": "http://example.org/med#symptom/rapid_heart_rate",
+    "wd_qid": null,
+    "text": "rapid heart rate"
+  },
+  {
+    "row": 11,
+    "key": "sym:red_inflamed_skin_patches",
+    "uri": "http://example.org/med#symptom/red_inflamed_skin_patches",
+    "wd_qid": null,
+    "text": "red inflamed skin patches"
+  },
+  {
+    "row": 12,
+    "key": "sym:red_skin",
+    "uri": "http://example.org/med#symptom/red_skin",
+    "wd_qid": null,
+    "text": "red skin"
+  },
+  {
+    "row": 13,
+    "key": "sym:red_sores",
+    "uri": "http://example.org/med#symptom/red_sores",
+    "wd_qid": null,
+    "text": "red sores"
+  },
+  {
+    "row": 14,
+    "key": "sym:sensitivity_to_sound",
+    "uri": "http://example.org/med#symptom/sensitivity_to_sound",
+    "wd_qid": null,
+    "text": "sensitivity to sound"
+  },
+  {
+    "row": 15,
+    "key": "sym:skin_bumps",
+    "uri": "http://example.org/med#symptom/skin_bumps",
+    "wd_qid": null,
+    "text": "skin bumps"
+  },
+  {
+    "row": 16,
+    "key": "sym:swelling_lumbs_anus",
+    "uri": "http://example.org/med#symptom/swelling_lumbs_anus",
+    "wd_qid": null,
+    "text": "swelling lumbs anus"
+  },
+  {
+    "row": 17,
+    "key": "sym:swollen_ankles",
+    "uri": "http://example.org/med#symptom/swollen_ankles",
+    "wd_qid": null,
+    "text": "swollen ankles"
+  },
+  {
+    "row": 18,
+    "key": "sym:vision_changes",
+    "uri": "http://example.org/med#symptom/vision_changes",
+    "wd_qid": null,
+    "text": "vision changes"
+  },
+  {
+    "row": 19,
+    "key": "sym:white_patches_around_genitals",
+    "uri": "http://example.org/med#symptom/white_patches_around_genitals",
+    "wd_qid": null,
+    "text": "white patches around genitals"
+  },
+  {
+    "row": 20,
+    "key": "sym:white_patches_in_mouth",
+    "uri": "http://example.org/med#symptom/white_patches_in_mouth",
+    "wd_qid": null,
+    "text": "white patches in mouth"
+  },
+  {
+    "row": 21,
+    "key": "sym:yellow_eyes",
+    "uri": "http://example.org/med#symptom/yellow_eyes",
+    "wd_qid": null,
+    "text": "yellow eyes"
+  },
+  {
+    "row": 22,
+    "key": "sym:yellow_skin",
+    "uri": "http://example.org/med#symptom/yellow_skin",
+    "wd_qid": null,
+    "text": "yellow skin"
+  },
+  {
+    "row": 23,
+    "key": "Q101991",
+    "uri": "http://www.wikidata.org/entity/Q101991",
+    "wd_qid": "Q101991",
+    "text": "inflammation"
+  },
+  {
+    "row": 24,
+    "key": "Q102186573",
+    "uri": "http://www.wikidata.org/entity/Q102186573",
+    "wd_qid": "Q102186573",
+    "text": "joint inflammation"
+  },
+  {
+    "row": 25,
+    "key": "Q102187111",
+    "uri": "http://www.wikidata.org/entity/Q102187111",
+    "wd_qid": "Q102187111",
+    "text": "nail discoloration"
+  },
+  {
+    "row": 26,
+    "key": "Q10916362",
+    "uri": "http://www.wikidata.org/entity/Q10916362",
+    "wd_qid": "Q10916362",
+    "text": "dizziness"
+  },
+  {
+    "row": 27,
+    "key": "Q109186",
+    "uri": "http://www.wikidata.org/entity/Q109186",
+    "wd_qid": "Q109186",
+    "text": "swelling"
+  },
+  {
+    "row": 28,
+    "key": "Q1115038",
+    "uri": "http://www.wikidata.org/entity/Q1115038",
+    "wd_qid": "Q1115038",
+    "text": "runny nose"
+  },
+  {
+    "row": 29,
+    "key": "Q1124286",
+    "uri": "http://www.wikidata.org/entity/Q1124286",
+    "wd_qid": "Q1124286",
+    "text": "polyuria"
+  },
+  {
+    "row": 30,
+    "key": "Q1129121",
+    "uri": "http://www.wikidata.org/entity/Q1129121",
+    "wd_qid": "Q1129121",
+    "text": "splenomegaly"
+  },
+  {
+    "row": 31,
+    "key": "Q1163908",
+    "uri": "http://www.wikidata.org/entity/Q1163908",
+    "wd_qid": "Q1163908",
+    "text": "melena"
+  },
+  {
+    "row": 32,
+    "key": "Q1172159",
+    "uri": "http://www.wikidata.org/entity/Q1172159",
+    "wd_qid": "Q1172159",
+    "text": "pimple"
+  },
+  {
+    "row": 33,
+    "key": "Q1269399",
+    "uri": "http://www.wikidata.org/entity/Q1269399",
+    "wd_qid": "Q1269399",
+    "text": "dysuria"
+  },
+  {
+    "row": 34,
+    "key": "Q127076",
+    "uri": "http://www.wikidata.org/entity/Q127076",
+    "wd_qid": "Q127076",
+    "text": "vomiting"
+  },
+  {
+    "row": 35,
+    "key": "Q1292082",
+    "uri": "http://www.wikidata.org/entity/Q1292082",
+    "wd_qid": "Q1292082",
+    "text": "sore throat"
+  },
+  {
+    "row": 36,
+    "key": "Q133244",
+    "uri": "http://www.wikidata.org/entity/Q133244",
+    "wd_qid": "Q133244",
+    "text": "jaundice"
+  },
+  {
+    "row": 37,
+    "key": "Q1362864",
+    "uri": "http://www.wikidata.org/entity/Q1362864",
+    "wd_qid": "Q1362864",
+    "text": "hepatomegaly"
+  },
+  {
+    "row": 38,
+    "key": "Q1495657",
+    "uri": "http://www.wikidata.org/entity/Q1495657",
+    "wd_qid": "Q1495657",
+    "text": "gastrointestinal bleeding"
+  },
+  {
+    "row": 39,
+    "key": "Q1515219",
+    "uri": "http://www.wikidata.org/entity/Q1515219",
+    "wd_qid": "Q1515219",
+    "text": "macula"
+  },
+  {
+    "row": 40,
+    "key": "Q1570161",
+    "uri": "http://www.wikidata.org/entity/Q1570161",
+    "wd_qid": "Q1570161",
+    "text": "hematemesis"
+  },
+  {
+    "row": 41,
+    "key": "Q159557",
+    "uri": "http://www.wikidata.org/entity/Q159557",
+    "wd_qid": "Q159557",
+    "text": "coma"
+  },
+  {
+    "row": 42,
+    "key": "Q165947",
+    "uri": "http://www.wikidata.org/entity/Q165947",
+    "wd_qid": "Q165947",
+    "text": "hunger"
+  },
+  {
+    "row": 43,
+    "key": "Q16595080",
+    "uri": "http://www.wikidata.org/entity/Q16595080",
+    "wd_qid": "Q16595080",
+    "text": "gastroesophageal reflux"
+  },
+  {
+    "row": 44,
+    "key": "Q166019",
+    "uri": "http://www.wikidata.org/entity/Q166019",
+    "wd_qid": "Q166019",
+    "text": "bleeding"
+  },
+  {
+    "row": 45,
+    "key": "Q178436",
+    "uri": "http://www.wikidata.org/entity/Q178436",
+    "wd_qid": "Q178436",
+    "text": "constipation"
+  },
+  {
+    "row": 46,
+    "key": "Q183425",
+    "uri": "http://www.wikidata.org/entity/Q183425",
+    "wd_qid": "Q183425",
+    "text": "abdominal pain"
+  },
+  {
+    "row": 47,
+    "key": "Q18554982",
+    "uri": "http://www.wikidata.org/entity/Q18554982",
+    "wd_qid": "Q18554982",
+    "text": "intestinal perforation"
+  },
+  {
+    "row": 48,
+    "key": "Q186889",
+    "uri": "http://www.wikidata.org/entity/Q186889",
+    "wd_qid": "Q186889",
+    "text": "nausea"
+  },
+  {
+    "row": 49,
+    "key": "Q1869874",
+    "uri": "http://www.wikidata.org/entity/Q1869874",
+    "wd_qid": "Q1869874",
+    "text": "insomnia"
+  },
+  {
+    "row": 50,
+    "key": "Q188008",
+    "uri": "http://www.wikidata.org/entity/Q188008",
+    "wd_qid": "Q188008",
+    "text": "dyspnea"
+  },
+  {
+    "row": 51,
+    "key": "Q189206",
+    "uri": "http://www.wikidata.org/entity/Q189206",
+    "wd_qid": "Q189206",
+    "text": "vesicle"
+  },
+  {
+    "row": 52,
+    "key": "Q189643",
+    "uri": "http://www.wikidata.org/entity/Q189643",
+    "wd_qid": "Q189643",
+    "text": "delusion"
+  },
+  {
+    "row": 53,
+    "key": "Q192309",
+    "uri": "http://www.wikidata.org/entity/Q192309",
+    "wd_qid": "Q192309",
+    "text": "tinnitus"
+  },
+  {
+    "row": 54,
+    "key": "Q199602",
+    "uri": "http://www.wikidata.org/entity/Q199602",
+    "wd_qid": "Q199602",
+    "text": "itch"
+  },
+  {
+    "row": 55,
+    "key": "Q202013",
+    "uri": "http://www.wikidata.org/entity/Q202013",
+    "wd_qid": "Q202013",
+    "text": "nosebleed"
+  },
+  {
+    "row": 56,
+    "key": "Q205835",
+    "uri": "http://www.wikidata.org/entity/Q205835",
+    "wd_qid": "Q205835",
+    "text": "snoring"
+  },
+  {
+    "row": 57,
+    "key": "Q2078852",
+    "uri": "http://www.wikidata.org/entity/Q2078852",
+    "wd_qid": "Q2078852",
+    "text": "chronic wound"
+  },
+  {
+    "row": 58,
+    "key": "Q209789",
+    "uri": "http://www.wikidata.org/entity/Q209789",
+    "wd_qid": "Q209789",
+    "text": "burping"
+  },
+  {
+    "row": 59,
+    "key": "Q21110084",
+    "uri": "http://www.wikidata.org/entity/Q21110084",
+    "wd_qid": "Q21110084",
+    "text": "dark urine"
+  },
+  {
+    "row": 60,
+    "key": "Q21120264",
+    "uri": "http://www.wikidata.org/entity/Q21120264",
+    "wd_qid": "Q21120264",
+    "text": "precordial pain"
+  },
+  {
+    "row": 61,
+    "key": "Q217111",
+    "uri": "http://www.wikidata.org/entity/Q217111",
+    "wd_qid": "Q217111",
+    "text": "bradycardia"
+  },
+  {
+    "row": 62,
+    "key": "Q2260058",
+    "uri": "http://www.wikidata.org/entity/Q2260058",
+    "wd_qid": "Q2260058",
+    "text": "chills"
+  },
+  {
+    "row": 63,
+    "key": "Q2336398",
+    "uri": "http://www.wikidata.org/entity/Q2336398",
+    "wd_qid": "Q2336398",
+    "text": "pallor"
+  },
+  {
+    "row": 64,
+    "key": "Q2536390",
+    "uri": "http://www.wikidata.org/entity/Q2536390",
+    "wd_qid": "Q2536390",
+    "text": "abdominal distention"
+  },
+  {
+    "row": 65,
+    "key": "Q254327",
+    "uri": "http://www.wikidata.org/entity/Q254327",
+    "wd_qid": "Q254327",
+    "text": "anorexia"
+  },
+  {
+    "row": 66,
+    "key": "Q276469",
+    "uri": "http://www.wikidata.org/entity/Q276469",
+    "wd_qid": "Q276469",
+    "text": "blister"
+  },
+  {
+    "row": 67,
+    "key": "Q281289",
+    "uri": "http://www.wikidata.org/entity/Q281289",
+    "wd_qid": "Q281289",
+    "text": "photophobia"
+  },
+  {
+    "row": 68,
+    "key": "Q29644032",
+    "uri": "http://www.wikidata.org/entity/Q29644032",
+    "wd_qid": "Q29644032",
+    "text": "continuous fever"
+  },
+  {
+    "row": 69,
+    "key": "Q29644041",
+    "uri": "http://www.wikidata.org/entity/Q29644041",
+    "wd_qid": "Q29644041",
+    "text": "periodic fever"
+  },
+  {
+    "row": 70,
+    "key": "Q2971524",
+    "uri": "http://www.wikidata.org/entity/Q2971524",
+    "wd_qid": "Q2971524",
+    "text": "eye inflammation"
+  },
+  {
+    "row": 71,
+    "key": "Q29971784",
+    "uri": "http://www.wikidata.org/entity/Q29971784",
+    "wd_qid": "Q29971784",
+    "text": "nail pitting"
+  },
+  {
+    "row": 72,
+    "key": "Q30597356",
+    "uri": "http://www.wikidata.org/entity/Q30597356",
+    "wd_qid": "Q30597356",
+    "text": "regurgitation"
+  },
+  {
+    "row": 73,
+    "key": "Q3073147",
+    "uri": "http://www.wikidata.org/entity/Q3073147",
+    "wd_qid": "Q3073147",
+    "text": "intermittent fever"
+  },
+  {
+    "row": 74,
+    "key": "Q3160831",
+    "uri": "http://www.wikidata.org/entity/Q3160831",
+    "wd_qid": "Q3160831",
+    "text": "heavy legs"
+  },
+  {
+    "row": 75,
+    "key": "Q3245488",
+    "uri": "http://www.wikidata.org/entity/Q3245488",
+    "wd_qid": "Q3245488",
+    "text": "nasal congestion"
+  },
+  {
+    "row": 76,
+    "key": "Q3407854",
+    "uri": "http://www.wikidata.org/entity/Q3407854",
+    "wd_qid": "Q3407854",
+    "text": "prostration"
+  },
+  {
+    "row": 77,
+    "key": "Q352585",
+    "uri": "http://www.wikidata.org/entity/Q352585",
+    "wd_qid": "Q352585",
+    "text": "frequent urination"
+  },
+  {
+    "row": 78,
+    "key": "Q3567802",
+    "uri": "http://www.wikidata.org/entity/Q3567802",
+    "wd_qid": "Q3567802",
+    "text": "neck pain"
+  },
+  {
+    "row": 79,
+    "key": "Q35805",
+    "uri": "http://www.wikidata.org/entity/Q35805",
+    "wd_qid": "Q35805",
+    "text": "cough"
+  },
+  {
+    "row": 80,
+    "key": "Q35830",
+    "uri": "http://www.wikidata.org/entity/Q35830",
+    "wd_qid": "Q35830",
+    "text": "sneeze"
+  },
+  {
+    "row": 81,
+    "key": "Q3589142",
+    "uri": "http://www.wikidata.org/entity/Q3589142",
+    "wd_qid": "Q3589142",
+    "text": "epigastric pain"
+  },
+  {
+    "row": 82,
+    "key": "Q373597",
+    "uri": "http://www.wikidata.org/entity/Q373597",
+    "wd_qid": "Q373597",
+    "text": "hematuria"
+  },
+  {
+    "row": 83,
+    "key": "Q380203",
+    "uri": "http://www.wikidata.org/entity/Q380203",
+    "wd_qid": "Q380203",
+    "text": "adynamia"
+  },
+  {
+    "row": 84,
+    "key": "Q38933",
+    "uri": "http://www.wikidata.org/entity/Q38933",
+    "wd_qid": "Q38933",
+    "text": "fever"
+  },
+  {
+    "row": 85,
+    "key": "Q40878",
+    "uri": "http://www.wikidata.org/entity/Q40878",
+    "wd_qid": "Q40878",
+    "text": "diarrhea"
+  },
+  {
+    "row": 86,
+    "key": "Q474959",
+    "uri": "http://www.wikidata.org/entity/Q474959",
+    "wd_qid": "Q474959",
+    "text": "myalgia"
+  },
+  {
+    "row": 87,
+    "key": "Q480971",
+    "uri": "http://www.wikidata.org/entity/Q480971",
+    "wd_qid": "Q480971",
+    "text": "low-grade fever"
+  },
+  {
+    "row": 88,
+    "key": "Q48970753",
+    "uri": "http://www.wikidata.org/entity/Q48970753",
+    "wd_qid": "Q48970753",
+    "text": "skin discoloration"
+  },
+  {
+    "row": 89,
+    "key": "Q4927059",
+    "uri": "http://www.wikidata.org/entity/Q4927059",
+    "wd_qid": "Q4927059",
+    "text": "bloating"
+  },
+  {
+    "row": 90,
+    "key": "Q4930803",
+    "uri": "http://www.wikidata.org/entity/Q4930803",
+    "wd_qid": "Q4930803",
+    "text": "blurred vision"
+  },
+  {
+    "row": 91,
+    "key": "Q496812",
+    "uri": "http://www.wikidata.org/entity/Q496812",
+    "wd_qid": "Q496812",
+    "text": "leukopenia"
+  },
+  {
+    "row": 92,
+    "key": "Q517104",
+    "uri": "http://www.wikidata.org/entity/Q517104",
+    "wd_qid": "Q517104",
+    "text": "wheeze"
+  },
+  {
+    "row": 93,
+    "key": "Q537297",
+    "uri": "http://www.wikidata.org/entity/Q537297",
+    "wd_qid": "Q537297",
+    "text": "heartburn"
+  },
+  {
+    "row": 94,
+    "key": "Q5445",
+    "uri": "http://www.wikidata.org/entity/Q5445",
+    "wd_qid": "Q5445",
+    "text": "anemia"
+  },
+  {
+    "row": 95,
+    "key": "Q557945",
+    "uri": "http://www.wikidata.org/entity/Q557945",
+    "wd_qid": "Q557945",
+    "text": "mental confusion"
+  },
+  {
+    "row": 96,
+    "key": "Q559210",
+    "uri": "http://www.wikidata.org/entity/Q559210",
+    "wd_qid": "Q559210",
+    "text": "joint stiffness"
+  },
+  {
+    "row": 97,
+    "key": "Q570920",
+    "uri": "http://www.wikidata.org/entity/Q570920",
+    "wd_qid": "Q570920",
+    "text": "tachypnea"
+  },
+  {
+    "row": 98,
+    "key": "Q623289",
+    "uri": "http://www.wikidata.org/entity/Q623289",
+    "wd_qid": "Q623289",
+    "text": "dysphagia"
+  },
+  {
+    "row": 99,
+    "key": "Q635195",
+    "uri": "http://www.wikidata.org/entity/Q635195",
+    "wd_qid": "Q635195",
+    "text": "polydipsia"
+  },
+  {
+    "row": 100,
+    "key": "Q647099",
+    "uri": "http://www.wikidata.org/entity/Q647099",
+    "wd_qid": "Q647099",
+    "text": "hemoptysis"
+  },
+  {
+    "row": 101,
+    "key": "Q65202123",
+    "uri": "http://www.wikidata.org/entity/Q65202123",
+    "wd_qid": "Q65202123",
+    "text": "confusion of consciousness"
+  },
+  {
+    "row": 102,
+    "key": "Q653197",
+    "uri": "http://www.wikidata.org/entity/Q653197",
+    "wd_qid": "Q653197",
+    "text": "rash"
+  },
+  {
+    "row": 103,
+    "key": "Q653267",
+    "uri": "http://www.wikidata.org/entity/Q653267",
+    "wd_qid": "Q653267",
+    "text": "polyphagia"
+  },
+  {
+    "row": 104,
+    "key": "Q6725808",
+    "uri": "http://www.wikidata.org/entity/Q6725808",
+    "wd_qid": "Q6725808",
+    "text": "maculopapular rash"
+  },
+  {
+    "row": 105,
+    "key": "Q683498",
+    "uri": "http://www.wikidata.org/entity/Q683498",
+    "wd_qid": "Q683498",
+    "text": "arthralgia"
+  },
+  {
+    "row": 106,
+    "key": "Q693058",
+    "uri": "http://www.wikidata.org/entity/Q693058",
+    "wd_qid": "Q693058",
+    "text": "chest pain"
+  },
+  {
+    "row": 107,
+    "key": "Q769220",
+    "uri": "http://www.wikidata.org/entity/Q769220",
+    "wd_qid": "Q769220",
+    "text": "paresthesia"
+  },
+  {
+    "row": 108,
+    "key": "Q778731",
+    "uri": "http://www.wikidata.org/entity/Q778731",
+    "wd_qid": "Q778731",
+    "text": "pyuria"
+  },
+  {
+    "row": 109,
+    "key": "Q81938",
+    "uri": "http://www.wikidata.org/entity/Q81938",
+    "wd_qid": "Q81938",
+    "text": "pain"
+  },
+  {
+    "row": 110,
+    "key": "Q847726",
+    "uri": "http://www.wikidata.org/entity/Q847726",
+    "wd_qid": "Q847726",
+    "text": "lymphadenopathy"
+  },
+  {
+    "row": 111,
+    "key": "Q86",
+    "uri": "http://www.wikidata.org/entity/Q86",
+    "wd_qid": "Q86",
+    "text": "headache"
+  },
+  {
+    "row": 112,
+    "key": "Q9690",
+    "uri": "http://www.wikidata.org/entity/Q9690",
+    "wd_qid": "Q9690",
+    "text": "fatigue"
+  },
+  {
+    "row": 113,
+    "key": "Q991153",
+    "uri": "http://www.wikidata.org/entity/Q991153",
+    "wd_qid": "Q991153",
+    "text": "erosion"
+  },
+  {
+    "row": 114,
+    "key": "Q997862",
+    "uri": "http://www.wikidata.org/entity/Q997862",
+    "wd_qid": "Q997862",
+    "text": "papule"
+  }
+]
