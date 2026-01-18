@@ -344,10 +344,7 @@ def main():
     """
     components = load_components(base_dir)
     
-    # Sample input 
-    #  Checck  symptoms
-    # sample_text = "fever and cough"
-    sample_text = "I have been experiencing a skin rash on my arms, legs, and torso for the past few weeks. It is red, itchy, and covered in dry, scaly patches."
+    sample_text = "I’ve had a runny nose and nasal congestion for several days, with sneezing and a sore throat. I’m also coughing and feeling fatigued."
     
     run_diagnosis(sample_text, components)
 

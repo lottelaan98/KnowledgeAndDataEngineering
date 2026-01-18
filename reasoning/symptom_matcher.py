@@ -171,8 +171,7 @@ def main():
     ap.add_argument(
         "--text",
         default=(
-            "I have been experiencing a skin rash on my arms, legs, and torso. "
-            "It is red, itchy, and covered in dry, scaly patches."
+            "I have fever, cough, and shortness of breath. I also have chest pain and I feel very tired and weak."
         ),
         help="User input text",
     )

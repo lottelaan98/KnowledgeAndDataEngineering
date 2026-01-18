@@ -1,0 +1,73 @@
+Example user sentences (based on your TTL symptom labels)
+
+SKIN
+1) Psoriasis-like
+- For the past few weeks I’ve had red, inflamed skin patches that are itchy. I also feel tired and the areas are painful.
+
+2) Impetigo-like
+- I have blisters that turned into honey-colored crusts, and there are small red sores around them. The area is itchy and it’s getting worse.
+
+3) Fungal infection-like
+- I’ve had red skin for a while and also noticed white patches in my mouth. The area feels painful and I’ve had a mild fever.
+
+4) Chickenpox-like
+- I have an itchy rash with small blisters and bumps, and I’m starting to get a fever and headache.
+
+RESPIRATORY
+5) Common cold-like
+- I’ve had a runny nose and nasal congestion for several days, with sneezing and a sore throat. I’m also coughing and feeling fatigued.
+
+6) Pneumonia-like
+- I have fever, cough, and shortness of breath. I also have chest pain and I feel very tired and weak.
+
+7) Asthma-like
+- I’m wheezing and feel short of breath, and the coughing keeps coming back. It gets worse when I exert myself.
+
+GASTROINTESTINAL
+8) Peptic ulcer-like
+- I have epigastric pain and heartburn, and I feel nauseous and bloated. Sometimes I burp a lot and the pain comes and goes.
+
+9) Typhoid-like
+- I’ve had continuous fever and fatigue for days, with headache and nausea. I also have diarrhea and my stomach feels bloated.
+
+10) Hemorrhoids-like
+- I have bleeding when using the toilet and discomfort when sitting. There’s itching around the anus and sometimes mucus discharge.
+
+SYSTEMIC / METABOLIC
+11) Diabetes mellitus-like
+- I’m extremely thirsty and peeing very often. I feel hungry all the time, my vision is blurry, and I’m also fatigued.
+
+12) UTI-like
+- I have pain when urinating and I need to pee frequently. I also have abdominal pain and I think I might have a fever.
+
+NEUROLOGICAL
+13) Migraine-like
+- I have a headache with nausea and sensitivity to sound. Bright light makes it worse and I feel like I might vomit.
+
+14) Cervical spondylosis-like
+- I’ve had neck pain for weeks and frequent headaches. Sometimes I get tingling sensations in my arm.
+
+JAUNDICE / LIVER-RELATED
+15) Jaundice-like
+- My eyes and skin look yellow and my urine is very dark. I also feel itchy, nauseous, and tired.
+
+EMERGENCY / ALARM-STYLE
+16) Mental status change (confusion)
+- I feel confused and my family says I’m acting strangely. It’s hard to stay awake and I’m not thinking clearly.
+
+17) Breathing problems (dyspnea)
+- I’m having breathing problems and shortness of breath, and it feels like I can’t get enough air.
+
+18) Vomiting blood
+- I started vomiting and there was blood in it. I feel weak and scared.
+
+19) Coughing blood
+- I’m coughing and I’m bringing up blood. It’s not just a small streak—it’s clearly blood.
+
+20) Numeric alarm examples (if your pipeline provides measurements)
+- My temperature is 40.2°C and I feel extremely unwell.
+- My pain is 9 out of 10 and it’s unbearable.
+
+NO SYMPTOMS (to force triage = unclear when has_symptom_matches=False)
+21) No symptom match case
+- I don’t have any symptoms. I feel fine—I’m just curious what diseases I might get in the future.
