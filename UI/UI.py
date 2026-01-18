@@ -1,141 +1,193 @@
-
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QLabel, QComboBox, QCheckBox, QVBoxLayout, QLineEdit, QTextEdit, QHBoxLayout
-from PyQt6.QtGui import QAction, QPixmap
-import sys
+from PyQt6.QtWidgets import (
+    QApplication, QWidget, QLabel, QComboBox, QCheckBox,
+    QVBoxLayout, QHBoxLayout, QTextEdit, QPushButton,
+    QMainWindow, QScrollArea, QFrame
+)
+from PyQt6.QtGui import QPixmap
 from pathlib import Path
+import sys
 
-UI_DIR = Path(__file__).parent / "UI"
+# --- Logo path ---
+UI_DIR = Path(__file__).parent
 PATH = UI_DIR / "UULogo.png"
 LOGO_PATH = str(PATH)
 
-
-import sys
+# --- Example disease data ---
+example_data = {
+    "q_id": "Q11664912",
+    "disease_name": "Cervical spondylosis",
+    "source_title": "Neck Injuries and Disorders",
+    "source_url": "https://medlineplus.gov/neckinjuriesanddisorders.html",
+    "summary": {
+        "explanation_100_words_max": "Neck problems can occur in any part of your neck, including muscles, bones, joints, tendons, ligaments, or nerves. Neck pain is common and may also come from your shoulder, jaw, head, or upper arms. Muscle strain or tension often causes neck pain due to overuse, awkward sleeping positions, or exercise.",
+        "symptoms": ["Pain", "Strain"],
+        "treatment_options": "Treatment depends on the cause, but may include applying ice, taking pain relievers, getting physical therapy, or wearing a cervical collar. Surgery is rarely needed.",
+        "see_a_doctor": {
+            "recommended": True,
+            "urgency": "routine",
+            "guidance": "If you experience neck pain, it's recommended to see a doctor for proper diagnosis and treatment."
+        }
+    }
+}
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Symptoms2Disease")
-        #self.setFixedSize(1400,800)
+        self.setGeometry(100, 100, 1200, 800)
 
-        # Label
-        self.label = QLabel("A Little introduction")
-        font = self.label.font()
-        font.setPointSize(9)
-        self.label.setFont(font)
-        self.label.setAlignment(Qt.AlignmentFlag.AlignLeft)  # or AlignHCenter|AlignVCenter
+        # Input Section
+        self.inputLabel = QLabel("Explain your illness using symptoms:")
+        self.inputTextbox = QTextEdit()
+        self.inputTextbox.setFixedHeight(150)
+        self.inputTextbox.setPlaceholderText("E.g., neck pain, muscle strain")
 
-        # Checkbox
-        self.widgetBox1 = QCheckBox("Explanation")
-        self.widgetBox1.setCheckState(Qt.CheckState.Checked)
-        self.widgetBox1.stateChanged.connect(self.show_state)
+        # Go Button
+        self.goButton = QPushButton("Go")
+        self.goButton.clicked.connect(self.on_go_pressed)
 
-        self.widgetBox2 = QCheckBox("Evaluation")
-        self.widgetBox2.setCheckState(Qt.CheckState.Checked)
-        self.widgetBox2.stateChanged.connect(self.show_state)
+        # Options
+        self.checkboxExplanation = QCheckBox("Explanation")
+        self.checkboxExplanation.setCheckState(Qt.CheckState.Checked)
 
+        self.checkboxEvaluation = QCheckBox("Evaluation")
+        self.checkboxEvaluation.setCheckState(Qt.CheckState.Checked)
 
-        # QComboBox
-        self.widgetComboBox1 = QComboBox()
-        self.widgetComboBox1.addItems(["Top 1", "Top 3", "Top 5"])
-        # Sends the current index (position) of the selected item.
-        self.widgetComboBox1.currentIndexChanged.connect( self.index_changed )
-        # There is an alternate signal to send the text.
-        self.widgetComboBox1.currentTextChanged.connect( self.text_changed )
+        self.topNCombo = QComboBox()
+        self.topNCombo.addItems(["Top 1", "Top 3", "Top 5"])
 
-        self.widgetComboBox2 = QComboBox()
-        self.widgetComboBox2.addItems(["Only KB", "Only LLM", "Both"])
-        # Sends the current index (position) of the selected item.
-        self.widgetComboBox2.currentIndexChanged.connect( self.index_changed )
-        # There is an alternate signal to send the text.
-        self.widgetComboBox2.currentTextChanged.connect( self.text_changed )
+        self.sourceCombo = QComboBox()
+        self.sourceCombo.addItems(["Only KB", "Only LLM", "Both"])
 
-        # Qline
-        self.widgetTextbox = QTextEdit()
-        self.widgetTextbox.setFixedHeight(200)
-        self.widgetTextbox.setPlaceholderText("Enter your text")
+        optionsLayout = QHBoxLayout()
+        optionsLayout.addWidget(self.checkboxExplanation)
+        optionsLayout.addWidget(self.checkboxEvaluation)
+        optionsLayout.addWidget(self.topNCombo)
+        optionsLayout.addWidget(self.sourceCombo)
 
-        #widget.setReadOnly(True) # uncomment this to make it read-only
+        # Scrollable area for disease cards
+        self.resultsArea = QScrollArea()
+        self.resultsArea.setWidgetResizable(True)
 
-        # self.widgetTextbox.returnPressed.connect(self.return_pressed)
-        # self.widgetTextbox.selectionChanged.connect(self.selection_changed)
-        self.widgetTextbox.textChanged.connect(self.text_changed)
-        # self.widgetTextbox.textEdited.connect(self.text_edited)
+        self.resultsWidget = QWidget()
+        self.resultsLayout = QVBoxLayout(self.resultsWidget)
+        self.resultsLayout.setAlignment(Qt.AlignmentFlag.AlignTop)
 
-        self.textboxLeft = QTextEdit()
-        self.textboxLeft.setReadOnly(True)
-        self.textboxLeft.setPlaceholderText("Top N diseases")
+        self.resultsArea.setWidget(self.resultsWidget)
 
-        self.textboxRight = QTextEdit()
-        self.textboxRight.setReadOnly(True)
-        self.textboxRight.setPlaceholderText("Explanation about disease")
-
-        self.textboxMiddle = QTextEdit()
-        self.textboxMiddle.setReadOnly(True)
-        self.textboxMiddle.setFixedHeight(50)
-        self.textboxMiddle.setPlaceholderText("Performance")
-
-        text_layout = QHBoxLayout()
-        text_layout.addWidget(self.textboxLeft)
-        text_layout.addWidget(self.textboxRight)
-
-        self.imageLabel = QLabel()
+        # Logo
+        self.logoLabel = QLabel()
         pixmap = QPixmap(LOGO_PATH)
+        if pixmap.isNull():
+            self.logoLabel.setText("Logo not found")
+        else:
+            scaled = pixmap.scaled(150, 60, Qt.AspectRatioMode.KeepAspectRatio)
+            self.logoLabel.setPixmap(scaled)
+        self.logoLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.imageLabel.setPixmap(pixmap)
-        scaled = pixmap.scaled(
-            150, 60,                                   # target size
-            Qt.AspectRatioMode.KeepAspectRatio,         # no distortion
-            Qt.TransformationMode.SmoothTransformation  # high quality
-        )
-        self.imageLabel.setPixmap(scaled)
-        self.imageLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        # Main Layout
+        centralWidget = QWidget()
+        mainLayout = QVBoxLayout(centralWidget)
+        mainLayout.addWidget(self.inputLabel)
+        mainLayout.addWidget(self.inputTextbox)
+        mainLayout.addWidget(self.goButton)
+        mainLayout.addLayout(optionsLayout)
+        mainLayout.addWidget(self.resultsArea, stretch=3)
+        mainLayout.addStretch()
+        mainLayout.addWidget(self.logoLabel, stretch=0, alignment=Qt.AlignmentFlag.AlignCenter)
 
-        # Container + layout
-        central = QWidget()
-        layout1 = QVBoxLayout(central)
-        layout1.addWidget(self.label)
-        layout1.addWidget(self.widgetTextbox)
-        layout1.addWidget(self.widgetBox1)
-        layout1.addWidget(self.widgetBox2)
-        layout1.addWidget(self.widgetComboBox1)
-        layout1.addWidget(self.widgetComboBox2)
-        layout1.addLayout(text_layout) 
-        layout1.addWidget(self.textboxMiddle)
-        layout1.addStretch(1)
-        layout1.addWidget(self.imageLabel)  
+        self.setCentralWidget(centralWidget)
 
-        self.setCentralWidget(central)
+    # --- Function to create disease cards with rank ---
+    def create_disease_card(self, disease_data, rank=None):
+        card = QFrame()
+        card.setFrameShape(QFrame.Shape.StyledPanel)
+        card.setStyleSheet("""
+            background-color: #f9f9f9; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+            padding: 8px;
+        """)
+        card_layout = QVBoxLayout(card)
+        
+        # Rank
+        if rank is not None:
+            rank_label = QLabel(f"<b>#{rank}</b>")
+            rank_label.setStyleSheet("font-size: 14px; color: #555;")
+            card_layout.addWidget(rank_label)
+        
+        # Disease Name
+        name_label = QLabel(f"<b>{disease_data['disease_name']}</b>")
+        name_label.setStyleSheet("font-size: 16px;")
+        card_layout.addWidget(name_label)
 
-    def show_state(self, s):
-        print(s == Qt.CheckState.Checked.value)
-        print(s)
-    
-    def index_changed(self, i): # i is an int
-        print(i)
+        # Source
+        source_label = QLabel(f"<a href='{disease_data['source_url']}'>{disease_data['source_title']}</a>")
+        source_label.setOpenExternalLinks(True)
+        card_layout.addWidget(source_label)
 
-    def text_changed(self, s): # s is a str
-        print(s)
+        # Symptoms
+        symptoms_label = QLabel("<b>Symptoms:</b> " + ", ".join(disease_data['summary']['symptoms']))
+        card_layout.addWidget(symptoms_label)
 
-    def return_pressed(self):
-        print("Return pressed!")
-        self.centralWidget().setText("BOOM!")
+        # Explanation
+        explanation_label = QLabel("<b>Explanation:</b> " + disease_data['summary']['explanation_100_words_max'])
+        explanation_label.setWordWrap(True)
+        card_layout.addWidget(explanation_label)
 
-    def selection_changed(self):
-        print("Selection changed")
-        print(self.centralWidget().selectedText())
+        # Treatment
+        treatment_label = QLabel("<b>Treatment:</b> " + disease_data['summary']['treatment_options'])
+        treatment_label.setWordWrap(True)
+        card_layout.addWidget(treatment_label)
 
-    def text_changed(self, s):
-        print("Text changed...")
-        print(s)
+        # See a Doctor 
+        see_doctor = disease_data['summary']['see_a_doctor']
+        doctor_text = f"<b>See a Doctor:</b> Recommended: {'Yes' if see_doctor['recommended'] else 'No'}, " \
+                      f"Urgency: {see_doctor['urgency']}, Guidance: {see_doctor['guidance']}"
+        doctor_label = QLabel(doctor_text)
+        doctor_label.setWordWrap(True)
+        card_layout.addWidget(doctor_label)
 
-    def text_edited(self, s):
-        print("Text edited...")
-        print(s)
+        return card
+
+    def on_go_pressed(self):
+        user_input = self.inputTextbox.toPlainText().strip()
+        if not user_input:
+            print("No explanation entered!")
+            return
+
+        source_choice = self.sourceCombo.currentText()
+        top_n = self.topNCombo.currentText()
+        n = int(top_n.split()[1])
+
+        # Just for testing= show sample data
+        results = []
+        for i in range(n):
+            results.append(example_data)  
+
+        for i in reversed(range(self.resultsLayout.count())):
+            widget = self.resultsLayout.itemAt(i).widget()
+            if widget:
+                widget.setParent(None)
+
+        for i, disease in enumerate(results):
+            card = self.create_disease_card(disease, rank=i+1)
+            self.resultsLayout.addWidget(card)
+
+    def query_kb(self, text):
+        print(f"Querying KB with: {text}")
+        return example_data
+
+    def query_llm(self, text):
+        print(f"Querying LLM with: {text}")
+        return example_data
+
+    def query_both(self, text):
+        print(f"Querying KB and LLM with: {text}")
+        return example_data
 
 app = QApplication(sys.argv)
 window = MainWindow()
 window.showMaximized()
 app.exec()
-
-
