@@ -1,0 +1,466 @@
+[
+  {
+    "uri": "http://www.wikidata.org/entity/Q86",
+    "label": "headache"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q127076",
+    "label": "vomiting"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q186889",
+    "label": "nausea"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q209789",
+    "label": "burping"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q281289",
+    "label": "photophobia"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q102186573",
+    "label": "joint inflammation"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q1163908",
+    "label": "melena"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q1570161",
+    "label": "hematemesis"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q3589142",
+    "label": "epigastric pain"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q537297",
+    "label": "heartburn"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q1269399",
+    "label": "dysuria"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q183425",
+    "label": "abdominal pain"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q352585",
+    "label": "frequent urination"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q373597",
+    "label": "hematuria"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q38933",
+    "label": "fever"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q16595080",
+    "label": "gastroesophageal reflux"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q21120264",
+    "label": "precordial pain"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q35805",
+    "label": "cough"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q1172159",
+    "label": "pimple"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q1129121",
+    "label": "splenomegaly"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q1362864",
+    "label": "hepatomegaly"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q1495657",
+    "label": "gastrointestinal bleeding"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q178436",
+    "label": "constipation"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q18554982",
+    "label": "intestinal perforation"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q1869874",
+    "label": "insomnia"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q189643",
+    "label": "delusion"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q217111",
+    "label": "bradycardia"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q2336398",
+    "label": "pallor"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q2536390",
+    "label": "abdominal distention"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q29644032",
+    "label": "continuous fever"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q3407854",
+    "label": "prostration"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q496812",
+    "label": "leukopenia"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q65202123",
+    "label": "confusion or consciousness"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q653197",
+    "label": "rash"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q40878",
+    "label": "diarrhea"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q9690",
+    "label": "fatigue"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q1115038",
+    "label": "runny nose"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q1292082",
+    "label": "sore throat"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q192309",
+    "label": "tinnitus"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q205835",
+    "label": "snoring"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q3245488",
+    "label": "nasal congestion"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q35830",
+    "label": "sneeze"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q133244",
+    "label": "jaundice"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q159557",
+    "label": "coma"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q2260058",
+    "label": "chills"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q29644041",
+    "label": "periodic fever"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q3073147",
+    "label": "intermittent fever"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q5445",
+    "label": "anemia"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q188008",
+    "label": "dyspnea"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q570920",
+    "label": "tachypnea"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q647099",
+    "label": "hemoptysis"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q1124286",
+    "label": "polyuria"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q635195",
+    "label": "polydipsia"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q653267",
+    "label": "polyphagia"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q166019",
+    "label": "bleeding"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q254327",
+    "label": "anorexia"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q380203",
+    "label": "adynamia"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q474959",
+    "label": "myalgia"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q6725808",
+    "label": "maculopapular rash"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q683498",
+    "label": "arthralgia"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q847726",
+    "label": "lymphadenopathy"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q101991",
+    "label": "inflammation"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q517104",
+    "label": "wheeze"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q693058",
+    "label": "chest pain"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q1515219",
+    "label": "macula"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q189206",
+    "label": "vesicle"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q199602",
+    "label": "itch"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q480971",
+    "label": "low-grade fever"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q991153",
+    "label": "erosion"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q997862",
+    "label": "papule"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q81938",
+    "label": "pain"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q29971784",
+    "label": "nail pitting"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q102187111",
+    "label": "nail discoloration"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q2971524",
+    "label": "eye inflammation"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q3160831",
+    "label": "heavy legs"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q48970753",
+    "label": "skin discoloration"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q276469",
+    "label": "blister"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q557945",
+    "label": "confusion"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q559210",
+    "label": "joint stiffness"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q109186",
+    "label": "swelling"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q202013",
+    "label": "nosebleed"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q10916362",
+    "label": "dizziness"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q30597356",
+    "label": "regurgitation"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q623289",
+    "label": "dysphagia"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q4927059",
+    "label": "bloating"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q4930803",
+    "label": "blurred vision"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q2078852",
+    "label": "chronic wound"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q778731",
+    "label": "pyuria"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q3567802",
+    "label": "neck pain"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q769220",
+    "label": "paresthesia"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q21110084",
+    "label": "dark urine"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q165947",
+    "label": "hunger"
+  },
+  {
+    "uri": "http://example.org/med#symptom/aching_legs",
+    "label": "aching legs"
+  },
+  {
+    "uri": "http://example.org/med#symptom/bulging_blue_veins",
+    "label": "bulging blue veins"
+  },
+  {
+    "uri": "http://example.org/med#symptom/disconfort_sitting",
+    "label": "disconfort by sitting"
+  },
+  {
+    "uri": "http://example.org/med#symptom/feeling_incomplete_bowel_emptying",
+    "label": "feeling of incomplete bowel emptying"
+  },
+  {
+    "uri": "http://example.org/med#symptom/honey_colored_crust",
+    "label": "honey colored crust"
+  },
+  {
+    "uri": "http://example.org/med#symptom/itching_anus",
+    "label": "itching anus"
+  },
+  {
+    "uri": "http://example.org/med#symptom/itching_eyes",
+    "label": "itching eyes"
+  },
+  {
+    "uri": "http://example.org/med#symptom/joint_pain",
+    "label": "joint pain"
+  },
+  {
+    "uri": "http://example.org/med#symptom/loss_of_appetite",
+    "label": "loss of appitite"
+  },
+  {
+    "uri": "http://example.org/med#symptom/mucus_discharge",
+    "label": "mucus discharge"
+  },
+  {
+    "uri": "http://example.org/med#symptom/rapid_heart_rate",
+    "label": "rapid heart rate"
+  },
+  {
+    "uri": "http://example.org/med#symptom/red_inflamed_skin_patches",
+    "label": "red, inflamed skin patches"
+  },
+  {
+    "uri": "http://example.org/med#symptom/red_sores",
+    "label": "red sores"
+  },
+  {
+    "uri": "http://example.org/med#symptom/red_skin",
+    "label": "red skin"
+  },
+  {
+    "uri": "http://example.org/med#symptom/sensitivity_to_sound",
+    "label": "sensitivity to sound"
+  },
+  {
+    "uri": "http://example.org/med#symptom/skin_bumps",
+    "label": "skin bumps"
+  },
+  {
+    "uri": "http://example.org/med#symptom/swelling_lumbs_anus",
+    "label": "swelling lumbs near the anus"
+  },
+  {
+    "uri": "http://example.org/med#symptom/swollen_ankles",
+    "label": "swollen ankles"
+  },
+  {
+    "uri": "http://example.org/med#symptom/vision_changes",
+    "label": "vision changes"
+  },
+  {
+    "uri": "http://example.org/med#symptom/white_patches_around_genitals",
+    "label": "white patches around genitals"
+  },
+  {
+    "uri": "http://example.org/med#symptom/white_patches_in_mouth",
+    "label": "white patches in mouth"
+  },
+  {
+    "uri": "http://example.org/med#symptom/yellow_eyes",
+    "label": "yellow eyes"
+  },
+  {
+    "uri": "http://example.org/med#symptom/yellow_skin",
+    "label": "yellow skin"
+  },
+  {
+    "uri": "http://www.wikidata.org/entity/Q133244",
+    "label": "Jaundice"
+  }
+]

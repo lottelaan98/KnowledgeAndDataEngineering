@@ -1,0 +1,144 @@
+PREFIX wd:  <http://www.wikidata.org/entity/>
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+PREFIX ex:  <http://example.org/med#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?triageLabelRes ?triageLabel ?alarmTriggers ?score ?threshold
+WHERE {
+  VALUES ?case { ex:case1 }   # <-- change this
+
+  # read measurements if present
+  OPTIONAL { ?case ex:temperatureC ?tempC . }
+  OPTIONAL { ?case ex:painScale    ?pain . }
+  OPTIONAL { ?case ex:systolicBP   ?sysBP . }
+
+  # your adult rule
+  ex:adultTriageRule ex:scoreThreshold ?threshold .
+
+  # ----------------------------
+  # Count alarm triggers
+  # ----------------------------
+  {
+    SELECT ?case (COUNT(DISTINCT ?alarm) AS ?alarmTriggers)
+    WHERE {
+      VALUES ?case { ex:case1 }  # <-- same case URI
+
+      OPTIONAL { ?case ex:temperatureC ?tempC . }
+      OPTIONAL { ?case ex:painScale    ?pain . }
+      OPTIONAL { ?case ex:systolicBP   ?sysBP . }
+
+      # reported symptoms
+      ?case ex:hasReportedSymptom ?reported .
+
+      # alarm symptom definitions
+      ?alarm a ex:AlarmSymptom .
+
+      # match: either the alarm itself is reported OR alarm skos:closeMatch is reported
+      FILTER(
+        ?alarm = ?reported
+        || EXISTS { ?alarm skos:closeMatch ?reported }
+      )
+
+      # alarm metadata
+      OPTIONAL { ?alarm ex:treshold ?thr . }
+      OPTIONAL { ?alarm ex:thresholdComparator ?compRaw . }
+      OPTIONAL { ?alarm ex:thresholdUnit ?unitRaw . }
+
+      BIND( COALESCE(STR(?compRaw), ">=") AS ?comp )
+      BIND( LCASE(STR(?unitRaw)) AS ?unit )
+
+      # If alarm has NO threshold -> categorical -> presence triggers
+      # If alarm HAS threshold -> must have the correct measurement + pass comparator
+      FILTER(
+        (!BOUND(?thr))
+        ||
+        (
+          BOUND(?thr)
+          &&
+          (
+            # select the measurement based on unit
+            (
+              (CONTAINS(?unit, "mmhg") || CONTAINS(?unit, "systolic"))
+              && BOUND(?sysBP)
+              && (
+                (?comp = ">=" && xsd:decimal(?sysBP) >= xsd:decimal(?thr)) ||
+                (?comp = ">"  && xsd:decimal(?sysBP) >  xsd:decimal(?thr)) ||
+                (?comp = "<=" && xsd:decimal(?sysBP) <= xsd:decimal(?thr)) ||
+                (?comp = "<"  && xsd:decimal(?sysBP) <  xsd:decimal(?thr)) ||
+                (?comp = "==" && xsd:decimal(?sysBP) =  xsd:decimal(?thr))
+              )
+            )
+            ||
+            (
+              (?unit = "c" || CONTAINS(?unit, "celsius") || CONTAINS(?unit, "°c"))
+              && BOUND(?tempC)
+              && (
+                (?comp = ">=" && xsd:decimal(?tempC) >= xsd:decimal(?thr)) ||
+                (?comp = ">"  && xsd:decimal(?tempC) >  xsd:decimal(?thr)) ||
+                (?comp = "<=" && xsd:decimal(?tempC) <= xsd:decimal(?thr)) ||
+                (?comp = "<"  && xsd:decimal(?tempC) <  xsd:decimal(?thr)) ||
+                (?comp = "==" && xsd:decimal(?tempC) =  xsd:decimal(?thr))
+              )
+            )
+            ||
+            (
+              (CONTAINS(?unit, "0-10") || CONTAINS(?unit, "pain"))
+              && BOUND(?pain)
+              && (
+                (?comp = ">=" && xsd:decimal(?pain) >= xsd:decimal(?thr)) ||
+                (?comp = ">"  && xsd:decimal(?pain) >  xsd:decimal(?thr)) ||
+                (?comp = "<=" && xsd:decimal(?pain) <= xsd:decimal(?thr)) ||
+                (?comp = "<"  && xsd:decimal(?pain) <  xsd:decimal(?thr)) ||
+                (?comp = "==" && xsd:decimal(?pain) =  xsd:decimal(?thr))
+              )
+            )
+          )
+        )
+      )
+    }
+    GROUP BY ?case
+  }
+
+  # ----------------------------
+  # Sum score points (exclude AlarmSymptom resources from scoring)
+  # ----------------------------
+  {
+    SELECT ?case (SUM(COALESCE(?pts, 0)) AS ?score)
+    WHERE {
+      VALUES ?case { ex:case1 }  # <-- same case URI
+
+      ?case ex:hasReportedSymptom ?s .
+      FILTER NOT EXISTS { ?s rdf:type ex:AlarmSymptom }
+
+      OPTIONAL { ?s ex:scorePoints ?pts . }
+    }
+    GROUP BY ?case
+  }
+
+  # ----------------------------
+  # Final decision in one result
+  # ----------------------------
+  BIND(
+    IF(
+      ?alarmTriggers > 0,
+      ex:emergency,
+      IF(
+        xsd:integer(?score) >= xsd:integer(?threshold),
+        ex:urgent,
+        IF(
+          xsd:integer(?score) >= 1,
+          ex:routine,
+          ex:unclear
+        )
+      )
+    )
+    AS ?triageLabelRes
+  )
+
+  # friendly string
+  OPTIONAL { ?triageLabelRes rdfs:label ?triageLabel . FILTER(lang(?triageLabel) = "en" || lang(?triageLabel) = "") }
+  BIND(COALESCE(STR(?triageLabel), REPLACE(STR(?triageLabelRes), "^.*#", "")) AS ?triageLabel)
+}
+LIMIT 1

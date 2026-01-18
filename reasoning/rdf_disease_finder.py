@@ -18,7 +18,8 @@ class RDFDiseaseFinder:
         self.graph.parse(rdf_path, format="turtle")
 
         # Hard-bind namespace (stop guessing)
-        self.EX = Namespace("http://uu.nl/medical/")
+        self.EX = Namespace("http://example.org/med#")
+
         self.graph.bind("ex", self.EX)
 
         # Caches
@@ -230,11 +231,11 @@ class RDFDiseaseFinder:
 
 def main():
     base_dir = Path(__file__).parent.parent
-    rdf_path = base_dir / "ontology" / "version 2 database.ttl"
+    rdf_path = base_dir / "ontology" / "databaseV7.ttl"
 
     finder = RDFDiseaseFinder(str(rdf_path))
 
-    symptoms = ["fever", "headache"]
+    symptoms = ['rash', 'red skin', 'red, inflamed skin patches']
     print(f"\nInput symptoms: {symptoms}\n")
 
     results = finder.find_nearest_diseases(symptoms, top_k=5)

@@ -1,0 +1,1687 @@
+@prefix ex: <http://example.org/med#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sym: <http://example.org/med#symptom/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <http://www.w3.org/2002/07/owl#> .
+
+[ rdf:type owl:Ontology
+ ] .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.w3.org/2004/02/skos/core#closeMatch
+skos:closeMatch rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#prefLabel
+skos:prefLabel rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://example.org/med#hardTriggerLabel
+ex:hardTriggerLabel rdf:type owl:ObjectProperty ;
+                    rdfs:domain ex:AlarmSymptom ;
+                    rdfs:range ex:TriageLabel .
+
+
+###  http://example.org/med#hasPrimarySymptom
+ex:hasPrimarySymptom rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf ex:hasSymptom ;
+                     rdfs:domain ex:Disease ;
+                     rdfs:range ex:Symptom .
+
+
+###  http://example.org/med#hasRareSymptom
+ex:hasRareSymptom rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf ex:hasSymptom ;
+                  rdfs:domain ex:Disease ;
+                  rdfs:range ex:Symptom .
+
+
+###  http://example.org/med#hasReportedSymptom
+ex:hasReportedSymptom rdf:type owl:ObjectProperty ;
+                      rdfs:domain ex:Case ;
+                      rdfs:range ex:Symptom ;
+                      rdfs:label "has reported symptom"@en .
+
+
+###  http://example.org/med#hasSecondarySymptom
+ex:hasSecondarySymptom rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf ex:hasSymptom ;
+                       rdfs:domain ex:Disease ;
+                       rdfs:range ex:Symptom .
+
+
+###  http://example.org/med#hasSymptom
+ex:hasSymptom rdf:type owl:ObjectProperty ;
+              owl:inverseOf ex:isSymptomOf ;
+              rdfs:domain ex:Disease ;
+              rdfs:range ex:Symptom .
+
+
+###  http://example.org/med#isSymptomOf
+ex:isSymptomOf rdf:type owl:ObjectProperty ;
+               rdfs:domain ex:Symptom ;
+               rdfs:range ex:Disease ;
+               rdfs:label "is symptom of"@en .
+
+
+###  http://example.org/med#triageLabel
+ex:triageLabel rdf:type owl:ObjectProperty ;
+               rdfs:domain ex:TriageRule ;
+               rdfs:range ex:TriageLabel .
+
+
+###  http://example.org/med#triageResult
+ex:triageResult rdf:type owl:ObjectProperty ;
+                rdfs:domain ex:Case ;
+                rdfs:range ex:TriageLabel ;
+                rdfs:label "triage result"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://example.org/med#alarm
+ex:alarm rdf:type owl:DatatypeProperty ;
+         rdfs:domain ex:AlarmSymptom ;
+         rdfs:range rdfs:Literal .
+
+
+###  http://example.org/med#hasExplanation
+ex:hasExplanation rdf:type owl:DatatypeProperty ;
+                  rdfs:domain ex:Disease ;
+                  rdfs:range rdfs:Literal .
+
+
+###  http://example.org/med#painScale
+ex:painScale rdf:type owl:DatatypeProperty ;
+             rdfs:domain ex:Case ;
+             rdfs:range xsd:decimal ;
+             rdfs:label "pain scale (0-10)"@en .
+
+
+###  http://example.org/med#scorePoints
+ex:scorePoints rdf:type owl:DatatypeProperty ;
+               rdfs:domain ex:Symptom ;
+               rdfs:range xsd:integer .
+
+
+###  http://example.org/med#scoreThreshold
+ex:scoreThreshold rdf:type owl:DatatypeProperty ;
+                  rdfs:domain ex:TriageRule ;
+                  rdfs:range xsd:integer .
+
+
+###  http://example.org/med#seeDoctor
+ex:seeDoctor rdf:type owl:DatatypeProperty ;
+             rdfs:domain ex:Disease ;
+             rdfs:range rdfs:Literal .
+
+
+###  http://example.org/med#systolicBP
+ex:systolicBP rdf:type owl:DatatypeProperty ;
+              rdfs:domain ex:Case ;
+              rdfs:range xsd:decimal ;
+              rdfs:label "systolic blood pressure (mmHg)"@en .
+
+
+###  http://example.org/med#temperatureC
+ex:temperatureC rdf:type owl:DatatypeProperty ;
+                rdfs:domain ex:Case ;
+                rdfs:range xsd:decimal ;
+                rdfs:label "temperature (C)"@en .
+
+
+###  http://example.org/med#threshold
+ex:threshold rdf:type owl:DatatypeProperty ;
+             rdfs:domain ex:AlarmSymptom ;
+             rdfs:range xsd:decimal .
+
+
+###  http://example.org/med#thresholdComparator
+ex:thresholdComparator rdf:type owl:DatatypeProperty ;
+                       rdfs:domain ex:AlarmSymptom ;
+                       rdfs:range xsd:string .
+
+
+###  http://example.org/med#thresholdUnit
+ex:thresholdUnit rdf:type owl:DatatypeProperty ;
+                 rdfs:domain ex:AlarmSymptom ;
+                 rdfs:range xsd:string .
+
+
+###  http://example.org/med#treatment
+ex:treatment rdf:type owl:DatatypeProperty ;
+             rdfs:domain ex:Disease ;
+             rdfs:range rdfs:Literal .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://example.org/med#AlarmSymptom
+ex:AlarmSymptom rdf:type owl:Class ;
+                rdfs:subClassOf ex:Symptom ;
+                rdfs:label "Alarm Symptom"@en .
+
+
+###  http://example.org/med#CardiovascularSymptom
+ex:CardiovascularSymptom rdf:type owl:Class ;
+                         rdfs:subClassOf ex:Symptom ;
+                         owl:disjointWith ex:ClinicalFinding ,
+                                          ex:GastrointestinalSymptom ,
+                                          ex:GeneralSymptom ,
+                                          ex:NeurologicalSymptom ,
+                                          ex:RespiratorySymptom ,
+                                          ex:SkinSymptom ,
+                                          ex:SystemicSymptom .
+
+
+###  http://example.org/med#Case
+ex:Case rdf:type owl:Class ;
+        rdfs:label "Case"@en .
+
+
+###  http://example.org/med#ClinicalFinding
+ex:ClinicalFinding rdf:type owl:Class ;
+                   rdfs:subClassOf ex:Symptom ;
+                   owl:disjointWith ex:GastrointestinalSymptom ,
+                                    ex:GeneralSymptom ,
+                                    ex:NeurologicalSymptom ,
+                                    ex:RespiratorySymptom ,
+                                    ex:SkinSymptom ,
+                                    ex:SystemicSymptom .
+
+
+###  http://example.org/med#Disease
+ex:Disease rdf:type owl:Class ;
+           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                             owl:onProperty ex:hasPrimarySymptom ;
+                             owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass ex:Symptom
+                           ] ;
+           rdfs:label "Disease"@en .
+
+
+###  http://example.org/med#Explanation
+ex:Explanation rdf:type owl:Class ;
+               rdfs:label "Explanation"@en .
+
+
+###  http://example.org/med#GastrointestinalSymptom
+ex:GastrointestinalSymptom rdf:type owl:Class ;
+                           rdfs:subClassOf ex:Symptom ;
+                           owl:disjointWith ex:GeneralSymptom ,
+                                            ex:NeurologicalSymptom ,
+                                            ex:RespiratorySymptom ,
+                                            ex:SkinSymptom ,
+                                            ex:SystemicSymptom .
+
+
+###  http://example.org/med#GeneralSymptom
+ex:GeneralSymptom rdf:type owl:Class ;
+                  rdfs:subClassOf ex:Symptom ;
+                  owl:disjointWith ex:NeurologicalSymptom ,
+                                   ex:RespiratorySymptom ,
+                                   ex:SkinSymptom ,
+                                   ex:SystemicSymptom .
+
+
+###  http://example.org/med#NeurologicalSymptom
+ex:NeurologicalSymptom rdf:type owl:Class ;
+                       rdfs:subClassOf ex:Symptom ;
+                       owl:disjointWith ex:RespiratorySymptom ,
+                                        ex:SkinSymptom ,
+                                        ex:SystemicSymptom .
+
+
+###  http://example.org/med#RespiratorySymptom
+ex:RespiratorySymptom rdf:type owl:Class ;
+                      rdfs:subClassOf ex:Symptom ;
+                      owl:disjointWith ex:SkinSymptom ,
+                                       ex:SystemicSymptom .
+
+
+###  http://example.org/med#SkinSymptom
+ex:SkinSymptom rdf:type owl:Class ;
+               rdfs:subClassOf ex:Symptom ;
+               owl:disjointWith ex:SystemicSymptom .
+
+
+###  http://example.org/med#Symptom
+ex:Symptom rdf:type owl:Class ;
+           owl:equivalentClass [ rdf:type owl:Class ;
+                                 owl:unionOf ( ex:AlarmSymptom
+                                               ex:CardiovascularSymptom
+                                               ex:GastrointestinalSymptom
+                                               ex:GeneralSymptom
+                                               ex:NeurologicalSymptom
+                                               ex:RespiratorySymptom
+                                               ex:SkinSymptom
+                                               ex:SystemicSymptom
+                                             )
+                               ] ;
+           rdfs:label "Symptom"@en .
+
+
+###  http://example.org/med#SystemicSymptom
+ex:SystemicSymptom rdf:type owl:Class ;
+                   rdfs:subClassOf ex:Symptom .
+
+
+###  http://example.org/med#TriageLabel
+ex:TriageLabel rdf:type owl:Class ;
+               rdfs:label "Triage Label"@en .
+
+
+###  http://example.org/med#TriageRule
+ex:TriageRule rdf:type owl:Class ;
+              rdfs:label "Triage Rule"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://example.org/med#adultTriageRule
+ex:adultTriageRule rdf:type owl:NamedIndividual ,
+                            ex:TriageRule ;
+                   ex:triageLabel ex:urgent ;
+                   ex:scoreThreshold 5 ;
+                   rdfs:label "Adult triage scoring rule"@en .
+
+
+###  http://example.org/med#alarmMessage
+ex:alarmMessage rdf:type owl:NamedIndividual ;
+                ex:alarm "Please contact your GP Immediately!"@en .
+
+
+###  http://example.org/med#emergency
+ex:emergency rdf:type owl:NamedIndividual ,
+                      ex:TriageLabel ;
+             rdfs:label "emergency"@en .
+
+
+###  http://example.org/med#routine
+ex:routine rdf:type owl:NamedIndividual ,
+                    ex:TriageLabel ;
+           rdfs:label "routine"@en .
+
+
+###  http://example.org/med#unclear
+ex:unclear rdf:type owl:NamedIndividual ,
+                    ex:TriageLabel ;
+           rdfs:label "unclear"@en .
+
+
+###  http://example.org/med#urgent
+ex:urgent rdf:type owl:NamedIndividual ,
+                   ex:TriageLabel ;
+          rdfs:label "urgent"@en .
+
+
+###  http://example.org/med#symptom/aching_legs
+sym:aching_legs rdf:type owl:NamedIndividual ,
+                         ex:SystemicSymptom ;
+                skos:prefLabel "aching legs"@en .
+
+
+###  http://example.org/med#symptom/breathing_problems
+sym:breathing_problems rdf:type owl:NamedIndividual ,
+                                ex:AlarmSymptom ;
+                       ex:hardTriggerLabel ex:emergency ;
+                       skos:closeMatch wd:Q188008 ;
+                       skos:prefLabel "breathing problems"@en .
+
+
+###  http://example.org/med#symptom/bulging_blue_veins
+sym:bulging_blue_veins rdf:type owl:NamedIndividual ,
+                                ex:CardiovascularSymptom ;
+                       skos:prefLabel "bulging blue veins"@en .
+
+
+###  http://example.org/med#symptom/change_mental_status
+sym:change_mental_status rdf:type owl:NamedIndividual ,
+                                  ex:AlarmSymptom ;
+                         ex:hardTriggerLabel ex:emergency ;
+                         skos:closeMatch wd:Q557945 ;
+                         skos:prefLabel "change in mental status (confusion, unusual behavior, hard to wake)"@en .
+
+
+###  http://example.org/med#symptom/chest_pain_2min
+sym:chest_pain_2min rdf:type owl:NamedIndividual ,
+                             ex:AlarmSymptom ;
+                    ex:hardTriggerLabel ex:emergency ;
+                    skos:closeMatch wd:Q693058 ;
+                    skos:prefLabel "chest pain or discomfort lasting two minutes or more"@en .
+
+
+###  http://example.org/med#symptom/coughing_blood
+sym:coughing_blood rdf:type owl:NamedIndividual ,
+                            ex:AlarmSymptom ;
+                   ex:hardTriggerLabel ex:emergency ;
+                   skos:closeMatch wd:Q647099 ;
+                   skos:prefLabel "coughing up blood"@en .
+
+
+###  http://example.org/med#symptom/disconfort_sitting
+sym:disconfort_sitting rdf:type owl:NamedIndividual ,
+                                ex:GeneralSymptom ;
+                       skos:prefLabel "disconfort by sitting"@en .
+
+
+###  http://example.org/med#symptom/extreme_pain
+sym:extreme_pain rdf:type owl:NamedIndividual ,
+                          ex:AlarmSymptom ;
+                 ex:hardTriggerLabel ex:emergency ;
+                 ex:threshold 9 ;
+                 ex:thresholdComparator ">=" ;
+                 ex:thresholdUnit "0-10" ;
+                 rdfs:label "extreme pain"@en ;
+                 skos:closeMatch wd:Q81938 .
+
+
+###  http://example.org/med#symptom/face_tongue_swelling
+sym:face_tongue_swelling rdf:type owl:NamedIndividual ,
+                                  ex:AlarmSymptom ;
+                         ex:hardTriggerLabel ex:emergency ;
+                         skos:closeMatch wd:Q109186 ;
+                         skos:prefLabel "swelling of face, eyes, or tongue"@en .
+
+
+###  http://example.org/med#symptom/feeling_incomplete_bowel_emptying
+sym:feeling_incomplete_bowel_emptying rdf:type owl:NamedIndividual ,
+                                               ex:GastrointestinalSymptom ;
+                                      skos:prefLabel "feeling of incomplete bowel emptying"@en .
+
+
+###  http://example.org/med#symptom/high_blood_pressure
+sym:high_blood_pressure rdf:type owl:NamedIndividual ,
+                                 ex:AlarmSymptom ;
+                        ex:hardTriggerLabel ex:emergency ;
+                        ex:threshold 180 ;
+                        ex:thresholdComparator ">=" ;
+                        ex:thresholdUnit "mmHg_systolic" ;
+                        rdfs:label "high blood pressure"@en .
+
+
+###  http://example.org/med#symptom/high_temprature
+sym:high_temprature rdf:type owl:NamedIndividual ,
+                             ex:AlarmSymptom ;
+                    ex:hardTriggerLabel ex:emergency ;
+                    ex:threshold 40 ;
+                    ex:thresholdComparator ">=" ;
+                    ex:thresholdUnit "C" ;
+                    rdfs:label "high body temprature"@en ;
+                    skos:closeMatch wd:Q38933 .
+
+
+###  http://example.org/med#symptom/honey_colored_crust
+sym:honey_colored_crust rdf:type owl:NamedIndividual ,
+                                 ex:SkinSymptom ;
+                        skos:prefLabel "honey colored crust"@en .
+
+
+###  http://example.org/med#symptom/itching_anus
+sym:itching_anus rdf:type owl:NamedIndividual ,
+                          ex:SkinSymptom ;
+                 skos:prefLabel "itching anus"@en .
+
+
+###  http://example.org/med#symptom/itching_eyes
+sym:itching_eyes rdf:type owl:NamedIndividual ,
+                          ex:SkinSymptom ;
+                 skos:prefLabel "itching eyes"@en .
+
+
+###  http://example.org/med#symptom/joint_pain
+sym:joint_pain rdf:type owl:NamedIndividual ,
+                        ex:SystemicSymptom ;
+               skos:prefLabel "joint pain"@en .
+
+
+###  http://example.org/med#symptom/loss_of_appetite
+sym:loss_of_appetite rdf:type owl:NamedIndividual ,
+                              ex:GeneralSymptom ;
+                     skos:prefLabel "loss of appitite"@en .
+
+
+###  http://example.org/med#symptom/mucus_discharge
+sym:mucus_discharge rdf:type owl:NamedIndividual ,
+                             ex:GastrointestinalSymptom ;
+                    skos:prefLabel "mucus discharge"@en .
+
+
+###  http://example.org/med#symptom/rapid_heart_rate
+sym:rapid_heart_rate rdf:type owl:NamedIndividual ,
+                              ex:CardiovascularSymptom ;
+                     skos:prefLabel "rapid heart rate"@en .
+
+
+###  http://example.org/med#symptom/red_inflamed_skin_patches
+sym:red_inflamed_skin_patches rdf:type owl:NamedIndividual ,
+                                       ex:SkinSymptom ;
+                              skos:prefLabel "red, inflamed skin patches"@en .
+
+
+###  http://example.org/med#symptom/red_skin
+sym:red_skin rdf:type owl:NamedIndividual ,
+                      ex:SkinSymptom ;
+             skos:prefLabel "red skin"@en .
+
+
+###  http://example.org/med#symptom/red_sores
+sym:red_sores rdf:type owl:NamedIndividual ,
+                       ex:SkinSymptom ;
+              skos:prefLabel "red sores"@en .
+
+
+###  http://example.org/med#symptom/sensitivity_to_sound
+sym:sensitivity_to_sound rdf:type owl:NamedIndividual ,
+                                  ex:NeurologicalSymptom ;
+                         skos:prefLabel "sensitivity to sound"@en .
+
+
+###  http://example.org/med#symptom/skin_bumps
+sym:skin_bumps rdf:type owl:NamedIndividual ,
+                        ex:SkinSymptom ;
+               skos:prefLabel "skin bumps"@en .
+
+
+###  http://example.org/med#symptom/swelling_lumbs_anus
+sym:swelling_lumbs_anus rdf:type owl:NamedIndividual ,
+                                 ex:SkinSymptom ;
+                        skos:prefLabel "swelling lumbs near the anus"@en .
+
+
+###  http://example.org/med#symptom/swollen_ankles
+sym:swollen_ankles rdf:type owl:NamedIndividual ,
+                            ex:CardiovascularSymptom ;
+                   skos:prefLabel "swollen ankles"@en .
+
+
+###  http://example.org/med#symptom/vision_changes
+sym:vision_changes rdf:type owl:NamedIndividual ,
+                            ex:NeurologicalSymptom ;
+                   skos:prefLabel "vision changes"@en .
+
+
+###  http://example.org/med#symptom/vomiting_blood
+sym:vomiting_blood rdf:type owl:NamedIndividual ,
+                            ex:AlarmSymptom ;
+                   ex:hardTriggerLabel ex:emergency ;
+                   skos:closeMatch wd:Q1570161 ;
+                   skos:prefLabel "vomiting blood"@en .
+
+
+###  http://example.org/med#symptom/white_patches_around_genitals
+sym:white_patches_around_genitals rdf:type owl:NamedIndividual ,
+                                           ex:SkinSymptom ;
+                                  skos:prefLabel "white patches around genitals"@en .
+
+
+###  http://example.org/med#symptom/white_patches_in_mouth
+sym:white_patches_in_mouth rdf:type owl:NamedIndividual ,
+                                    ex:SkinSymptom ;
+                           skos:prefLabel "white patches in mouth"@en .
+
+
+###  http://example.org/med#symptom/yellow_eyes
+sym:yellow_eyes rdf:type owl:NamedIndividual ,
+                         ex:SystemicSymptom ;
+                skos:prefLabel "yellow eyes"@en .
+
+
+###  http://example.org/med#symptom/yellow_skin
+sym:yellow_skin rdf:type owl:NamedIndividual ,
+                         ex:SystemicSymptom ;
+                skos:prefLabel "yellow skin"@en .
+
+
+###  http://www.wikidata.org/entity/Q101991
+wd:Q101991 rdf:type owl:NamedIndividual ,
+                    ex:GeneralSymptom ;
+           skos:prefLabel "inflammation"@en .
+
+
+###  http://www.wikidata.org/entity/Q102186573
+wd:Q102186573 rdf:type owl:NamedIndividual ,
+                       ex:SystemicSymptom ;
+              skos:prefLabel "joint inflammation"@en .
+
+
+###  http://www.wikidata.org/entity/Q102187111
+wd:Q102187111 rdf:type owl:NamedIndividual ,
+                       ex:SkinSymptom ;
+              skos:prefLabel "nail discoloration"@en .
+
+
+###  http://www.wikidata.org/entity/Q10916362
+wd:Q10916362 rdf:type owl:NamedIndividual ,
+                      ex:NeurologicalSymptom ;
+             skos:prefLabel "dizziness"@en .
+
+
+###  http://www.wikidata.org/entity/Q109186
+wd:Q109186 rdf:type owl:NamedIndividual ,
+                    ex:GeneralSymptom ;
+           skos:prefLabel "swelling"@en .
+
+
+###  http://www.wikidata.org/entity/Q1115038
+wd:Q1115038 rdf:type owl:NamedIndividual ,
+                     ex:RespiratorySymptom ;
+            skos:prefLabel "runny nose"@en .
+
+
+###  http://www.wikidata.org/entity/Q1124286
+wd:Q1124286 rdf:type owl:NamedIndividual ,
+                     ex:SystemicSymptom ;
+            skos:prefLabel "polyuria"@en .
+
+
+###  http://www.wikidata.org/entity/Q1129121
+wd:Q1129121 rdf:type owl:NamedIndividual ,
+                     ex:ClinicalFinding ;
+            skos:prefLabel "splenomegaly"@en .
+
+
+###  http://www.wikidata.org/entity/Q1163908
+wd:Q1163908 rdf:type owl:NamedIndividual ,
+                     ex:GastrointestinalSymptom ;
+            skos:prefLabel "melena"@en .
+
+
+###  http://www.wikidata.org/entity/Q11664912
+wd:Q11664912 rdf:type owl:NamedIndividual ,
+                      ex:Disease ;
+             ex:hasPrimarySymptom wd:Q3567802 ,
+                                  wd:Q86 ;
+             ex:hasRareSymptom wd:Q3567802 ,
+                               wd:Q769220 ;
+             ex:hasSecondarySymptom wd:Q35805 ,
+                                    wd:Q769220 ,
+                                    wd:Q81938 ;
+             ex:hasExplanation "Cervical spondylosis is age-related wear of the neck bones and discs."@en ;
+             ex:seeDoctor "If pain or nerve symptoms persist."@en ;
+             ex:treatment "Medical evaluation is recommended for ongoing symptoms."@en ;
+             skos:prefLabel "Cervical spondylosis"@en .
+
+
+###  http://www.wikidata.org/entity/Q1172159
+wd:Q1172159 rdf:type owl:NamedIndividual ,
+                     ex:SkinSymptom ;
+            skos:prefLabel "pimple"@en .
+
+
+###  http://www.wikidata.org/entity/Q12125
+wd:Q12125 rdf:type owl:NamedIndividual ,
+                   ex:Disease ;
+          ex:hasPrimarySymptom wd:Q1115038 ,
+                               wd:Q1292082 ,
+                               wd:Q3245488 ,
+                               wd:Q35805 ,
+                               wd:Q35830 ,
+                               wd:Q9690 ;
+          ex:hasRareSymptom wd:Q1115038 ,
+                            wd:Q192309 ,
+                            wd:Q205835 ,
+                            wd:Q3245488 ,
+                            wd:Q35830 ;
+          ex:hasSecondarySymptom wd:Q192309 ,
+                                 wd:Q205835 ,
+                                 wd:Q38933 ,
+                                 wd:Q81938 ,
+                                 wd:Q86 ;
+          ex:hasExplanation "The common cold is a mild viral infection of the upper airways that usually resolves on its own."@en ;
+          ex:seeDoctor "If symptoms last longer than two weeks or worsen."@en ;
+          ex:treatment "Self-care is usually sufficient."@en ;
+          skos:prefLabel "Common cold"@en .
+
+
+###  http://www.wikidata.org/entity/Q12156
+wd:Q12156 rdf:type owl:NamedIndividual ,
+                   ex:Disease ;
+          ex:hasPrimarySymptom wd:Q2260058 ,
+                               wd:Q29644041 ,
+                               wd:Q3073147 ,
+                               wd:Q38933 ,
+                               wd:Q474959 ,
+                               wd:Q86 ,
+                               wd:Q9690 ;
+          ex:hasRareSymptom wd:Q1129121 ,
+                            wd:Q1362864 ,
+                            wd:Q159557 ,
+                            wd:Q2260058 ,
+                            wd:Q29644041 ,
+                            wd:Q3073147 ,
+                            wd:Q474959 ,
+                            wd:Q5445 ;
+          ex:hasSecondarySymptom wd:Q1129121 ,
+                                 wd:Q127076 ,
+                                 wd:Q133244 ,
+                                 wd:Q1362864 ,
+                                 wd:Q159557 ,
+                                 wd:Q186889 ,
+                                 wd:Q5445 ,
+                                 wd:Q81938 ;
+          ex:hasExplanation "Malaria is a serious parasitic infection transmitted by mosquitoes."@en ;
+          ex:seeDoctor "Immediately if fever occurs after travel to a risk area."@en ;
+          ex:treatment "Immediate medical treatment is required; do not self-treat."@en ;
+          skos:prefLabel "Malaria"@en .
+
+
+###  http://www.wikidata.org/entity/Q12192
+wd:Q12192 rdf:type owl:NamedIndividual ,
+                   ex:Disease ;
+          ex:hasPrimarySymptom wd:Q188008 ,
+                               wd:Q205835 ,
+                               wd:Q2260058 ,
+                               wd:Q35805 ,
+                               wd:Q38933 ,
+                               wd:Q693058 ,
+                               wd:Q9690 ;
+          ex:hasRareSymptom sym:rapid_heart_rate ,
+                            wd:Q205835 ,
+                            wd:Q2260058 ,
+                            wd:Q570920 ,
+                            wd:Q647099 ;
+          ex:hasSecondarySymptom sym:rapid_heart_rate ,
+                                 wd:Q570920 ,
+                                 wd:Q647099 ,
+                                 wd:Q81938 ;
+          ex:hasExplanation "Pneumonia is an infection of the lungs that can be mild or life-threatening."@en ;
+          ex:seeDoctor "Immediately if pneumonia is suspected."@en ;
+          ex:treatment "Immediate medical treatment is required."@en ;
+          skos:prefLabel "Pneumonia"@en .
+
+
+###  http://www.wikidata.org/entity/Q12206
+wd:Q12206 rdf:type owl:NamedIndividual ,
+                   ex:Disease ;
+          ex:hasPrimarySymptom wd:Q1124286 ,
+                               wd:Q2078852 ,
+                               wd:Q352585 ,
+                               wd:Q4930803 ,
+                               wd:Q635195 ,
+                               wd:Q653267 ,
+                               wd:Q9690 ;
+          ex:hasRareSymptom wd:Q1124286 ,
+                            wd:Q165947 ,
+                            wd:Q2078852 ,
+                            wd:Q352585 ,
+                            wd:Q4930803 ,
+                            wd:Q635195 ,
+                            wd:Q653267 ;
+          ex:hasSecondarySymptom wd:Q1292082 ,
+                                 wd:Q165947 ,
+                                 wd:Q35805 ,
+                                 wd:Q81938 ;
+          ex:hasExplanation "Diabetes mellitus is a chronic disease affecting blood sugar control."@en ;
+          ex:seeDoctor "If symptoms of high blood sugar persist."@en ;
+          ex:treatment "Medical management is required; self-treatment alone is not sufficient."@en ;
+          skos:prefLabel "Diabetes mellitus"@en .
+
+
+###  http://www.wikidata.org/entity/Q1269399
+wd:Q1269399 rdf:type owl:NamedIndividual ,
+                     ex:SystemicSymptom ;
+            skos:prefLabel "dysuria"@en .
+
+
+###  http://www.wikidata.org/entity/Q127076
+wd:Q127076 rdf:type owl:NamedIndividual ,
+                    ex:GastrointestinalSymptom ;
+           ex:scorePoints 3 ;
+           skos:prefLabel "vomiting"@en .
+
+
+###  http://www.wikidata.org/entity/Q1292082
+wd:Q1292082 rdf:type owl:NamedIndividual ,
+                     ex:RespiratorySymptom ;
+            skos:prefLabel "sore throat"@en .
+
+
+###  http://www.wikidata.org/entity/Q133244
+wd:Q133244 rdf:type owl:NamedIndividual ,
+                    ex:Disease ,
+                    ex:SystemicSymptom ;
+           ex:hasPrimarySymptom sym:yellow_eyes ,
+                                sym:yellow_skin ,
+                                wd:Q199602 ,
+                                wd:Q21110084 ;
+           ex:hasRareSymptom sym:yellow_eyes ,
+                             sym:yellow_skin ,
+                             wd:Q21110084 ;
+           ex:hasSecondarySymptom wd:Q127076 ,
+                                  wd:Q186889 ,
+                                  wd:Q38933 ,
+                                  wd:Q81938 ,
+                                  wd:Q9690 ;
+           ex:hasExplanation "Jaundice is yellowing of the skin and eyes due to liver or blood problems."@en ;
+           ex:seeDoctor "Always when jaundice appears."@en ;
+           ex:treatment "Immediate medical evaluation is required."@en ;
+           skos:prefLabel "Jaundice"@en ,
+                          "jaundice"@en .
+
+
+###  http://www.wikidata.org/entity/Q133823
+wd:Q133823 rdf:type owl:NamedIndividual ,
+                    ex:Disease ;
+           ex:hasPrimarySymptom sym:sensitivity_to_sound ,
+                                wd:Q186889 ,
+                                wd:Q281289 ,
+                                wd:Q86 ;
+           ex:hasRareSymptom sym:sensitivity_to_sound ,
+                             wd:Q209789 ,
+                             wd:Q281289 ;
+           ex:hasSecondarySymptom wd:Q127076 ,
+                                  wd:Q209789 ,
+                                  wd:Q81938 ;
+           ex:hasExplanation "Migraine is a neurological disorder causing repeated headache attacks."@en ;
+           ex:seeDoctor "If attacks become more frequent or severe."@en ;
+           ex:treatment "Medical treatment is often needed to control attacks."@en ;
+           skos:prefLabel "Migraine"@en .
+
+
+###  http://www.wikidata.org/entity/Q1362864
+wd:Q1362864 rdf:type owl:NamedIndividual ,
+                     ex:ClinicalFinding ;
+            skos:prefLabel "hepatomegaly"@en .
+
+
+###  http://www.wikidata.org/entity/Q1495657
+wd:Q1495657 rdf:type owl:NamedIndividual ,
+                     ex:GastrointestinalSymptom ;
+            skos:prefLabel "gastrointestinal bleeding"@en .
+
+
+###  http://www.wikidata.org/entity/Q1515219
+wd:Q1515219 rdf:type owl:NamedIndividual ,
+                     ex:SkinSymptom ;
+            skos:prefLabel "macula"@en .
+
+
+###  http://www.wikidata.org/entity/Q1570161
+wd:Q1570161 rdf:type owl:NamedIndividual ,
+                     ex:GastrointestinalSymptom ;
+            skos:prefLabel "hematemesis"@en .
+
+
+###  http://www.wikidata.org/entity/Q159557
+wd:Q159557 rdf:type owl:NamedIndividual ,
+                    ex:NeurologicalSymptom ;
+           skos:prefLabel "coma"@en .
+
+
+###  http://www.wikidata.org/entity/Q165947
+wd:Q165947 rdf:type owl:NamedIndividual ,
+                    ex:GeneralSymptom ;
+           skos:prefLabel "hunger"@en .
+
+
+###  http://www.wikidata.org/entity/Q16595080
+wd:Q16595080 rdf:type owl:NamedIndividual ,
+                      ex:GastrointestinalSymptom ;
+             skos:prefLabel "gastroesophageal reflux"@en .
+
+
+###  http://www.wikidata.org/entity/Q166019
+wd:Q166019 rdf:type owl:NamedIndividual ,
+                    ex:GeneralSymptom ;
+           skos:prefLabel "bleeding"@en .
+
+
+###  http://www.wikidata.org/entity/Q170990
+wd:Q170990 rdf:type owl:NamedIndividual ,
+                    ex:Disease ;
+           ex:hasPrimarySymptom sym:joint_pain ,
+                                wd:Q102186573 ,
+                                wd:Q109186 ,
+                                wd:Q559210 ;
+           ex:hasRareSymptom sym:joint_pain ,
+                             wd:Q102186573 ,
+                             wd:Q559210 ;
+           ex:hasSecondarySymptom wd:Q81938 ,
+                                  wd:Q9690 ;
+           ex:hasExplanation "Arthritis involves inflammation of the joints and can lead to long-term joint damage."@en ;
+           ex:seeDoctor "If joint pain or stiffness lasts more than a few weeks."@en ;
+           ex:treatment "Medical evaluation is needed for long-term management."@en ;
+           skos:prefLabel "Arthritis"@en .
+
+
+###  http://www.wikidata.org/entity/Q172941
+wd:Q172941 rdf:type owl:NamedIndividual ,
+                    ex:Disease ;
+           ex:hasPrimarySymptom wd:Q183425 ,
+                                wd:Q186889 ,
+                                wd:Q3589142 ,
+                                wd:Q4927059 ,
+                                wd:Q537297 ;
+           ex:hasRareSymptom wd:Q1163908 ,
+                             wd:Q1570161 ,
+                             wd:Q183425 ,
+                             wd:Q209789 ,
+                             wd:Q3589142 ,
+                             wd:Q4927059 ,
+                             wd:Q537297 ;
+           ex:hasSecondarySymptom wd:Q1163908 ,
+                                  wd:Q127076 ,
+                                  wd:Q1570161 ,
+                                  wd:Q209789 ,
+                                  wd:Q40878 ,
+                                  wd:Q81938 ;
+           ex:hasExplanation "Peptic ulcer disease involves open sores in the stomach or intestine lining."@en ;
+           ex:seeDoctor "Immediately if bleeding occurs."@en ;
+           ex:treatment "Medical treatment is required; do not self-treat."@en ;
+           skos:prefLabel "Peptic ulcer disease"@en .
+
+
+###  http://www.wikidata.org/entity/Q178436
+wd:Q178436 rdf:type owl:NamedIndividual ,
+                    ex:GastrointestinalSymptom ;
+           skos:prefLabel "constipation"@en .
+
+
+###  http://www.wikidata.org/entity/Q179945
+wd:Q179945 rdf:type owl:NamedIndividual ,
+                    ex:Disease ;
+           ex:hasPrimarySymptom sym:red_inflamed_skin_patches ,
+                                wd:Q102187111 ,
+                                wd:Q199602 ,
+                                wd:Q29971784 ;
+           ex:hasRareSymptom sym:joint_pain ,
+                             sym:red_inflamed_skin_patches ,
+                             wd:Q102187111 ,
+                             wd:Q2971524 ,
+                             wd:Q29971784 ;
+           ex:hasSecondarySymptom sym:joint_pain ,
+                                  wd:Q2971524 ,
+                                  wd:Q81938 ,
+                                  wd:Q9690 ;
+           ex:hasExplanation "Psoriasis is a chronic autoimmune disease that causes long-lasting inflammation of the skin."@en ;
+           ex:seeDoctor "If symptoms persist, worsen, or joint pain appears."@en ;
+           ex:treatment "Treatment usually requires medical guidance; do not rely on self-treatment alone."@en ;
+           skos:prefLabel "Psoriasis"@en .
+
+
+###  http://www.wikidata.org/entity/Q183425
+wd:Q183425 rdf:type owl:NamedIndividual ,
+                    ex:GastrointestinalSymptom ;
+           skos:prefLabel "abdominal pain"@en .
+
+
+###  http://www.wikidata.org/entity/Q18554982
+wd:Q18554982 rdf:type owl:NamedIndividual ,
+                      ex:GastrointestinalSymptom ;
+             skos:prefLabel "intestinal perforation"@en .
+
+
+###  http://www.wikidata.org/entity/Q186889
+wd:Q186889 rdf:type owl:NamedIndividual ,
+                    ex:GastrointestinalSymptom ;
+           skos:prefLabel "nausea"@en .
+
+
+###  http://www.wikidata.org/entity/Q1869874
+wd:Q1869874 rdf:type owl:NamedIndividual ,
+                     ex:NeurologicalSymptom ;
+            skos:prefLabel "insomnia"@en .
+
+
+###  http://www.wikidata.org/entity/Q188008
+wd:Q188008 rdf:type owl:NamedIndividual ,
+                    ex:RespiratorySymptom ;
+           ex:scorePoints 5 ;
+           skos:prefLabel "dyspnea"@en .
+
+
+###  http://www.wikidata.org/entity/Q189206
+wd:Q189206 rdf:type owl:NamedIndividual ,
+                    ex:SkinSymptom ;
+           skos:prefLabel "vesicle"@en .
+
+
+###  http://www.wikidata.org/entity/Q189643
+wd:Q189643 rdf:type owl:NamedIndividual ,
+                    ex:NeurologicalSymptom ;
+           skos:prefLabel "delusion"@en .
+
+
+###  http://www.wikidata.org/entity/Q192309
+wd:Q192309 rdf:type owl:NamedIndividual ,
+                    ex:NeurologicalSymptom ;
+           skos:prefLabel "tinnitus"@en .
+
+
+###  http://www.wikidata.org/entity/Q199602
+wd:Q199602 rdf:type owl:NamedIndividual ,
+                    ex:SkinSymptom ;
+           skos:prefLabel "itch"@en .
+
+
+###  http://www.wikidata.org/entity/Q201180
+wd:Q201180 rdf:type owl:NamedIndividual ,
+                    ex:Disease ;
+           ex:hasPrimarySymptom sym:aching_legs ,
+                                sym:bulging_blue_veins ,
+                                sym:swollen_ankles ,
+                                wd:Q3160831 ;
+           ex:hasRareSymptom sym:aching_legs ,
+                             sym:bulging_blue_veins ,
+                             sym:swollen_ankles ,
+                             wd:Q3160831 ,
+                             wd:Q48970753 ;
+           ex:hasSecondarySymptom wd:Q48970753 ,
+                                  wd:Q81938 ,
+                                  wd:Q9690 ;
+           ex:hasExplanation "Varicose veins occur when weakened veins cause blood to pool, mainly in the legs."@en ;
+           ex:seeDoctor "If pain, swelling, skin changes, or sudden worsening occurs."@en ;
+           ex:treatment "Mild cases can be managed conservatively, but medical evaluation is needed for complications."@en ;
+           skos:prefLabel "Varicose veins"@en .
+
+
+###  http://www.wikidata.org/entity/Q202013
+wd:Q202013 rdf:type owl:NamedIndividual ,
+                    ex:GeneralSymptom ;
+           skos:prefLabel "nosebleed"@en .
+
+
+###  http://www.wikidata.org/entity/Q205835
+wd:Q205835 rdf:type owl:NamedIndividual ,
+                    ex:RespiratorySymptom ;
+           skos:prefLabel "snoring"@en .
+
+
+###  http://www.wikidata.org/entity/Q2078852
+wd:Q2078852 rdf:type owl:NamedIndividual ,
+                     ex:SkinSymptom ;
+            skos:prefLabel "chronic wound"@en .
+
+
+###  http://www.wikidata.org/entity/Q209789
+wd:Q209789 rdf:type owl:NamedIndividual ,
+                    ex:GastrointestinalSymptom ;
+           skos:prefLabel "burping"@en .
+
+
+###  http://www.wikidata.org/entity/Q21110084
+wd:Q21110084 rdf:type owl:NamedIndividual ,
+                      ex:SystemicSymptom ;
+             skos:prefLabel "dark urine"@en .
+
+
+###  http://www.wikidata.org/entity/Q21120264
+wd:Q21120264 rdf:type owl:NamedIndividual ,
+                      ex:CardiovascularSymptom ;
+             skos:prefLabel "precordial pain"@en .
+
+
+###  http://www.wikidata.org/entity/Q217111
+wd:Q217111 rdf:type owl:NamedIndividual ,
+                    ex:CardiovascularSymptom ;
+           skos:prefLabel "bradycardia"@en .
+
+
+###  http://www.wikidata.org/entity/Q221668
+wd:Q221668 rdf:type owl:NamedIndividual ,
+                    ex:Disease ;
+           ex:hasPrimarySymptom wd:Q1269399 ,
+                                wd:Q352585 ,
+                                wd:Q373597 ,
+                                wd:Q778731 ;
+           ex:hasRareSymptom wd:Q1269399 ,
+                             wd:Q183425 ,
+                             wd:Q352585 ,
+                             wd:Q373597 ,
+                             wd:Q778731 ;
+           ex:hasSecondarySymptom wd:Q127076 ,
+                                  wd:Q183425 ,
+                                  wd:Q186889 ,
+                                  wd:Q38933 ,
+                                  wd:Q81938 ,
+                                  wd:Q86 ;
+           ex:hasExplanation "A urinary tract infection is a bacterial infection of the bladder or kidneys."@en ;
+           ex:seeDoctor "If symptoms last more than three days or worsen."@en ;
+           ex:treatment "Mild cases may resolve, but medical treatment is often needed."@en ;
+           skos:prefLabel "Urinary tract infection"@en .
+
+
+###  http://www.wikidata.org/entity/Q223591
+wd:Q223591 rdf:type owl:NamedIndividual ,
+                    ex:Disease ;
+           ex:hasPrimarySymptom wd:Q16595080 ,
+                                wd:Q30597356 ,
+                                wd:Q537297 ;
+           ex:hasRareSymptom wd:Q21120264 ,
+                             wd:Q30597356 ,
+                             wd:Q537297 ,
+                             wd:Q623289 ;
+           ex:hasSecondarySymptom wd:Q1292082 ,
+                                  wd:Q186889 ,
+                                  wd:Q21120264 ,
+                                  wd:Q35805 ,
+                                  wd:Q623289 ,
+                                  wd:Q81938 ;
+           ex:hasExplanation "This condition occurs when stomach acid repeatedly flows back into the esophagus."@en ;
+           ex:seeDoctor "If symptoms persist for several weeks."@en ;
+           ex:treatment "Lifestyle changes may help, but medical treatment is often needed."@en ;
+           skos:prefLabel "Gastroesophageal reflux disease"@en .
+
+
+###  http://www.wikidata.org/entity/Q2260058
+wd:Q2260058 rdf:type owl:NamedIndividual ,
+                     ex:SystemicSymptom ;
+            skos:prefLabel "chills"@en .
+
+
+###  http://www.wikidata.org/entity/Q2336398
+wd:Q2336398 rdf:type owl:NamedIndividual ,
+                     ex:ClinicalFinding ;
+            skos:prefLabel "pallor"@en .
+
+
+###  http://www.wikidata.org/entity/Q2536390
+wd:Q2536390 rdf:type owl:NamedIndividual ,
+                     ex:GastrointestinalSymptom ;
+            skos:prefLabel "abdominal distention"@en .
+
+
+###  http://www.wikidata.org/entity/Q254327
+wd:Q254327 rdf:type owl:NamedIndividual ,
+                    ex:GeneralSymptom ;
+           skos:prefLabel "anorexia"@en .
+
+
+###  http://www.wikidata.org/entity/Q276469
+wd:Q276469 rdf:type owl:NamedIndividual ,
+                    ex:SkinSymptom ;
+           skos:prefLabel "blister"@en .
+
+
+###  http://www.wikidata.org/entity/Q281289
+wd:Q281289 rdf:type owl:NamedIndividual ,
+                    ex:NeurologicalSymptom ;
+           skos:prefLabel "photophobia"@en .
+
+
+###  http://www.wikidata.org/entity/Q28971
+wd:Q28971 rdf:type owl:NamedIndividual ,
+                   ex:Disease ;
+          ex:hasPrimarySymptom sym:honey_colored_crust ,
+                               sym:red_sores ,
+                               wd:Q276469 ;
+          ex:hasRareSymptom sym:honey_colored_crust ,
+                            sym:red_sores ,
+                            wd:Q276469 ;
+          ex:hasSecondarySymptom wd:Q199602 ,
+                                 wd:Q38933 ,
+                                 wd:Q81938 ,
+                                 wd:Q86 ,
+                                 wd:Q9690 ;
+          ex:hasExplanation "Impetigo is a contagious bacterial skin infection, mainly affecting children."@en ;
+          ex:seeDoctor "If the infection spreads or does not improve."@en ;
+          ex:treatment "Medical treatment is often required to prevent spreading."@en ;
+          skos:prefLabel "Impetigo"@en .
+
+
+###  http://www.wikidata.org/entity/Q29644032
+wd:Q29644032 rdf:type owl:NamedIndividual ,
+                      ex:SystemicSymptom ;
+             skos:prefLabel "continuous fever"@en .
+
+
+###  http://www.wikidata.org/entity/Q29644041
+wd:Q29644041 rdf:type owl:NamedIndividual ,
+                      ex:SystemicSymptom ;
+             skos:prefLabel "periodic fever"@en .
+
+
+###  http://www.wikidata.org/entity/Q2971524
+wd:Q2971524 rdf:type owl:NamedIndividual ,
+                     ex:GeneralSymptom ;
+            skos:prefLabel "eye inflammation"@en .
+
+
+###  http://www.wikidata.org/entity/Q29971784
+wd:Q29971784 rdf:type owl:NamedIndividual ,
+                      ex:SkinSymptom ;
+             skos:prefLabel "nail pitting"@en .
+
+
+###  http://www.wikidata.org/entity/Q30597356
+wd:Q30597356 rdf:type owl:NamedIndividual ,
+                      ex:GastrointestinalSymptom ;
+             skos:prefLabel "regurgitation"@en .
+
+
+###  http://www.wikidata.org/entity/Q3073147
+wd:Q3073147 rdf:type owl:NamedIndividual ,
+                     ex:SystemicSymptom ;
+            skos:prefLabel "intermittent fever"@en .
+
+
+###  http://www.wikidata.org/entity/Q30953
+wd:Q30953 rdf:type owl:NamedIndividual ,
+                   ex:Disease ;
+          ex:hasPrimarySymptom sym:joint_pain ,
+                               wd:Q186889 ,
+                               wd:Q38933 ,
+                               wd:Q474959 ,
+                               wd:Q653197 ,
+                               wd:Q683498 ,
+                               wd:Q86 ;
+          ex:hasRareSymptom sym:joint_pain ,
+                            sym:loss_of_appetite ,
+                            wd:Q166019 ,
+                            wd:Q217111 ,
+                            wd:Q254327 ,
+                            wd:Q380203 ,
+                            wd:Q474959 ,
+                            wd:Q6725808 ,
+                            wd:Q683498 ,
+                            wd:Q847726 ;
+          ex:hasSecondarySymptom sym:loss_of_appetite ,
+                                 wd:Q127076 ,
+                                 wd:Q166019 ,
+                                 wd:Q217111 ,
+                                 wd:Q254327 ,
+                                 wd:Q380203 ,
+                                 wd:Q6725808 ,
+                                 wd:Q81938 ,
+                                 wd:Q847726 ,
+                                 wd:Q9690 ;
+          ex:hasExplanation "Dengue is a mosquito-borne viral infection that can become severe."@en ;
+          ex:seeDoctor "Immediately if dengue is suspected."@en ;
+          ex:treatment "Immediate medical care is required; do not self-treat."@en ;
+          skos:prefLabel "Dengue"@en .
+
+
+###  http://www.wikidata.org/entity/Q3160831
+wd:Q3160831 rdf:type owl:NamedIndividual ,
+                     ex:GeneralSymptom ;
+            skos:prefLabel "heavy legs"@en .
+
+
+###  http://www.wikidata.org/entity/Q3245488
+wd:Q3245488 rdf:type owl:NamedIndividual ,
+                     ex:RespiratorySymptom ;
+            skos:prefLabel "nasal congestion"@en .
+
+
+###  http://www.wikidata.org/entity/Q3407854
+wd:Q3407854 rdf:type owl:NamedIndividual ,
+                     ex:GeneralSymptom ;
+            skos:prefLabel "prostration"@en .
+
+
+###  http://www.wikidata.org/entity/Q352585
+wd:Q352585 rdf:type owl:NamedIndividual ,
+                    ex:SystemicSymptom ;
+           skos:prefLabel "frequent urination"@en .
+
+
+###  http://www.wikidata.org/entity/Q3567802
+wd:Q3567802 rdf:type owl:NamedIndividual ,
+                     ex:SystemicSymptom ;
+            skos:prefLabel "neck pain"@en .
+
+
+###  http://www.wikidata.org/entity/Q35805
+wd:Q35805 rdf:type owl:NamedIndividual ,
+                   ex:RespiratorySymptom ;
+          skos:prefLabel "cough"@en .
+
+
+###  http://www.wikidata.org/entity/Q35830
+wd:Q35830 rdf:type owl:NamedIndividual ,
+                   ex:RespiratorySymptom ;
+          skos:prefLabel "sneeze"@en .
+
+
+###  http://www.wikidata.org/entity/Q35869
+wd:Q35869 rdf:type owl:NamedIndividual ,
+                   ex:Disease ;
+          ex:hasPrimarySymptom wd:Q188008 ,
+                               wd:Q35805 ,
+                               wd:Q517104 ;
+          ex:hasRareSymptom wd:Q517104 ;
+          ex:hasSecondarySymptom wd:Q101991 ,
+                                 wd:Q693058 ,
+                                 wd:Q9690 ;
+          ex:hasExplanation "Asthma is a chronic lung disease that causes narrowing of the airways."@en ;
+          ex:seeDoctor "If breathing problems worsen or attacks increase."@en ;
+          ex:treatment "Medical treatment is required; acute attacks need immediate care."@en ;
+          skos:prefLabel "Asthma"@en .
+
+
+###  http://www.wikidata.org/entity/Q3589142
+wd:Q3589142 rdf:type owl:NamedIndividual ,
+                     ex:GastrointestinalSymptom ;
+            skos:prefLabel "epigastric pain"@en .
+
+
+###  http://www.wikidata.org/entity/Q373597
+wd:Q373597 rdf:type owl:NamedIndividual ,
+                    ex:SystemicSymptom ;
+           skos:prefLabel "hematuria"@en .
+
+
+###  http://www.wikidata.org/entity/Q380203
+wd:Q380203 rdf:type owl:NamedIndividual ,
+                    ex:GeneralSymptom ;
+           skos:prefLabel "adynamia"@en .
+
+
+###  http://www.wikidata.org/entity/Q38933
+wd:Q38933 rdf:type owl:NamedIndividual ,
+                   ex:SystemicSymptom ;
+          ex:scorePoints 3 ;
+          skos:prefLabel "fever"@en .
+
+
+###  http://www.wikidata.org/entity/Q3931183
+wd:Q3931183 rdf:type owl:NamedIndividual ,
+                     ex:Disease ;
+            ex:hasPrimarySymptom wd:Q199602 ,
+                                 wd:Q653197 ;
+            ex:hasRareSymptom sym:rapid_heart_rate ,
+                              wd:Q10916362 ,
+                              wd:Q517104 ;
+            ex:hasSecondarySymptom sym:rapid_heart_rate ,
+                                   wd:Q10916362 ,
+                                   wd:Q186889 ,
+                                   wd:Q188008 ,
+                                   wd:Q38933 ,
+                                   wd:Q40878 ,
+                                   wd:Q517104 ,
+                                   wd:Q81938 ;
+            ex:hasExplanation "A drug reaction is an unwanted response to medication."@en ;
+            ex:seeDoctor "Immediately if severe reactions occur."@en ;
+            ex:treatment "Stop the drug and seek medical care; severe cases need urgent treatment."@en ;
+            skos:prefLabel "Drug reaction"@en .
+
+
+###  http://www.wikidata.org/entity/Q40878
+wd:Q40878 rdf:type owl:NamedIndividual ,
+                   ex:GastrointestinalSymptom ;
+          ex:scorePoints 3 ;
+          skos:prefLabel "diarrhea"@en .
+
+
+###  http://www.wikidata.org/entity/Q41478
+wd:Q41478 rdf:type owl:NamedIndividual ,
+                   ex:Disease ;
+          ex:hasPrimarySymptom sym:disconfort_sitting ,
+                               sym:itching_anus ,
+                               sym:swelling_lumbs_anus ,
+                               wd:Q166019 ;
+          ex:hasRareSymptom sym:disconfort_sitting ,
+                            sym:feeling_incomplete_bowel_emptying ,
+                            sym:itching_anus ,
+                            sym:mucus_discharge ,
+                            sym:swelling_lumbs_anus ,
+                            wd:Q166019 ;
+          ex:hasSecondarySymptom sym:feeling_incomplete_bowel_emptying ,
+                                 sym:mucus_discharge ,
+                                 wd:Q81938 ;
+          ex:hasExplanation "Hemorrhoids are swollen blood vessels near the anus that can cause discomfort."@en ;
+          ex:seeDoctor "If bleeding or pain persists."@en ;
+          ex:treatment "Often managed with self-care, but medical treatment may be needed."@en ;
+          skos:prefLabel "Hemorrhoids"@en .
+
+
+###  http://www.wikidata.org/entity/Q42982
+wd:Q42982 rdf:type owl:NamedIndividual ,
+                   ex:Disease ;
+          ex:hasPrimarySymptom sym:itching_eyes ,
+                               wd:Q1115038 ,
+                               wd:Q35830 ,
+                               wd:Q653197 ,
+                               wd:wd:Q109186 ;
+          ex:hasRareSymptom sym:itching_eyes ,
+                            wd:Q1115038 ;
+          ex:hasSecondarySymptom wd:Q1292082 ,
+                                 wd:Q186889 ,
+                                 wd:Q35805 ,
+                                 wd:Q38933 ,
+                                 wd:Q40878 ,
+                                 wd:Q81938 ,
+                                 wd:Q86 ,
+                                 wd:Q9690 ;
+          ex:hasExplanation "An allergy occurs when the immune system overreacts to harmless substances."@en ;
+          ex:seeDoctor "Immediately if swelling or breathing difficulty occurs."@en ;
+          ex:treatment "Mild allergies may be self-managed; severe reactions require emergency care."@en ;
+          skos:prefLabel "Allergy"@en .
+
+
+###  http://www.wikidata.org/entity/Q44727
+wd:Q44727 rdf:type owl:NamedIndividual ,
+                   ex:Disease ;
+          ex:hasPrimarySymptom wd:Q1515219 ,
+                               wd:Q189206 ,
+                               wd:Q199602 ,
+                               wd:Q276469 ,
+                               wd:Q480971 ,
+                               wd:Q653197 ,
+                               wd:Q997862 ;
+          ex:hasRareSymptom sym:loss_of_appetite ,
+                            wd:Q1515219 ,
+                            wd:Q189206 ,
+                            wd:Q276469 ,
+                            wd:Q480971 ,
+                            wd:Q847726 ,
+                            wd:Q991153 ,
+                            wd:Q997862 ;
+          ex:hasSecondarySymptom sym:loss_of_appetite ,
+                                 wd:Q127076 ,
+                                 wd:Q38933 ,
+                                 wd:Q81938 ,
+                                 wd:Q847726 ,
+                                 wd:Q86 ,
+                                 wd:Q991153 ;
+          ex:hasExplanation "Chickenpox is a contagious viral infection that usually causes a temporary illness."@en ;
+          ex:seeDoctor "If the patient is an adult, pregnant, or becomes very ill."@en ;
+          ex:treatment "Usually supportive care, but medical care is needed in high-risk cases."@en ;
+          skos:prefLabel "Chickenpox"@en .
+
+
+###  http://www.wikidata.org/entity/Q464067
+wd:Q464067 rdf:type owl:NamedIndividual ,
+                    ex:Disease ;
+           ex:hasPrimarySymptom sym:red_skin ,
+                                sym:white_patches_around_genitals ,
+                                sym:white_patches_in_mouth ,
+                                wd:Q102187111 ;
+           ex:hasRareSymptom sym:red_skin ,
+                             sym:white_patches_around_genitals ,
+                             sym:white_patches_in_mouth ,
+                             wd:Q102187111 ,
+                             wd:Q557945 ;
+           ex:hasSecondarySymptom wd:Q38933 ,
+                                  wd:Q81938 ,
+                                  wd:Q86 ;
+           ex:hasExplanation "A fungal infection occurs when fungi overgrow on the skin, nails, or mucous membranes."@en ;
+           ex:seeDoctor "If the infection does not improve with basic treatment."@en ;
+           ex:treatment "Mild cases may be self-treated, but persistent cases need medical care."@en ;
+           skos:prefLabel "Fungal infection"@en .
+
+
+###  http://www.wikidata.org/entity/Q474959
+wd:Q474959 rdf:type owl:NamedIndividual ,
+                    ex:SystemicSymptom ;
+           skos:prefLabel "myalgia"@en .
+
+
+###  http://www.wikidata.org/entity/Q480971
+wd:Q480971 rdf:type owl:NamedIndividual ,
+                    ex:SystemicSymptom ;
+           skos:prefLabel "low-grade fever"@en .
+
+
+###  http://www.wikidata.org/entity/Q48970753
+wd:Q48970753 rdf:type owl:NamedIndividual ,
+                      ex:SkinSymptom ;
+             skos:prefLabel "skin discoloration"@en .
+
+
+###  http://www.wikidata.org/entity/Q4927059
+wd:Q4927059 rdf:type owl:NamedIndividual ,
+                     ex:GastrointestinalSymptom ;
+            skos:prefLabel "bloating"@en .
+
+
+###  http://www.wikidata.org/entity/Q4930803
+wd:Q4930803 rdf:type owl:NamedIndividual ,
+                     ex:NeurologicalSymptom ;
+            skos:prefLabel "blurred vision"@en .
+
+
+###  http://www.wikidata.org/entity/Q496812
+wd:Q496812 rdf:type owl:NamedIndividual ,
+                    ex:ClinicalFinding ;
+           skos:prefLabel "leukopenia"@en .
+
+
+###  http://www.wikidata.org/entity/Q517104
+wd:Q517104 rdf:type owl:NamedIndividual ,
+                    ex:RespiratorySymptom ;
+           skos:prefLabel "wheeze"@en .
+
+
+###  http://www.wikidata.org/entity/Q537297
+wd:Q537297 rdf:type owl:NamedIndividual ,
+                    ex:GastrointestinalSymptom ;
+           skos:prefLabel "heartburn"@en .
+
+
+###  http://www.wikidata.org/entity/Q5445
+wd:Q5445 rdf:type owl:NamedIndividual ,
+                  ex:ClinicalFinding ;
+         skos:prefLabel "anemia"@en .
+
+
+###  http://www.wikidata.org/entity/Q557945
+wd:Q557945 rdf:type owl:NamedIndividual ,
+                    ex:NeurologicalSymptom ;
+           ex:scorePoints 5 ;
+           skos:prefLabel "confusion"@en .
+
+
+###  http://www.wikidata.org/entity/Q559210
+wd:Q559210 rdf:type owl:NamedIndividual ,
+                    ex:SystemicSymptom ;
+           skos:prefLabel "joint stiffness"@en .
+
+
+###  http://www.wikidata.org/entity/Q570920
+wd:Q570920 rdf:type owl:NamedIndividual ,
+                    ex:RespiratorySymptom ;
+           skos:prefLabel "tachypnea"@en .
+
+
+###  http://www.wikidata.org/entity/Q623289
+wd:Q623289 rdf:type owl:NamedIndividual ,
+                    ex:GastrointestinalSymptom ;
+           skos:prefLabel "dysphagia"@en .
+
+
+###  http://www.wikidata.org/entity/Q635195
+wd:Q635195 rdf:type owl:NamedIndividual ,
+                    ex:GeneralSymptom ;
+           skos:prefLabel "polydipsia"@en .
+
+
+###  http://www.wikidata.org/entity/Q647099
+wd:Q647099 rdf:type owl:NamedIndividual ,
+                    ex:RespiratorySymptom ;
+           skos:prefLabel "hemoptysis"@en .
+
+
+###  http://www.wikidata.org/entity/Q65202123
+wd:Q65202123 rdf:type owl:NamedIndividual ,
+                      ex:NeurologicalSymptom ;
+             skos:prefLabel "confusion or consciousness"@en .
+
+
+###  http://www.wikidata.org/entity/Q653197
+wd:Q653197 rdf:type owl:NamedIndividual ,
+                    ex:SkinSymptom ;
+           skos:prefLabel "rash"@en .
+
+
+###  http://www.wikidata.org/entity/Q653267
+wd:Q653267 rdf:type owl:NamedIndividual ,
+                    ex:GeneralSymptom ;
+           skos:prefLabel "polyphagia"@en .
+
+
+###  http://www.wikidata.org/entity/Q6725808
+wd:Q6725808 rdf:type owl:NamedIndividual ,
+                     ex:SkinSymptom ;
+            skos:prefLabel "maculopapular rash"@en .
+
+
+###  http://www.wikidata.org/entity/Q683498
+wd:Q683498 rdf:type owl:NamedIndividual ,
+                    ex:SystemicSymptom ;
+           skos:prefLabel "arthralgia"@en .
+
+
+###  http://www.wikidata.org/entity/Q693058
+wd:Q693058 rdf:type owl:NamedIndividual ,
+                    ex:CardiovascularSymptom ;
+           ex:scorePoints 5 ;
+           skos:prefLabel "chest pain"@en .
+
+
+###  http://www.wikidata.org/entity/Q769220
+wd:Q769220 rdf:type owl:NamedIndividual ,
+                    ex:NeurologicalSymptom ;
+           skos:prefLabel "paresthesia"@en .
+
+
+###  http://www.wikidata.org/entity/Q778731
+wd:Q778731 rdf:type owl:NamedIndividual ,
+                    ex:SystemicSymptom ;
+           skos:prefLabel "pyuria"@en .
+
+
+###  http://www.wikidata.org/entity/Q79928
+wd:Q79928 rdf:type owl:NamedIndividual ,
+                   ex:Disease ;
+          ex:hasPrimarySymptom sym:skin_bumps ,
+                               wd:Q1172159 ;
+          ex:hasRareSymptom sym:skin_bumps ,
+                            wd:Q1172159 ;
+          ex:hasExplanation "Acne is a skin condition caused by inflammation of oil glands."@en ;
+          ex:seeDoctor "If acne is severe or causes scarring."@en ;
+          ex:treatment "Mild acne can be self-treated; severe cases need medical care."@en ;
+          skos:prefLabel "Acne"@en .
+
+
+###  http://www.wikidata.org/entity/Q81938
+wd:Q81938 rdf:type owl:NamedIndividual ,
+                   ex:GeneralSymptom ;
+          ex:scorePoints 2 ;
+          skos:prefLabel "pain"@en .
+
+
+###  http://www.wikidata.org/entity/Q83319
+wd:Q83319 rdf:type owl:NamedIndividual ,
+                   ex:Disease ;
+          ex:hasPrimarySymptom sym:loss_of_appetite ,
+                               wd:Q178436 ,
+                               wd:Q186889 ,
+                               wd:Q2536390 ,
+                               wd:Q29644032 ,
+                               wd:Q38933 ,
+                               wd:Q40878 ,
+                               wd:Q86 ,
+                               wd:Q9690 ;
+          ex:hasRareSymptom sym:loss_of_appetite ,
+                            wd:Q1129121 ,
+                            wd:Q1362864 ,
+                            wd:Q1495657 ,
+                            wd:Q178436 ,
+                            wd:Q18554982 ,
+                            wd:Q1869874 ,
+                            wd:Q189643 ,
+                            wd:Q217111 ,
+                            wd:Q2336398 ,
+                            wd:Q2536390 ,
+                            wd:Q29644032 ,
+                            wd:Q3407854 ,
+                            wd:Q496812 ,
+                            wd:Q65202123 ;
+          ex:hasSecondarySymptom wd:Q1129121 ,
+                                 wd:Q127076 ,
+                                 wd:Q1362864 ,
+                                 wd:Q1495657 ,
+                                 wd:Q18554982 ,
+                                 wd:Q1869874 ,
+                                 wd:Q189643 ,
+                                 wd:Q217111 ,
+                                 wd:Q2336398 ,
+                                 wd:Q3407854 ,
+                                 wd:Q496812 ,
+                                 wd:Q65202123 ,
+                                 wd:Q653197 ,
+                                 wd:Q81938 ;
+          ex:hasExplanation "Typhoid is a serious bacterial infection spread through contaminated food or water."@en ;
+          ex:seeDoctor "Immediately if typhoid is suspected."@en ;
+          ex:treatment "Immediate medical treatment is required; do not attempt self-treatment."@en ;
+          skos:prefLabel "Typhoid"@en .
+
+
+###  http://www.wikidata.org/entity/Q847726
+wd:Q847726 rdf:type owl:NamedIndividual ,
+                    ex:ClinicalFinding ;
+           skos:prefLabel "lymphadenopathy"@en .
+
+
+###  http://www.wikidata.org/entity/Q86
+wd:Q86 rdf:type owl:NamedIndividual ,
+                ex:NeurologicalSymptom ;
+       skos:prefLabel "headache"@en .
+
+
+###  http://www.wikidata.org/entity/Q95566669
+wd:Q95566669 rdf:type owl:NamedIndividual ,
+                      ex:Disease ;
+             ex:hasPrimarySymptom sym:vision_changes ,
+                                  wd:Q10916362 ,
+                                  wd:Q202013 ,
+                                  wd:Q557945 ,
+                                  wd:Q86 ;
+             ex:hasRareSymptom sym:vision_changes ,
+                               wd:Q10916362 ,
+                               wd:Q202013 ,
+                               wd:Q557945 ;
+             ex:hasSecondarySymptom wd:Q188008 ,
+                                    wd:Q693058 ,
+                                    wd:Q81938 ,
+                                    wd:Q9690 ;
+             ex:hasExplanation "Hypertension is a condition where blood pressure stays too high over time."@en ;
+             ex:seeDoctor "If repeated blood pressure readings are high."@en ;
+             ex:treatment "Medical management is required; lifestyle changes alone may not be enough."@en ;
+             skos:prefLabel "Hypertension"@en .
+
+
+###  http://www.wikidata.org/entity/Q9690
+wd:Q9690 rdf:type owl:NamedIndividual ,
+                  ex:SystemicSymptom ;
+         skos:prefLabel "fatigue"@en .
+
+
+###  http://www.wikidata.org/entity/Q991153
+wd:Q991153 rdf:type owl:NamedIndividual ,
+                    ex:SkinSymptom ;
+           skos:prefLabel "erosion"@en .
+
+
+###  http://www.wikidata.org/entity/Q997862
+wd:Q997862 rdf:type owl:NamedIndividual ,
+                    ex:SkinSymptom ;
+           skos:prefLabel "papule"@en .
+
+
+###  http://www.wikidata.org/entity/wd:Q109186
+wd:wd:Q109186 rdf:type owl:NamedIndividual .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

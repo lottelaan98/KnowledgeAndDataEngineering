@@ -1,9 +1,9 @@
 ### MOUNTED ON GOOGLE DRIVE USING GOOGLE COLAB ###
-from google.colab import drive
-drive.mount('/content/drive')
+# from google.colab import drive
+# drive.mount('/content/drive')
 
-### INSTAL RDF LIB ###
-pip install rdflib
+# ### INSTAL RDF LIB ###
+# pip install rdflib
 
 ### CHECK GRAPH CAN BE PARSED ###
 

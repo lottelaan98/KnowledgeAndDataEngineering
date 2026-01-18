@@ -2,6 +2,7 @@ import joblib
 import sys
 from pathlib import Path
 from typing import List, Dict, Any
+import re
 
 
 base_dir = Path(__file__).parent.resolve()
@@ -10,6 +11,7 @@ sys.path.append(str(base_dir))
 from reasoning.reasoning_engine import ReasoningEngine
 from reasoning.rdf_disease_finder import RDFDiseaseFinder
 from rag.rag_engine import RAGExplainer
+from reasoning.wikidata_client import WikidataClient
 
 
 # Common symptoms loaded dynamically from the KG
@@ -17,45 +19,62 @@ from rag.rag_engine import RAGExplainer
 def extract_symptoms_from_text(text: str, known_symptoms: List[str]) -> List[str]:
     """
     Extract symptom keywords from user text.
-    Simple keyword matching.
+    Uses regex word-boundary matching instead of substring + replace.
     """
-    text_lower = text.lower()
-    found_symptoms = []
-    
-    # Check for multi-word symptom
-    # Sort by length to match longest phrases first (e.g. "chest pain" before "pain")
     if not known_symptoms:
         return []
 
+    # Normalize input text: lowercase + keep spaces
+    text_lower = text.lower()
+    text_lower = re.sub(r"[^a-z0-9\s]", " ", text_lower)
+    text_lower = re.sub(r"\s+", " ", text_lower).strip()
+
+    found = []
+    found_set = set()
+
+    # 1) Match known symptoms (prefer longer phrases first)
     for symptom in sorted(known_symptoms, key=len, reverse=True):
-        if symptom in text_lower:
-            found_symptoms.append(symptom)
-            text_lower = text_lower.replace(symptom, "", 1)
-    
-    # common phrases
+        s = symptom.lower().strip()
+        if not s:
+            continue
+
+        # Make spaces flexible: "skin rash" matches "skin   rash"
+        pattern = r"\b" + re.escape(s).replace(r"\ ", r"\s+") + r"\b"
+
+        if re.search(pattern, text_lower):
+            if s not in found_set:
+                found.append(s)
+                found_set.add(s)
+
+    # 2) Extra phrase -> canonical symptom mapping (optional)
     synonyms = {
         "loose stool": "diarrhea",
         "stomach ache": "abdominal pain",
-        "tummy ache": "abdominal pain", 
+        "tummy ache": "abdominal pain",
         "high temp": "fever",
         "throwing up": "vomiting",
-        "shitting": "diarrhea"
+        "shitting": "diarrhea",
+        "itchy": "itch",  
     }
-    
-    for phrase, symptom in synonyms.items():
-        if phrase in text_lower and symptom not in found_symptoms:
-            found_symptoms.append(symptom)
-            
-    return list(set(found_symptoms))
 
-from reasoning.wikidata_client import WikidataClient
+    for phrase, canonical_symptom in synonyms.items():
+        p = phrase.lower().strip()
+        pattern = r"\b" + re.escape(p).replace(r"\ ", r"\s+") + r"\b"
+        if re.search(pattern, text_lower):
+            c = canonical_symptom.lower()
+            if c not in found_set:
+                found.append(c)
+                found_set.add(c)
+
+    return found
+
 
 def load_components(base_path: Path):
     """Load all models and data."""
     print("Loading components...", file=sys.stderr)
     
     model_path = base_path / "models" / "classifier.joblib"
-    rdf_path = base_path / "ontology" / "version 2 database.ttl"
+    rdf_path = base_path / "ontology" / "databaseV72.ttl"
     docs_path = base_path / "rag" / "docs"
 
     components = {}
@@ -122,6 +141,7 @@ def run_diagnosis(text: str, components: Dict[str, Any]):
         print("Warning: No known symptoms loaded from Knowledge Graph. Extraction may fail.")
     
     symptoms = extract_symptoms_from_text(text, known_symptoms)
+    print(symptoms)
     print(f"Extracted Symptoms: {', '.join(symptoms) if symptoms else 'None found'}\n")
     
     if not symptoms:
