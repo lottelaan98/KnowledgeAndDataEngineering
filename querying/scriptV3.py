@@ -7,10 +7,6 @@ This rewrites your notebook-style script into reusable functions:
 - query2_disease_wiki_info(g, disease_iri)
 - query3_matching_symptoms(g, disease_iri, symps_list)
 - query3_missing_symptoms(g, disease_iri, symps_list)
-
-So your *main* file can do:
-    from scriptV2 import load_graph, query1_topk_diseases_by_score, ...
-and it won’t contain big SPARQL strings anymore.
 """
 
 from __future__ import annotations
