@@ -190,3 +190,107 @@ class ReasoningEngine:
 
         out.sort(key=lambda r: float(r.get("similarity_score", 0.0)), reverse=True)
         return out
+    
+def main() -> None:
+    """
+    Standalone demo for ReasoningEngine.
+
+        return out
+    This simulates the outputs of:
+      1) symptom_matcher.py
+      2) disease_finder_query.py
+
+    Run with:
+        python reasoning_engine.py
+    """
+
+    # -----------------------------
+    # Simulated output of symptom_matcher.py
+ 
+    symptom_matches = [
+        {
+            "uri": "http://www.wikidata.org/entity/Q38933",
+            "label": "fever",
+            "score": 0.375,
+        },
+        {
+            "uri": "http://www.wikidata.org/entity/Q86",
+            "label": "headache",
+            "score": 0.305,
+        },
+    ]
+
+    # -----------------------------
+    # Simulated output of disease_finder_query.py
+    # -----------------------------
+    kg_candidates = [
+        {
+            "disease_name": "Pneumonia",
+            "disease_uri": "http://www.wikidata.org/entity/Q12192",
+            "similarity_pct": 70.55,
+            "matched_symptoms": ["fatigue", "fever"],
+        },
+        {
+            "disease_name": "Malaria",
+            "disease_uri": "http://www.wikidata.org/entity/Q12156",
+            "similarity_pct": 68.80,
+            "matched_symptoms": ["fatigue", "fever"],
+        },
+        {
+            "disease_name": "Typhoid",
+            "disease_uri": "http://www.wikidata.org/entity/Q83319",
+            "similarity_pct": 67.13,
+            "matched_symptoms": ["fatigue", "fever"],
+        },
+    ]
+
+    # -----------------------------
+    # Simulated ML model prediction
+    # -----------------------------
+    ml_prediction = {
+        "disease_id": "Malaria",
+        "score": 0.0626,   # very low ML confidence
+    }
+
+    # -----------------------------
+    # Run reasoning engine
+    # -----------------------------
+
+    engine = ReasoningEngine()
+
+    final = engine.fuse_results(
+        ml_prediction=ml_prediction,
+        kg_candidates=kg_candidates,
+        symptom_matches=symptom_matches,
+        rdf_finder=None,  # optional; not needed for demo
+    )
+
+    # -----------------------------
+    # Print results (human-readable)
+    # -----------------------------
+    print("\n=== SYMPTOM MATCHES ===")
+    for i, s in enumerate(symptom_matches, 1):
+        print(f"{i}. {s['label']}  (score={s['score']:.3f})")
+        print(f"   URI: {s['uri']}")
+
+    print("\n=== KG DISEASE CANDIDATES ===")
+    for i, d in enumerate(final["kg_candidates"], 1):
+        print(f"{i}. {d['disease_name']}")
+        print(f"   URI: {d['disease_uri']}")
+        print(f"   Similarity: {d['similarity_pct']:.2f}%")
+        print(f"   Matched: {', '.join(d['matched_symptoms'])}")
+
+    print("\n=== FINAL REASONED PREDICTION ===")
+
+    print("Disease:        ", final["disease"])
+    print("Original score: ", f"{final['original_score']:.4f}")
+    print("Final score:    ", f"{final['final_score']:.4f}")
+    print("Fallback used:  ", final["is_fallback"])
+
+    print("\n--- Reasoning steps ---")
+
+    for step in final["reasoning"]:
+        print("•", step)
+
+if __name__ == "__main__":
+    main()
