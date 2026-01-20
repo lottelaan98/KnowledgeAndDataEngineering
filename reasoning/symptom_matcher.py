@@ -1,296 +1,211 @@
-from __future__ import annotations
+import re
+import argparse
+from pathlib import Path
+from typing import List, Dict, Any, Tuple
 
-from typing import List, Dict, Any, Optional
+import rdflib
+from rdflib import Graph, Namespace, RDF
+from rdflib.namespace import SKOS, RDFS
+
+# Optional: spaCy
+try:
+    import spacy
+except Exception:
+    spacy = None
 
 
-class ReasoningEngine:
+EX = Namespace("http://example.org/med#")
+
+
+def normalize(text: str) -> str:
+    text = text.lower().strip()
+    text = re.sub(r"[-_]+", " ", text)
+    text = re.sub(r"[^a-z0-9\s]", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+
+def get_symptom_labels(graph: Graph) -> List[Tuple[rdflib.term.Identifier, str]]:
+    """Return list of (symptom_uri, label) for all symptoms in KG."""
+    symptom_types = {EX.Symptom}
+    for subclass in graph.subjects(RDFS.subClassOf, EX.Symptom):
+        symptom_types.add(subclass)
+
+    out = []
+    for symptom_type in symptom_types:
+        for s in graph.subjects(RDF.type, symptom_type):
+            label = None
+            for p in (SKOS.prefLabel, RDFS.label):
+                for l in graph.objects(s, p):
+                    if not getattr(l, "language", None) or l.language == "en":
+                        label = str(l)
+                        break
+                if label:
+                    break
+            if label:
+                out.append((s, label))
+    return out
+
+
+def extract_phrases_simple(text: str) -> List[str]:
     """
-    Pure fuser: does NOT compute symptom matches or KG disease candidates.
-
-    Inputs:
-      - ml_prediction: {"disease_id": str, "score": float}
-      - kg_candidates: list of diseases from Query pipeline (already ranked)
-      - symptom_matches: list of symptoms from symptom_matcher (uri/label/score)
-
-    Output (backwards-compatible with your original engine):
-      {
-        "disease": str,
-        "original_score": float,
-        "final_score": float,
-        "reasoning": [str, ...],
-        "is_fallback": bool
-      }
-
-    Extra fields (safe to ignore by old callers):
-      - "symptom_matches"
-      - "kg_candidates"
+    Minimal phrase extraction that works even without spaCy:
+    - unigrams + some bigrams
     """
+    t = normalize(text)
+    tokens = t.split()
+    phrases = set(tokens)
+    for i in range(len(tokens) - 1):
+        phrases.add(tokens[i] + " " + tokens[i + 1])
+    return sorted(phrases)
 
-    def fuse_results(
-        self,
-        ml_prediction: Dict[str, Any],
-        kg_candidates: Optional[List[Dict[str, Any]]] = None,
-        symptom_matches: Optional[List[Dict[str, Any]]] = None,
-        rdf_finder=None,
-        low_conf_threshold: float = 0.40,
-        agreement_bonus: float = 0.20,
-        primary_penalty: float = 0.50,
-    ) -> Dict[str, Any]:
 
-        disease_id = ml_prediction.get("disease_id")
-        ml_score = float(ml_prediction.get("score", 0.0))
-
-        final_result: Dict[str, Any] = {
-            "disease": disease_id,
-            "original_score": ml_score,
-            "final_score": ml_score,
-            "reasoning": [],
-            "is_fallback": False,
-        }
-
-        # Keep upstream outputs available for debugging (backward-safe)
-        final_result["symptom_matches"] = symptom_matches or []
-
-        candidates = self._normalize_kg_candidates(kg_candidates or [])
-        final_result["kg_candidates"] = candidates
-
-        # If no KG candidates provided, ML-only result
-        if not candidates:
-            final_result["reasoning"].append("No Knowledge Graph candidates provided (ML only)")
-            return final_result
-
-        # -----------------------------
-        # 1) Agreement check (Top 3)
-        # -----------------------------
-        top3 = candidates[:3]
-        kg_agrees = any(self._same(c.get("disease_name"), disease_id) for c in top3)
-
-        if kg_agrees:
-            final_result["final_score"] = min(1.0, final_result["final_score"] + agreement_bonus)
-            final_result["reasoning"].append("Knowledge Graph agrees (Bonus +20%)")
-        else:
-            final_result["reasoning"].append("Knowledge Graph suggests different diseases")
-
-        # -----------------------------
-        # 2) Sanity check (Primary symptoms) - optional
-        # -----------------------------
-        # We use symptom_matcher labels as "user symptoms" here (more reliable than raw text).
-        user_symptom_labels = [
-            str(m.get("label", "")).strip()
-            for m in (symptom_matches or [])
-            if m.get("label")
-        ]
-
-        if rdf_finder is not None and hasattr(rdf_finder, "get_primary_symptoms") and disease_id:
-            try:
-                primary_symptoms = rdf_finder.get_primary_symptoms(disease_id) or []
-            except Exception:
-                primary_symptoms = []
-
-            if primary_symptoms:
-                user_sym_norm = [s.lower() for s in user_symptom_labels]
-                prim_sym_norm = [str(s).lower() for s in primary_symptoms]
-
-                has_primary = any(ps in user_sym_norm for ps in prim_sym_norm)
-                if not has_primary:
-                    final_result["final_score"] *= primary_penalty
-                    final_result["reasoning"].append(
-                        f"Missing primary symptoms for {disease_id} "
-                        f"(Expected: {', '.join(primary_symptoms)}) (Penalty -50%)"
-                    )
-                else:
-                    final_result["reasoning"].append("User has primary symptoms")
-
-        # -----------------------------
-        # 3) Fallback logic (low ML confidence -> use KG top result)
-        # -----------------------------
-        if final_result["final_score"] < low_conf_threshold:
-            top_kg = candidates[0]
-            final_result["reasoning"].append(
-                f"ML confidence too low ({final_result['final_score']:.2%}). "
-                f"Falling back to top Knowledge Graph result."
-            )
-            final_result["disease"] = top_kg.get("disease_name")
-            final_result["final_score"] = float(top_kg.get("similarity_score", 0.0))
-            final_result["is_fallback"] = True
-
-        return final_result
-
-    # -----------------------------
-    # Helpers
-    # -----------------------------
-    @staticmethod
-    def _same(a: Any, b: Any) -> bool:
-        if a is None or b is None:
-            return False
-        return str(a).strip().lower() == str(b).strip().lower()
-
-    @staticmethod
-    def _normalize_kg_candidates(cands: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """
-        Accept KG candidates in either "percent" or "0..1" score form.
-
-        Supported input keys per candidate:
-          - disease_name or label
-          - disease_uri or disease_iri or disease_uri
-          - similarity_pct (e.g. 70.55) OR similarity_score (0..1) OR finalScore (0..1)
-          - matched_symptoms (list of strings) OR matched (list of strings)
-
-        Output candidates always contain:
-          - disease_name
-          - disease_uri
-          - similarity_score (0..1 float)
-          - similarity_pct (0..100 float)
-          - matched_symptoms (list[str])
-        """
-        out: List[Dict[str, Any]] = []
-
-        for c in cands or []:
-            cc = dict(c)
-
-            # disease name normalization
-            if "disease_name" not in cc:
-                if "label" in cc:
-                    cc["disease_name"] = cc["label"]
-
-            # disease uri normalization
-            if "disease_uri" not in cc:
-                if "disease_iri" in cc:
-                    cc["disease_uri"] = cc["disease_iri"]
-                elif "disease_uri" in cc:
-                    pass
-                else:
-                    cc["disease_uri"] = None
-
-            # matched symptoms normalization
-            if "matched_symptoms" not in cc or cc["matched_symptoms"] is None:
-                if "matched" in cc and cc["matched"] is not None:
-                    cc["matched_symptoms"] = cc["matched"]
-                else:
-                    cc["matched_symptoms"] = []
-
-            # similarity normalization (always make both score + pct)
-            sim_score: float = 0.0
-            sim_pct: float = 0.0
-
-            if cc.get("similarity_pct") is not None:
-                sim_pct = float(cc["similarity_pct"])
-                sim_score = sim_pct / 100.0
-            elif cc.get("similarity_score") is not None:
-                sim_score = float(cc["similarity_score"])
-                sim_pct = sim_score * 100.0
-            elif cc.get("finalScore") is not None:
-                sim_score = float(cc["finalScore"])
-                sim_pct = sim_score * 100.0
-
-            cc["similarity_score"] = sim_score
-            cc["similarity_pct"] = sim_pct
-
-            out.append(cc)
-
-        out.sort(key=lambda r: float(r.get("similarity_score", 0.0)), reverse=True)
-        return out
-    
-def main() -> None:
+def extract_phrases_spacy(text: str, model: str = "en_core_web_sm") -> List[str]:
     """
-    Standalone demo for ReasoningEngine.
-
-        return out
-    This simulates the outputs of:
-      1) symptom_matcher.py
-      2) disease_finder_query.py
-
-    Run with:
-        python reasoning_engine.py
+    Phrase extraction with spaCy if available.
+    If model not installed, fallback to simple extractor.
     """
+    if spacy is None:
+        return extract_phrases_simple(text)
 
-    # -----------------------------
-    # Simulated output of symptom_matcher.py
- 
-    symptom_matches = [
-        {
-            "uri": "http://www.wikidata.org/entity/Q38933",
-            "label": "fever",
-            "score": 0.375,
-        },
-        {
-            "uri": "http://www.wikidata.org/entity/Q86",
-            "label": "headache",
-            "score": 0.305,
-        },
-    ]
+    try:
+        nlp = spacy.load(model)
+    except Exception:
+        return extract_phrases_simple(text)
 
-    # -----------------------------
-    # Simulated output of disease_finder_query.py
-    # -----------------------------
-    kg_candidates = [
-        {
-            "disease_name": "Pneumonia",
-            "disease_uri": "http://www.wikidata.org/entity/Q12192",
-            "similarity_pct": 70.55,
-            "matched_symptoms": ["fatigue", "fever"],
-        },
-        {
-            "disease_name": "Malaria",
-            "disease_uri": "http://www.wikidata.org/entity/Q12156",
-            "similarity_pct": 68.80,
-            "matched_symptoms": ["fatigue", "fever"],
-        },
-        {
-            "disease_name": "Typhoid",
-            "disease_uri": "http://www.wikidata.org/entity/Q83319",
-            "similarity_pct": 67.13,
-            "matched_symptoms": ["fatigue", "fever"],
-        },
-    ]
+    doc = nlp(text)
+    phrases = set()
 
-    # -----------------------------
-    # Simulated ML model prediction
-    # -----------------------------
-    ml_prediction = {
-        "disease_id": "Malaria",
-        "score": 0.0626,   # very low ML confidence
-    }
+    # noun chunks need parser; guard
+    if doc.has_annotation("DEP"):
+        for chunk in doc.noun_chunks:
+            phrases.add(normalize(chunk.text))
 
-    # -----------------------------
-    # Run reasoning engine
-    # -----------------------------
+    # add lemmas of nouns/adjs
+    for token in doc:
+        if token.pos_ in {"NOUN", "ADJ"} and not token.is_stop:
+            phrases.add(normalize(token.lemma_))
 
-    engine = ReasoningEngine()
+    # also raw tokens
+    for token in doc:
+        if token.is_alpha and not token.is_stop:
+            phrases.add(normalize(token.text))
 
-    final = engine.fuse_results(
-        ml_prediction=ml_prediction,
-        kg_candidates=kg_candidates,
-        symptom_matches=symptom_matches,
-        rdf_finder=None,  # optional; not needed for demo
+    phrases = {p for p in phrases if p and len(p) >= 3}
+    return sorted(phrases)
+
+
+def build_tfidf_vectors(texts: List[str]):
+    """
+    TF-IDF vectors (cosine similarity) using scikit-learn.
+    If sklearn not installed, raise helpful error.
+    """
+    try:
+        from sklearn.feature_extraction.text import TfidfVectorizer
+    except Exception as e:
+        raise RuntimeError(
+            "scikit-learn is required for cosine similarity TF-IDF.\n"
+            "Install with: pip install scikit-learn"
+        ) from e
+
+    vectorizer = TfidfVectorizer(ngram_range=(1, 2), lowercase=True)
+    X = vectorizer.fit_transform(texts)
+    return vectorizer, X
+
+
+def match_symptoms(graph: Graph, text: str, top_k: int = 5) -> List[Dict[str, Any]]:
+    """
+    Compare user input against KG symptom labels using cosine similarity (TF-IDF).
+    Returns top_k best matches: [{"uri":..., "label":..., "score":...}, ...]
+    """
+    # Extract phrases from user
+    phrases = extract_phrases_spacy(text)  # auto-fallback if model missing
+    user_doc = " ".join(phrases) if phrases else normalize(text)
+
+    # Get symptom labels
+    symptom_items = get_symptom_labels(graph)
+    if not symptom_items:
+        return []
+
+    labels = [lbl for _, lbl in symptom_items]
+    corpus = [user_doc] + labels
+
+    _, X = build_tfidf_vectors(corpus)
+
+    # cosine similarity between user vector and all symptom label vectors
+    try:
+        from sklearn.metrics.pairwise import cosine_similarity
+    except Exception as e:
+        raise RuntimeError(
+            "scikit-learn is required for cosine similarity.\n"
+            "Install with: pip install scikit-learn"
+        ) from e
+
+    sims = cosine_similarity(X[0], X[1:]).flatten()
+
+    results = []
+    for (uri, lbl), score in zip(symptom_items, sims):
+        results.append({"uri": str(uri), "label": lbl, "score": float(score)})
+
+    results.sort(key=lambda r: r["score"], reverse=True)
+    return results[:top_k]
+
+def symptoms_above_threshold(
+    matches: List[Dict[str, Any]],
+    threshold: float = 0.1,
+) -> List[Dict[str, Any]]:
+    """
+    Filter symptom match results to only those with score > threshold.
+    Returns the same dict structure: {"uri":..., "label":..., "score":...}
+    """
+    return [m for m in matches if float(m.get("score", 0.0)) > threshold]
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument(
+        "--ttl",
+        default="ontology/databaseV7.ttl",
+        help="TTL file path (default: ontology/databaseV7.ttl)",
     )
+    ap.add_argument(
+        "--text",
+        default=(
+            "I have a fever, and a headache."
+        ),
+        help="User input text",
+    )
+    ap.add_argument("--topk", type=int, default=5, help="Top K symptom matches")
 
-    # -----------------------------
-    # Print results (human-readable)
-    # -----------------------------
-    print("\n=== SYMPTOM MATCHES ===")
-    for i, s in enumerate(symptom_matches, 1):
-        print(f"{i}. {s['label']}  (score={s['score']:.3f})")
-        print(f"   URI: {s['uri']}")
+    args = ap.parse_args()
 
-    print("\n=== KG DISEASE CANDIDATES ===")
-    for i, d in enumerate(final["kg_candidates"], 1):
-        print(f"{i}. {d['disease_name']}")
-        print(f"   URI: {d['disease_uri']}")
-        print(f"   Similarity: {d['similarity_pct']:.2f}%")
-        print(f"   Matched: {', '.join(d['matched_symptoms'])}")
+    ttl_path = Path(args.ttl)
+    if not ttl_path.exists():
+        raise FileNotFoundError(f"TTL file not found: {ttl_path.resolve()}")
 
-    print("\n=== FINAL REASONED PREDICTION ===")
+    g = Graph()
+    g.parse(str(ttl_path), format="turtle")
+    g.bind("ex", EX)
+    g.bind("skos", SKOS)
 
-    print("Disease:        ", final["disease"])
-    print("Original score: ", f"{final['original_score']:.4f}")
-    print("Final score:    ", f"{final['final_score']:.4f}")
-    print("Fallback used:  ", final["is_fallback"])
+    results = match_symptoms(g, args.text, top_k=args.topk)
 
-    print("\n--- Reasoning steps ---")
+    print("=== INPUT ===")
+    print(args.text)
+    print("\n=== BEST SYMPTOM MATCHES (cosine TF-IDF) ===")
 
-    for step in final["reasoning"]:
-        print("•", step)
+    if not results:
+        print("(no symptom labels found in KG)")
+        return
+    
+    print(results)
+
+    for i, r in enumerate(results, 1):
+        print(f"{i}. {r['label']}")
+        print(f"   score = {r['score']:.3f}")
+        print(f"   uri   = {r['uri']}")
+        print()
+
 
 if __name__ == "__main__":
     main()
