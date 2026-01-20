@@ -1,248 +1,371 @@
 import joblib
 import sys
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
+from rdflib import Graph
 
+# ------------------------------------------------------------
+# Project path setup
+# ------------------------------------------------------------
 base_dir = Path(__file__).parent.resolve()
 sys.path.append(str(base_dir))
 
 from reasoning.reasoning_engine import ReasoningEngine
 from reasoning.rdf_disease_finder import RDFDiseaseFinder
 from rag.rag_engine import RAGExplainer
-
-
-# Common symptoms loaded dynamically from the KG
-
-def extract_symptoms_from_text(text: str, known_symptoms: List[str]) -> List[str]:
-    """
-    Extract symptom keywords from user text.
-    Simple keyword matching.
-    """
-    text_lower = text.lower()
-    found_symptoms = []
-    
-    # Check for multi-word symptom
-    # Sort by length to match longest phrases first (e.g. "chest pain" before "pain")
-    if not known_symptoms:
-        return []
-
-    for symptom in sorted(known_symptoms, key=len, reverse=True):
-        if symptom in text_lower:
-            found_symptoms.append(symptom)
-            text_lower = text_lower.replace(symptom, "", 1)
-    
-    # common phrases
-    synonyms = {
-        "loose stool": "diarrhea",
-        "stomach ache": "abdominal pain",
-        "tummy ache": "abdominal pain", 
-        "high temp": "fever",
-        "throwing up": "vomiting",
-        "shitting": "diarrhea"
-    }
-    
-    for phrase, symptom in synonyms.items():
-        if phrase in text_lower and symptom not in found_symptoms:
-            found_symptoms.append(symptom)
-            
-    return list(set(found_symptoms))
-
 from reasoning.wikidata_client import WikidataClient
+from reasoning.emergency_reasoner import triage_case
+from reasoning import symptom_matcher
+from querying import scriptV3
 
-def load_components(base_path: Path):
-    """Load all models and data."""
+
+# ------------------------------------------------------------
+# Symptom extraction via symptom_matcher.py (TF-IDF cosine)
+# ------------------------------------------------------------
+def extract_symptoms_with_matcher(
+    text: str,
+    rdf_graph: Graph,
+    top_k: int = 15,
+    threshold: float = 0.10,
+) -> Dict[str, Any]:
+    """
+    Uses TF-IDF cosine similarity against KG symptom labels (symptom_matcher.py).
+
+    Returns:
+      {
+        "labels":  [..],  # symptom labels (strings)
+        "iris":    [..],  # full IRIs (strings)
+        "matches": [..],  # raw match dicts: {"uri","label","score"}
+      }
+    """
+    matches = symptom_matcher.match_symptoms(rdf_graph, text, top_k=top_k)
+    good = symptom_matcher.symptoms_above_threshold(matches, threshold=threshold)
+
+    seen_lbl = set()
+    labels: List[str] = []
+    iris: List[str] = []
+
+    for m in good:
+        lbl = str(m.get("label", "")).strip()
+        uri = str(m.get("uri", "")).strip()
+
+        if uri:
+            iris.append(uri)
+
+        if lbl:
+            key = lbl.lower()
+            if key not in seen_lbl:
+                labels.append(lbl)
+                seen_lbl.add(key)
+
+    # dedup IRIs, keep order
+    seen_uri = set()
+    iris2 = []
+    for u in iris:
+        if u not in seen_uri:
+            iris2.append(u)
+            seen_uri.add(u)
+
+    return {"labels": labels, "iris": iris2, "matches": good}
+
+
+# ------------------------------------------------------------
+# Convert full URIs -> prefixed ids expected by Query 1
+# ------------------------------------------------------------
+def uris_to_prefixed(symptom_iris: List[str]) -> List[str]:
+    """
+    Convert:
+      - http://www.wikidata.org/entity/Q123 -> wd:Q123
+      - http://example.org/med#symptom/foo  -> sym:foo   (adjust if your namespace differs)
+    """
+    out: List[str] = []
+    for uri in symptom_iris:
+        uri = uri.strip()
+        if not uri:
+            continue
+
+        if "wikidata.org/entity/Q" in uri:
+            qid = uri.rsplit("/", 1)[-1]
+            out.append(f"wd:{qid}")
+            continue
+
+        if "example.org/med#symptom/" in uri:
+            local_id = uri.rsplit("/", 1)[-1]
+            out.append(f"sym:{local_id}")
+            continue
+
+        # If your local symptom URIs are like http://example.org/med#bulging_blue_veins
+        if "example.org/med#" in uri:
+            local_id = uri.rsplit("#", 1)[-1]
+            # only prefix if it looks like a symptom id
+            if local_id:
+                out.append(f"sym:{local_id}")
+            continue
+
+    return out
+
+
+# ------------------------------------------------------------
+# Load components
+# ------------------------------------------------------------
+def load_components(base_path: Path) -> Dict[str, Any]:
     print("Loading components...", file=sys.stderr)
-    
+
     model_path = base_path / "models" / "classifier.joblib"
-    rdf_path = base_path / "ontology" / "version 2 database.ttl"
+    rdf_path = base_path / "ontology" / "databaseV7.ttl"
     docs_path = base_path / "rag" / "docs"
 
-    components = {}
+    components: Dict[str, Any] = {}
 
+    # Classifier
     try:
-        components['classifier'] = joblib.load(model_path)
+        components["classifier"] = joblib.load(model_path)
     except Exception as e:
         print(f"Warning: Could not load classifier: {e}", file=sys.stderr)
-        components['classifier'] = None
+        components["classifier"] = None
 
+    # Reasoner
     try:
-        components['reasoner'] = ReasoningEngine()
-    except Exception:
-        components['reasoner'] = None
+        components["reasoner"] = ReasoningEngine()
+    except Exception as e:
+        print(f"Warning: Could not init ReasoningEngine: {e}", file=sys.stderr)
+        components["reasoner"] = None
 
+    # RAG explainer
     try:
-        components['explainer'] = RAGExplainer(docs_path=str(docs_path))
+        components["explainer"] = RAGExplainer(docs_path=str(docs_path))
     except Exception as e:
         print(f"Warning: Could not load RAG explainer: {e}", file=sys.stderr)
-        components['explainer'] = None
-        
+        components["explainer"] = None
+
+    # RDF finder + graph
     try:
-        # Check if version 2 exists, otherwise fallback or error
         if not rdf_path.exists():
-            # Try finding any ttl in ontology
             ttls = list((base_path / "ontology").glob("*.ttl"))
             if ttls:
                 rdf_path = ttls[0]
-                print(f"Version 2 database not found, using {rdf_path.name}", file=sys.stderr)
-        
-        components['rdf_finder'] = RDFDiseaseFinder(str(rdf_path))
+                print(f"databaseV7.ttl not found, using {rdf_path.name}", file=sys.stderr)
+
+        components["rdf_finder"] = RDFDiseaseFinder(str(rdf_path))
         print(f"RDF graph loaded from: {rdf_path.name}", file=sys.stderr)
     except Exception as e:
         print(f"Error loading RDF file: {e}", file=sys.stderr)
-        components['rdf_finder'] = None
+        components["rdf_finder"] = None
 
-    # Load Wikidata Client
-    components['wikidata'] = WikidataClient()
-
-    # Pre-fetch all recognized symptoms from the ontology
-    if components.get('rdf_finder'):
-        try:
-            components['all_symptoms'] = components['rdf_finder'].get_all_symptoms()
-            print(f"Loaded {len(components['all_symptoms'])} symptoms from Knowledge Graph.", file=sys.stderr)
-        except Exception as e:
-            print(f"Error fetching symptoms from KG: {e}", file=sys.stderr)
-            components['all_symptoms'] = []
-    else:
-        components['all_symptoms'] = []
-
+    components["wikidata"] = WikidataClient()
     return components
 
-def run_diagnosis(text: str, components: Dict[str, Any]):
-    """Run the full diagnosis pipeline on the input text."""
-    
-    print("\n" + "="*70)
+
+# ------------------------------------------------------------
+# Diagnosis pipeline
+# ------------------------------------------------------------
+def run_diagnosis(text: str, components: Dict[str, Any]) -> None:
+    print("\n" + "=" * 70)
     print("Disease Prediction System Results")
-    print("="*70)
+    print("=" * 70)
     print(f"Input: {text}")
-    
-    # 1. Extract Symptoms
-    known_symptoms = components.get('all_symptoms', [])
-    if not known_symptoms:
-        print("Warning: No known symptoms loaded from Knowledge Graph. Extraction may fail.")
-    
-    symptoms = extract_symptoms_from_text(text, known_symptoms)
+
+    rdf_finder = components.get("rdf_finder")
+    if not rdf_finder:
+        print("RDF Finder not initialized.")
+        return
+
+    g = rdf_finder.graph  # already loaded graph
+
+    # 1) Extract symptoms via TF-IDF matcher
+    extracted = extract_symptoms_with_matcher(text=text, rdf_graph=g, top_k=15, threshold=0.10)
+    symptoms = extracted["labels"]
+    symptom_iris = extracted["iris"]
+    symptom_matches = extracted["matches"]
+
     print(f"Extracted Symptoms: {', '.join(symptoms) if symptoms else 'None found'}\n")
-    
+    print(f"symptom irirs : {symptom_iris}")
+
     if not symptoms:
         print("No symptoms identified. Please provide more specific details.")
         return
 
-    # 2. RDF Search
-    rdf_finder = components.get('rdf_finder')
-    nearest_diseases = []
-    
-    print("-" * 30 + " RDF Knowledge Graph " + "-" * 30)
-    if rdf_finder:
-        try:
-            nearest_diseases = rdf_finder.find_nearest_diseases(symptoms, top_k=3, use_jaccard=False)
-            if nearest_diseases:
-                for i, disease in enumerate(nearest_diseases, 1):
-                    print(f"{i}. {disease['disease_name']}")
-                    print(f"   Confidence: {disease['similarity_score']:.2%}")
-                    print(f"   Matched: {', '.join(disease['matched_symptoms'])}")
-                    print(f"   Coverage: {disease['match_count']}/{disease['total_input_symptoms']}")
-                    print()
-            else:
-                print("No diseases found matching the symptoms in the Knowledge Graph.")
-        except Exception as e:
-            print(f"Error querying KG: {e}")
-    else:
-        print("RDF Finder not initialized.")
+    # 2) KG Query pipeline (Query 1 + Query3)
+    print("-" * 30 + " RDF Knowledge Graph (Query) " + "-" * 30)
 
-    # 3. Hybrid Reasoning (Fusion)
-    classifier = components.get('classifier')
-    reasoner = components.get('reasoner')
+    symptom_prefixed = uris_to_prefixed(symptom_iris)
+    print("Query symptoms:", symptom_prefixed)
+
+    kg_candidates: List[Dict[str, Any]] = []
+    try:
+        rows = scriptV3.query1_topk_diseases_by_score(
+            g=g,
+            symps_list=symptom_prefixed,
+            top_k_results=5,
+            exclude_label=None,
+        )
+
+        if not rows:
+            print("No diseases found (Query 1 returned empty).")
+        else:
+            # Optional: don't print the raw rows list (remove noisy debug)
+            # print(rows)
+
+            for i, r in enumerate(rows, 1):
+                disease_name = r["label"]
+                disease_iri = r["disease_uri"]
+                score = float(r.get("finalScore") or 0.0)
+                similarity_pct = score * 100.0
+
+                matched_labels = scriptV3.query3_matching_symptoms(
+                    g=g,
+                    disease_iri=disease_iri,
+                    symps_list=symptom_prefixed,
+                )
+
+                print(f"{i}. {disease_name}")
+                print(f"   Disease URI: {disease_iri}")
+                print(f"   Similarity: {similarity_pct:.2f}%")
+                print(f"   Matched: {', '.join(matched_labels)}\n")
+
+                kg_candidates.append(
+                    {
+                        "disease_name": disease_name,
+                        "disease_uri": disease_iri,
+                        "similarity_score": score,          # 0..1
+                        "similarity_pct": similarity_pct,   # 0..100
+                        "matched_symptoms": matched_labels,
+                    }
+                )
+
+    except Exception as e:
+        print(f"Error querying KG (query pipeline): {e}")
+
+    # 3) Hybrid reasoning (ML + KG)
     print("-" * 30 + " Hybrid Reasoning " + "-" * 30)
-    
+
+    classifier = components.get("classifier")
+    reasoner = components.get("reasoner")
+
+    final_result: Optional[Dict[str, Any]] = None
+
     if classifier and reasoner:
         try:
-            # Get raw ML prediction
             probs = classifier.predict_proba([text])[0]
             labels = classifier.classes_
             top_idx = probs.argmax()
-            ml_prediction = {
-                "disease_id": labels[top_idx], 
-                "score": float(probs[top_idx])
-            }
-            
-            # Fuse results
+
+            ml_prediction = {"disease_id": labels[top_idx], "score": float(probs[top_idx])}
+
             final_result = reasoner.fuse_results(
                 ml_prediction=ml_prediction,
-                rdf_candidates=nearest_diseases,
-                user_symptoms=symptoms,
-                rdf_finder=rdf_finder
+                kg_candidates=kg_candidates,
+                symptom_matches=symptom_matches,
+                rdf_finder=rdf_finder,
             )
-            
+
             print(f"Final Prediction: {final_result['disease']}")
             print(f"Confidence Score: {final_result['final_score']:.2%}")
-            
-            if final_result['is_fallback']:
+
+            if final_result.get("is_fallback"):
                 print("Note: Result based on Knowledge Graph due to low ML confidence.")
             else:
                 print(f"Base ML Score:    {final_result['original_score']:.2%}")
-                
+
             print("\nReasoning Trace:")
-            for reason in final_result['reasoning']:
-                try:
-                    print(f"  {reason}")
-                except UnicodeEncodeError:
-                     print(f"  {reason.encode('ascii', 'ignore').decode()}")
+            for reason in final_result.get("reasoning", []):
+                print(f"  {reason}")
             print()
-            
+
         except Exception as e:
             print(f"Error in reasoning engine: {e}")
     else:
         print("Classifier or Reasoner not available.")
 
-    # 4. Live Wikidata Info
-    wikidata = components.get('wikidata')
-    if final_result and final_result['disease']:
-        print("-" * 30 + " Live Wikidata Info " + "-" * 30)
-        disease_name = final_result['disease']
-        wikidata_id = rdf_finder.get_wikidata_id(disease_name)
-        
-        if wikidata_id and wikidata:
-            print(f"Fetching data for {disease_name} ({wikidata_id})...")
-            info = wikidata.fetch_disease_info(wikidata_id)
+    # 4) Live Wikidata Info (use query-based kg_candidates)
+    print("-" * 30 + " Live Wikidata Info " + "-" * 30)
+
+    wikidata = components.get("wikidata")
+    if final_result and wikidata and kg_candidates:
+        disease_uri = kg_candidates[0].get("disease_uri")
+        wikidata_id = None
+        if disease_uri and "wikidata.org/entity/Q" in disease_uri:
+            wikidata_id = disease_uri.rsplit("/", 1)[-1]
+
+        if wikidata_id:
+            print(f"Fetching data for {final_result['disease']} ({wikidata_id})...")
+            try:
+                info = wikidata.fetch_disease_info(wikidata_id)
+            except Exception as e:
+                info = None
+                print(f"Error fetching Wikidata info: {e}")
+
             if info:
                 print(f"Description: {info.get('description')}")
                 print(f"Wikipedia:   {info.get('wikipedia_url')}")
-                if info.get('image_url'):
+                if info.get("image_url"):
                     print(f"Image:       {info.get('image_url')}")
             else:
                 print("No additional info found on Wikidata.")
         else:
-            print("No Wikidata ID found in ontology.")
+            print("No Wikidata ID found (top disease is not a Wikidata Q-id).")
+    else:
+        print("No Wikidata info available (missing final result or KG candidates).")
 
-    # 5. Explanation
-    explainer = components.get('explainer')
-    if nearest_diseases and explainer:
-        print("-" * 30 + " Explanation " + "-" * 30)
-        top_disease = nearest_diseases[0]
+    # 5) Explanation (use query-based kg_candidates)
+    print("-" * 30 + " Explanation " + "-" * 30)
+
+    explainer = components.get("explainer")
+    if explainer and kg_candidates:
+        top_disease = kg_candidates[0]
         try:
             explanation = explainer.explain(
                 symptoms=text,
-                disease=top_disease['disease_name'],
-                confidence=top_disease['similarity_score']
+                disease=top_disease["disease_name"],
+                confidence=float(top_disease.get("similarity_score", 0.0)),
             )
             print(f"\nExplanation for {top_disease['disease_name']}:")
             print(explanation)
         except Exception as e:
             print(f"Could not generate explanation: {e}")
+    else:
+        if not explainer:
+            print("Explainer not available.")
+        else:
+            print("No KG candidates available to explain.")
 
-def main():
-    """
-    Main execution function.
-    Runs a sample diagnosis flow when the script is executed directly.
-    """
+    # 6) TRIAGE
+    print("-" * 30 + " Triage " + "-" * 30)
+
+    try:
+        disease_iri = kg_candidates[0].get("disease_uri") if kg_candidates else None
+
+        triage_result = triage_case(
+            g=g,
+            user_text=text,
+            symptom_iris=symptom_iris,
+            disease_iri=disease_iri,
+            temperatureC=None,
+            systolicBP=None,
+            painScale=None,
+            has_symptom_matches=bool(symptom_iris),
+        )
+
+        print("Triage final:", triage_result["final"])
+        if triage_result.get("seeDoctorText"):
+            print("seeDoctor:", triage_result["seeDoctorText"])
+        print("Scorepoint summation:", triage_result["kg"].score_sum)
+
+    except Exception as e:
+        print(f"Error running triage engine: {e}")
+
+
+# ------------------------------------------------------------
+# MAIN
+# ------------------------------------------------------------
+def main() -> None:
     components = load_components(base_dir)
-    
-    # Sample input 
-    #  Checck  symptoms
-    sample_text = "fever and cough"
-    
+
+    # Sample input
+    sample_text = "I have chest pain, feel tired and I have a fever."
     run_diagnosis(sample_text, components)
+
 
 if __name__ == "__main__":
     main()
