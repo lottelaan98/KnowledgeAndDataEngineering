@@ -7,6 +7,7 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtGui import QPixmap
 from pathlib import Path
 import sys
+from main import run_diagnosis
 
 # --- Logo path ---
 UI_DIR = Path(__file__).parent
@@ -32,8 +33,10 @@ example_data = {
 }
 
 class MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, components):
         super().__init__()
+        self.components = components
+
         self.setWindowTitle("Symptoms2Disease")
         self.setGeometry(100, 100, 1200, 800)
 
@@ -157,6 +160,8 @@ class MainWindow(QMainWindow):
             print("No explanation entered!")
             return
 
+        run_diagnosis(user_input, self.components)
+
         source_choice = self.sourceCombo.currentText()
         top_n = self.topNCombo.currentText()
         n = int(top_n.split()[1])
@@ -187,7 +192,9 @@ class MainWindow(QMainWindow):
         print(f"Querying KB and LLM with: {text}")
         return example_data
 
-app = QApplication(sys.argv)
-window = MainWindow()
-window.showMaximized()
-app.exec()
+
+def start_UI(components):
+    app = QApplication(sys.argv)
+    window = MainWindow(components)
+    window.showMaximized()
+    app.exec()

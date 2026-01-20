@@ -18,6 +18,7 @@ from reasoning.wikidata_client import WikidataClient
 from reasoning.emergency_reasoner import triage_case
 from reasoning import symptom_matcher
 from querying import scriptV3
+from UI import UI2
 
 
 # ------------------------------------------------------------
@@ -363,7 +364,8 @@ def main() -> None:
     components = load_components(base_dir)
 
     # Sample input
-    sample_text = "I have chest pain, feel tired and I have a fever."
+    sample_text = "confusion, dizziness, headache, nosebleed, vision changes"
+    UI2.start_UI(components)
     run_diagnosis(sample_text, components)
 
 

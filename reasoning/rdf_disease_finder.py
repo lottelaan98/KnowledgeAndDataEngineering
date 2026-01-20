@@ -18,7 +18,7 @@ class RDFDiseaseFinder:
         self.graph.parse(rdf_path, format="turtle")
 
         # Hard-bind namespace (stop guessing)
-        self.EX = Namespace("http://uu.nl/medical/")
+        self.EX = Namespace("http://example.org/med#")
         self.graph.bind("ex", self.EX)
 
         # Caches
