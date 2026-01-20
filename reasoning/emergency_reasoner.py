@@ -8,6 +8,8 @@ Then:
 - Cosine similarity on triage labels (emergency/urgent/routine/unclear)
 - Combine KG + text into one final triage label
 
+Run directly: python reasoning/triage_engine_queries.py
+(no CLI args needed)
 """
 
 from __future__ import annotations
@@ -296,41 +298,41 @@ def kg_triage_queries(
     for alarm_iri, label_iri in query_hard_triggers_categorical(g, symptom_iris):
         hard_hits.append((alarm_iri, label_iri))
 
-    # 2) Always sum scorePoints (even if hard trigger fired)
-    score_sum, point_hits = query_score_points_sum(g, symptom_iris)
-    point_hits_labeled = [(_get_label_text(g, s), p) for s, p in point_hits]
-
-    # If hard trigger fired, return emergency but keep points for explainability
     if hard_hits:
+        # In your TTL, hardTriggerLabel is usually ex:emergency.
+        # We'll return the label text of the first hit.
         pred = _get_label_text(g, hard_hits[0][1]).lower()
         alarm_labels = sorted({_get_label_text(g, a) for a, _ in hard_hits})
-
         return KGTriageResult(
             pred=pred if pred in {"emergency", "urgent", "routine", "unclear"} else "emergency",
-            score_sum=score_sum,
-            score_threshold=None,          # (optional) you can still read the threshold if you want
+            score_sum=0,
+            score_threshold=None,
             hard_trigger=pred,
             hard_trigger_hits=alarm_labels,
-            matched_point_symptoms=point_hits_labeled,
+            matched_point_symptoms=[],
         )
+
+    # 2) Sum scorePoints
+    score_sum, point_hits = query_score_points_sum(g, symptom_iris)
 
     # 3) Apply triage rule (threshold -> urgent else routine/unclear)
     thr, triage_label_iri = query_triage_rule(g)
-    triage_label_txt = _get_label_text(g, triage_label_iri).lower() if triage_label_iri else None
+    triage_label_txt = None
+    if triage_label_iri:
+        triage_label_txt = _get_label_text(g, triage_label_iri).lower()
 
     if thr is not None and triage_label_txt:
         if score_sum >= thr:
             pred = triage_label_txt  # e.g. urgent
         else:
             pred = "routine" if score_sum > 0 else "unclear"
-
         return KGTriageResult(
             pred=pred,
             score_sum=score_sum,
             score_threshold=thr,
             hard_trigger=None,
             hard_trigger_hits=[],
-            matched_point_symptoms=point_hits_labeled,
+            matched_point_symptoms=[(_get_label_text(g, s), p) for s, p in point_hits],
         )
 
     # no rule
@@ -340,9 +342,8 @@ def kg_triage_queries(
         score_threshold=None,
         hard_trigger=None,
         hard_trigger_hits=[],
-        matched_point_symptoms=point_hits_labeled,
+        matched_point_symptoms=[(_get_label_text(g, s), p) for s, p in point_hits],
     )
-
 
 
 # ----------------------------
@@ -438,18 +439,17 @@ def main():
 
     # Example 2
     user_text = "I have chest pain for 10 minutes and feel confused."
-    symptom_iris =  ['http://www.wikidata.org/entity/Q693058', 'http://www.wikidata.org/entity/Q35805', 'http://www.wikidata.org/entity/Q38933', 'http://www.wikidata.org/entity/Q81938']
-    #[
-    #     "http://www.wikidata.org/entity/Q693058",  # chest pain
-    #     #"http://www.wikidata.org/entity/Q557945",  # confusion
-    # ]
+    symptom_iris = [
+        "http://www.wikidata.org/entity/Q693058",  # chest pain
+        #"http://www.wikidata.org/entity/Q557945",  # confusion
+    ]
 
     disease_iri = "http://www.wikidata.org/entity/Q83319"  # e.g., Typhoid (example)
 
     # Optional numeric fields (None if empty)
-    temperatureC = 41
-    systolicBP = 150
-    painScale = 8
+    temperatureC = None
+    systolicBP = None
+    painScale = None
 
     result = triage_case(
         g=g,

@@ -230,7 +230,7 @@ class RDFDiseaseFinder:
 
 def main():
     base_dir = Path(__file__).parent.parent
-    rdf_path = base_dir / "ontology" / "version 2 database.ttl"
+    rdf_path = base_dir / "ontology" / "databaseV7.ttl"
 
     finder = RDFDiseaseFinder(str(rdf_path))
 
