@@ -180,7 +180,6 @@ def run_diagnosis(text: str, components: Dict[str, Any]) -> None:
     symptom_matches = extracted["matches"]
 
     print(f"Extracted Symptoms: {', '.join(symptoms) if symptoms else 'None found'}\n")
-    print(f"symptom irirs : {symptom_iris}")
 
     if not symptoms:
         print("No symptoms identified. Please provide more specific details.")
@@ -190,7 +189,6 @@ def run_diagnosis(text: str, components: Dict[str, Any]) -> None:
     print("-" * 30 + " RDF Knowledge Graph (Query) " + "-" * 30)
 
     symptom_prefixed = uris_to_prefixed(symptom_iris)
-    print("Query symptoms:", symptom_prefixed)
 
     kg_candidates: List[Dict[str, Any]] = []
     try:
