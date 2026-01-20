@@ -105,23 +105,6 @@ def uris_to_prefixed(symptom_iris: List[str]) -> List[str]:
 
     return out
 
-from rdflib import Graph
-
-def load_graph_fallback(base_path: Path) -> Graph:
-    rdf_path = base_path / "ontology" / "databaseV7.ttl"
-    if not rdf_path.exists():
-        ttls = list((base_path / "ontology").glob("*.ttl"))
-        if not ttls:
-            raise FileNotFoundError("No .ttl found in ontology/ folder.")
-        rdf_path = ttls[0]
-        print(f"databaseV7.ttl not found, using {rdf_path.name}", file=sys.stderr)
-
-    g = Graph()
-    g.parse(rdf_path.as_posix(), format="turtle")  # local file parse
-    print(f"RDF graph loaded from: {rdf_path.name}", file=sys.stderr)
-    return g
-
-
 
 # ------------------------------------------------------------
 # Load components
@@ -156,20 +139,19 @@ def load_components(base_path: Path) -> Dict[str, Any]:
         print(f"Warning: Could not load RAG explainer: {e}", file=sys.stderr)
         components["explainer"] = None
 
-    # RDF finder
+    # RDF finder + graph
     try:
         if not rdf_path.exists():
             ttls = list((base_path / "ontology").glob("*.ttl"))
             if ttls:
                 rdf_path = ttls[0]
-                print(f"Version 7 database not found, using {rdf_path.name}", file=sys.stderr)
+                print(f"databaseV7.ttl not found, using {rdf_path.name}", file=sys.stderr)
 
         components["rdf_finder"] = RDFDiseaseFinder(str(rdf_path))
         print(f"RDF graph loaded from: {rdf_path.name}", file=sys.stderr)
     except Exception as e:
         print(f"Error loading RDF file: {e}", file=sys.stderr)
         components["rdf_finder"] = None
-
 
     components["wikidata"] = WikidataClient()
     return components
@@ -183,7 +165,7 @@ def run_diagnosis(text: str, components: Dict[str, Any]) -> None:
     print("Disease Prediction System Results")
     print("=" * 70)
     print(f"Input: {text}")
-    
+
     rdf_finder = components.get("rdf_finder")
     if not rdf_finder:
         print("RDF Finder not initialized.")
