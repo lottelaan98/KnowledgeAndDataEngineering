@@ -18,7 +18,7 @@ from reasoning.wikidata_client import WikidataClient
 from reasoning.emergency_reasoner import triage_case
 from reasoning import symptom_matcher
 from querying import scriptV3
-from UI import UI2
+from UI import UI
 
 
 # ------------------------------------------------------------
@@ -161,7 +161,7 @@ def load_components(base_path: Path) -> Dict[str, Any]:
 # ------------------------------------------------------------
 # Diagnosis pipeline
 # ------------------------------------------------------------
-def run_diagnosis(text: str, components: Dict[str, Any]) -> None:
+def run_diagnosis(text: str, components: Dict[str, Any], temperature = None, systolicBP = None, painScale = None):
     print("\n" + "=" * 70)
     print("Disease Prediction System Results")
     print("=" * 70)
@@ -311,6 +311,7 @@ def run_diagnosis(text: str, components: Dict[str, Any]) -> None:
     print("-" * 30 + " Explanation " + "-" * 30)
 
     explainer = components.get("explainer")
+    explanation = None
     if explainer and kg_candidates:
         top_disease = kg_candidates[0]
         try:
@@ -331,6 +332,7 @@ def run_diagnosis(text: str, components: Dict[str, Any]) -> None:
 
     # 6) TRIAGE
     print("-" * 30 + " Triage " + "-" * 30)
+    triage_result = None
 
     try:
         disease_iri = kg_candidates[0].get("disease_uri") if kg_candidates else None
@@ -340,9 +342,9 @@ def run_diagnosis(text: str, components: Dict[str, Any]) -> None:
             user_text=text,
             symptom_iris=symptom_iris,
             disease_iri=disease_iri,
-            temperatureC=None,
-            systolicBP=None,
-            painScale=None,
+            temperatureC=temperature,
+            systolicBP=systolicBP,
+            painScale=painScale,
             has_symptom_matches=bool(symptom_iris),
         )
 
@@ -354,17 +356,17 @@ def run_diagnosis(text: str, components: Dict[str, Any]) -> None:
     except Exception as e:
         print(f"Error running triage engine: {e}")
 
+    return {"kg_candidates": kg_candidates,
+            "explanation": explanation,
+            "triage_result": triage_result}
+
 
 # ------------------------------------------------------------
 # MAIN
 # ------------------------------------------------------------
 def main() -> None:
     components = load_components(base_dir)
-
-    # Sample input
-    sample_text = "confusion, dizziness, headache, nosebleed, vision changes"
-    UI2.start_UI(components)
-    run_diagnosis(sample_text, components)
+    UI.start_UI(components)
 
 
 if __name__ == "__main__":
