@@ -70,7 +70,6 @@ class MainWindow(QMainWindow):
         self.painSpin.setRange(0, 10)
         self.painSpin.setValue(5)
         self.painSpin.setEnabled(False)
-        self.painCheck.stateChanged.connect(lambda s: self.painSpin.setEnabled(s == Qt.CheckState.Checked))
         self.painSpin.setToolTip("Set your pain scale from 0 (no pain) to 10 (worst pain).")
 
         specLayout = QHBoxLayout()
