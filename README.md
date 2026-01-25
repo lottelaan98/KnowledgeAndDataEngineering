@@ -27,20 +27,20 @@ As part of the final deliverable of the project we used two main queries based t
 Disease Scoring Logic:
 Diseases are ranked using a custom, interpretable scoring function implemented directly in SPARQL over the RDF knowledge graph. The score combines multiple clinically meaningful factors derived from the graph structure.
 
-FinalScore = ( BaseScore × ImportanceCoeff ) + 0.1 ⋅ SymptomLocationBonus
-BaseScore = 0.6 ⋅ GlobalRarity + 0.2 ⋅ JaccardSimilarity + 0.2 ⋅ SymptomCoverage
+FinalScore = ( BaseScore × ImportanceCoeff ) + 0.1 ⋅ SymptomLocationBonus <br />
+BaseScore = 0.6 ⋅ GlobalRarity + 0.2 ⋅ JaccardSimilarity + 0.2 ⋅ SymptomCoverage <br />
 
-Brief Intuition:
--JaccardSimilarity: measures overlap between user-reported symptoms and disease symptoms.
--SymptomCoverage: measures how much of a disease’s symptom profile is explained by the user input.
--GlobalRarity: rewards symptoms that occur in fewer diseases and are therefore more informative.
--ImportanceCoeff: gives higher weight to primary symptoms compared to secondary ones.
--SymptomLocationBonus: slightly favors diseases affecting the same body systems as the user’s symptoms.
+Brief Intuition:<br />
+-JaccardSimilarity: measures overlap between user-reported symptoms and disease symptoms. <br />
+-SymptomCoverage: measures how much of a disease’s symptom profile is explained by the user input. <br />
+-GlobalRarity: rewards symptoms that occur in fewer diseases and are therefore more informative. <br />
+-ImportanceCoeff: gives higher weight to primary symptoms compared to secondary ones. <br />
+-SymptomLocationBonus: slightly favors diseases affecting the same body systems as the user’s symptoms. <br />
 
 The formula is explicit, explainable and easy to extend with additional factors as more medical knowledge is added to the graph.
 
-Note:
-A set of additional queries that were implemented but not used in the final deliverable can be found under: 
-querying/ImplementedQueries/ 
-This directory contains a Colab notebook and the corresponding TTL version used when developing these queries.
+Note:<br />
+A set of additional queries that were implemented but not used in the final deliverable can be found under: <br />
+querying/ImplementedQueries/ <br />
+This directory contains a Colab notebook and the corresponding TTL version used when developing these queries. 
 
