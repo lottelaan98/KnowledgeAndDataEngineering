@@ -19,7 +19,7 @@ LLM guides and materials:
 - OpenAI Practical Guide to Building Agents: https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf
 - Prompt Engineering and LLMs Guides: https://www.promptingguide.ai/research/llm-agents
 
-* Querying *
+Querying:
 
 As part of the final deliverable of the project we used two main queries based the final ttl file version: <br />
 1)Information retrieval query that fetches relevant information on symptoms and diseases of interest. <br />
