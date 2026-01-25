@@ -5,14 +5,12 @@ from typing import List, Dict, Any, Optional
 
 class ReasoningEngine:
     """
-    Pure fuser: does NOT compute symptom matches or KG disease candidates.
-
+    No compute symptom matches or KG disease candidates.
     Inputs:
       - ml_prediction: {"disease_id": str, "score": float}
       - kg_candidates: list of diseases from Query pipeline (already ranked)
       - symptom_matches: list of symptoms from symptom_matcher (uri/label/score)
-
-    Output (backwards-compatible with your original engine):
+    Output :
       {
         "disease": str,
         "original_score": float,
@@ -20,8 +18,7 @@ class ReasoningEngine:
         "reasoning": [str, ...],
         "is_fallback": bool
       }
-
-    Extra fields (safe to ignore by old callers):
+    Extra fields :
       - "symptom_matches"
       - "kg_candidates"
     """
@@ -47,8 +44,7 @@ class ReasoningEngine:
             "reasoning": [],
             "is_fallback": False,
         }
-
-        # Keep upstream outputs available for debugging (backward-safe)
+        
         final_result["symptom_matches"] = symptom_matches or []
 
         candidates = self._normalize_kg_candidates(kg_candidates or [])
@@ -74,7 +70,7 @@ class ReasoningEngine:
         # -----------------------------
         # 2) Sanity check (Primary symptoms) - optional
         # -----------------------------
-        # We use symptom_matcher labels as "user symptoms" here (more reliable than raw text).
+        #use symptom_matcher labels as "user symptoms" .
         user_symptom_labels = [
             str(m.get("label", "")).strip()
             for m in (symptom_matches or [])
@@ -127,22 +123,7 @@ class ReasoningEngine:
 
     @staticmethod
     def _normalize_kg_candidates(cands: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """
-        Accept KG candidates in either "percent" or "0..1" score form.
-
-        Supported input keys per candidate:
-          - disease_name or label
-          - disease_uri or disease_iri or disease_uri
-          - similarity_pct (e.g. 70.55) OR similarity_score (0..1) OR finalScore (0..1)
-          - matched_symptoms (list of strings) OR matched (list of strings)
-
-        Output candidates always contain:
-          - disease_name
-          - disease_uri
-          - similarity_score (0..1 float)
-          - similarity_pct (0..100 float)
-          - matched_symptoms (list[str])
-        """
+       
         out: List[Dict[str, Any]] = []
 
         for c in cands or []:
@@ -262,11 +243,11 @@ def main() -> None:
         ml_prediction=ml_prediction,
         kg_candidates=kg_candidates,
         symptom_matches=symptom_matches,
-        rdf_finder=None,  # optional; not needed for demo
+        rdf_finder=None,  # optional
     )
 
     # -----------------------------
-    # Print results (human-readable)
+    # Print results
     # -----------------------------
     print("\n=== SYMPTOM MATCHES ===")
     for i, s in enumerate(symptom_matches, 1):
@@ -294,3 +275,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
