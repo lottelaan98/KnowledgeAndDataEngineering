@@ -23,7 +23,7 @@ from evaluation.dataset_statistics import compute_stats
 
 
 # ------------------------------------------------------------
-# Symptom extraction via symptom_matcher.py (TF-IDF cosine)
+# Symptom extraction via symptom_matcher.py 
 # ------------------------------------------------------------
 def extract_symptoms_with_matcher(
     text: str,
@@ -73,13 +73,13 @@ def extract_symptoms_with_matcher(
 
 
 # ------------------------------------------------------------
-# Convert full URIs -> prefixed ids expected by Query 1
+# Convert full URIs 
 # ------------------------------------------------------------
 def uris_to_prefixed(symptom_iris: List[str]) -> List[str]:
     """
     Convert:
       - http://www.wikidata.org/entity/Q123 -> wd:Q123
-      - http://example.org/med#symptom/foo  -> sym:foo   (adjust if your namespace differs)
+      - http://example.org/med#symptom/foo  -> sym:foo   
     """
     out: List[str] = []
     for uri in symptom_iris:
@@ -377,3 +377,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
