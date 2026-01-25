@@ -1,5 +1,5 @@
 """
-Triage engine using SPARQL QUERIES (rdflib Graph.query) for:
+Triage engine using SPARQL queries for:
 - Hard trigger alarms (categorical + numeric)
 - Sum scorePoints for matched symptoms
 - Read triage rule threshold + label (e.g., urgent)
@@ -8,8 +8,6 @@ Then:
 - Cosine similarity on triage labels (emergency/urgent/routine/unclear)
 - Combine KG + text into one final triage label
 
-Run directly: python reasoning/triage_engine_queries.py
-(no CLI args needed)
 """
 
 from __future__ import annotations
@@ -58,10 +56,7 @@ def _get_label_text(g: Graph, iri: str) -> str:
                 return str(o)
     return iri
 
-
-# ----------------------------
 # Text cosine triage
-# ----------------------------
 
 def triage_by_cosine_text(text: str, threshold_unclear: float = 0.01) -> Dict[str, Any]:
     from sklearn.feature_extraction.text import TfidfVectorizer
@@ -100,11 +95,7 @@ def triage_by_cosine_text(text: str, threshold_unclear: float = 0.01) -> Dict[st
         best_label = "routine"
     return {"pred": best_label, "best_score": best_score, "scores": scores}
 
-
-
-# ----------------------------
 # KG triage via QUERIES
-# ----------------------------
 
 @dataclass
 class KGTriageResult:
@@ -156,7 +147,7 @@ def query_hard_triggers_numeric(
 ) -> List[Tuple[str, str]]:
     """
     Checks numeric AlarmSymptom thresholds inside SPARQL.
-    Returns list of (alarmIRI, triageLabelIRI) that triggered.
+    Returns list of (alarmIRI, triageLabelIRI) that are triggered.
     """
     # If all are missing, skip query
     if temperatureC is None and systolicBP is None and painScale is None:
@@ -345,10 +336,7 @@ def kg_triage_queries(
         matched_point_symptoms=[(_get_label_text(g, s), p) for s, p in point_hits],
     )
 
-
-# ----------------------------
 # Combine policies
-# ----------------------------
 
 def combine_triage(kg: KGTriageResult, text_pred: Dict[str, Any]) -> Dict[str, Any]:
     text_label = text_pred["pred"]
@@ -415,9 +403,7 @@ def triage_case(
     return out
 
 
-# ----------------------------
-# Demo run (no CLI args)
-# ----------------------------
+# Demo run 
 
 def main():
     base_dir = Path(__file__).resolve().parent.parent
@@ -426,25 +412,14 @@ def main():
     g = Graph()
     g.parse(str(ttl), format="turtle")
 
-    # Example: user input -> you normally fill these from your pipeline
-
-    # Example: 1
-    # user_text = "I have been experiencing a skin rash. It is red and itchy."
-    # symptom_iris = [
-    #     "http://www.wikidata.org/entity/Q653197",   # rash
-    #     "http://www.wikidata.org/entity/Q199602",   # itch
-    # ]
-
-    # disease_iri = "http://www.wikidata.org/entity/Q179945"  # Psoriasis (from your TTL)
-
-    # Example 2
+    # Example 
     user_text = "I have chest pain for 10 minutes and feel confused."
     symptom_iris = [
         "http://www.wikidata.org/entity/Q693058",  # chest pain
         #"http://www.wikidata.org/entity/Q557945",  # confusion
     ]
 
-    disease_iri = "http://www.wikidata.org/entity/Q83319"  # e.g., Typhoid (example)
+    disease_iri = "http://www.wikidata.org/entity/Q83319"  # Typhoid (example)
 
     # Optional numeric fields (None if empty)
     temperatureC = None
