@@ -20,11 +20,11 @@ LLM guides and materials:
 - Prompt Engineering and LLMs Guides: https://www.promptingguide.ai/research/llm-agents
 
 ** Querying **
-As part of the final deliverable of the project we used two main queries based the final ttl file version:
-1)Information retrieval query that fetches relevant information on symptoms and diseases of interest.
+As part of the final deliverable of the project we used two main queries based the final ttl file version: <br />
+1)Information retrieval query that fetches relevant information on symptoms and diseases of interest. <br />
 2)Disease scoring and ranking query.
 
-Disease Scoring Logic:
+Disease Scoring Logic: <br />
 Diseases are ranked using a custom, interpretable scoring function implemented directly in SPARQL over the RDF knowledge graph. The score combines multiple clinically meaningful factors derived from the graph structure.
 
 FinalScore = ( BaseScore × ImportanceCoeff ) + 0.1 ⋅ SymptomLocationBonus <br />
