@@ -607,9 +607,7 @@ wd:Q693058 ex:scorePoints "5"^^xsd:integer .   # chest pain
 # Psoriasis
 wd:Q179945 a ex:Disease ;
     skos:prefLabel "Psoriasis"@en ;
-    ex:hasExplanation "Psoriasis is a chronic autoimmune disease that causes long-lasting inflammation of the skin."@en ;
     ex:seeDoctor "If symptoms persist, worsen, or joint pain appears."@en ;
-    ex:treatment "Treatment usually requires medical guidance; do not rely on self-treatment alone."@en ;
     ex:hasRareSymptom
         wd:Q29971784,      # nail pitting
         wd:Q102187111,     # nail discoloration
@@ -630,9 +628,7 @@ wd:Q179945 a ex:Disease ;
 # Varicose veins
 wd:Q201180 a ex:Disease ;
     skos:prefLabel "Varicose veins"@en ;
-    ex:hasExplanation "Varicose veins occur when weakened veins cause blood to pool, mainly in the legs."@en ;
     ex:seeDoctor "If pain, swelling, skin changes, or sudden worsening occurs."@en ;
-    ex:treatment "Mild cases can be managed conservatively, but medical evaluation is needed for complications."@en ;
     ex:hasRareSymptom
         wd:Q3160831,       # heavy legs
         wd:Q48970753 ,     # skin discoloration
@@ -652,9 +648,7 @@ wd:Q201180 a ex:Disease ;
 # Typhoid
 wd:Q83319 a ex:Disease ;
     skos:prefLabel "Typhoid"@en ;
-    ex:hasExplanation "Typhoid is a serious bacterial infection spread through contaminated food or water."@en ;
     ex:seeDoctor "Immediately if typhoid is suspected."@en ;
-    ex:treatment "Immediate medical treatment is required; do not attempt self-treatment."@en ;
     ex:hasRareSymptom
         wd:Q1129121 ,       # splenomegaly
         wd:Q1362864 ,       # hepatomegaly
@@ -700,9 +694,7 @@ wd:Q83319 a ex:Disease ;
 # Chickenpox
 wd:Q44727 a ex:Disease ;
     skos:prefLabel "Chickenpox"@en ;
-    ex:hasExplanation "Chickenpox is a contagious viral infection that usually causes a temporary illness."@en ;
     ex:seeDoctor "If the patient is an adult, pregnant, or becomes very ill."@en ;
-    ex:treatment "Usually supportive care, but medical care is needed in high-risk cases."@en ; 
     ex:hasRareSymptom
         wd:Q847726 ,        # lymphadenopathy
         wd:Q1515219 ,       # macula
@@ -732,9 +724,7 @@ wd:Q44727 a ex:Disease ;
 # Impetigo
 wd:Q28971 a ex:Disease ;
     skos:prefLabel "Impetigo"@en ;
-    ex:hasExplanation "Impetigo is a contagious bacterial skin infection, mainly affecting children."@en ;
     ex:seeDoctor "If the infection spreads or does not improve."@en ;
-    ex:treatment "Medical treatment is often required to prevent spreading."@en ;
     ex:hasRareSymptom
         wd:Q276469,         # blister
         sym:honey_colored_crust,  
@@ -753,9 +743,7 @@ wd:Q28971 a ex:Disease ;
 # Dengue
 wd:Q30953 a ex:Disease ;
     skos:prefLabel "Dengue"@en ;
-    ex:hasExplanation "Dengue is a mosquito-borne viral infection that can become severe."@en ;
     ex:seeDoctor "Immediately if dengue is suspected."@en ;
-    ex:treatment "Immediate medical care is required; do not self-treat."@en ; 
     ex:hasRareSymptom
         wd:Q217111 ,        # bradycardia
         wd:Q166019 ,        # bleeding
@@ -790,9 +778,7 @@ wd:Q30953 a ex:Disease ;
 # Fungal infection
 wd:Q464067 a ex:Disease ;
     skos:prefLabel "Fungal infection"@en ;
-    ex:hasExplanation "A fungal infection occurs when fungi overgrow on the skin, nails, or mucous membranes."@en ;
     ex:seeDoctor "If the infection does not improve with basic treatment."@en ;
-    ex:treatment "Mild cases may be self-treated, but persistent cases need medical care."@en ; 
     ex:hasRareSymptom
         wd:Q102187111,      # nail discoloration
         wd:Q557945 ,        # confusion
@@ -812,9 +798,7 @@ wd:Q464067 a ex:Disease ;
 # Common cold
 wd:Q12125 a ex:Disease ;
     skos:prefLabel "Common cold"@en ;
-    ex:hasExplanation "The common cold is a mild viral infection of the upper airways that usually resolves on its own."@en ;
     ex:seeDoctor "If symptoms last longer than two weeks or worsen."@en ;
-    ex:treatment "Self-care is usually sufficient."@en ;
     ex:hasRareSymptom
         wd:Q1115038 ,       # runny nose
         wd:Q192309 ,        # tinnitus
@@ -838,9 +822,7 @@ wd:Q12125 a ex:Disease ;
 # Pneumonia
 wd:Q12192 a ex:Disease ;
     skos:prefLabel "Pneumonia"@en ;
-    ex:hasExplanation "Pneumonia is an infection of the lungs that can be mild or life-threatening."@en ;
     ex:seeDoctor "Immediately if pneumonia is suspected."@en ;
-    ex:treatment "Immediate medical treatment is required."@en ; 
     ex:hasRareSymptom
         wd:Q205835 ,        # snoring
         wd:Q2260058 ,       # chills
@@ -864,9 +846,7 @@ wd:Q12192 a ex:Disease ;
 # Dimorphic hemorrhoids
 wd:Q41478 a ex:Disease ;
     skos:prefLabel "Hemorrhoids"@en ;
-    ex:hasExplanation "Hemorrhoids are swollen blood vessels near the anus that can cause discomfort."@en ;
     ex:seeDoctor "If bleeding or pain persists."@en ;
-    ex:treatment "Often managed with self-care, but medical treatment may be needed."@en ;
     ex:hasRareSymptom
         wd:Q166019,         # bleeding
         sym:disconfort_sitting,
@@ -887,9 +867,7 @@ wd:Q41478 a ex:Disease ;
 # Arthritis
 wd:Q170990 a ex:Disease ;
     skos:prefLabel "Arthritis"@en ;
-    ex:hasExplanation "Arthritis involves inflammation of the joints and can lead to long-term joint damage."@en ;
     ex:seeDoctor "If joint pain or stiffness lasts more than a few weeks."@en ;
-    ex:treatment "Medical evaluation is needed for long-term management."@en ; 
     ex:hasRareSymptom
         wd:Q102186573 ,     # joint inflammation
         wd:Q559210,         # joint stiffness
@@ -906,9 +884,7 @@ wd:Q170990 a ex:Disease ;
 # Acne
 wd:Q79928 a ex:Disease ;
     skos:prefLabel "Acne"@en ;
-    ex:hasExplanation "Acne is a skin condition caused by inflammation of oil glands."@en ;
     ex:seeDoctor "If acne is severe or causes scarring."@en ;
-    ex:treatment "Mild acne can be self-treated; severe cases need medical care."@en ; 
     ex:hasRareSymptom
         wd:Q1172159 ,      # pimple
         sym:skin_bumps ;
@@ -919,9 +895,7 @@ wd:Q79928 a ex:Disease ;
 # Bronchial asthma
 wd:Q35869 a ex:Disease ;
     skos:prefLabel "Asthma"@en ;
-    ex:hasExplanation "Asthma is a chronic lung disease that causes narrowing of the airways."@en ;
     ex:seeDoctor "If breathing problems worsen or attacks increase."@en ;
-    ex:treatment "Medical treatment is required; acute attacks need immediate care."@en ;
     ex:hasRareSymptom
         wd:Q517104 ;        # wheeze
     ex:hasPrimarySymptom
@@ -936,9 +910,7 @@ wd:Q35869 a ex:Disease ;
 # Hypertension
 wd:Q95566669 a ex:Disease ;
     skos:prefLabel "Hypertension"@en ;
-    ex:hasExplanation "Hypertension is a condition where blood pressure stays too high over time."@en ;
     ex:seeDoctor "If repeated blood pressure readings are high."@en ;
-    ex:treatment "Medical management is required; lifestyle changes alone may not be enough."@en ; 
     ex:hasRareSymptom
         wd:Q557945,         # confusion
         wd:Q202013,         # nosebleed
@@ -959,9 +931,7 @@ wd:Q95566669 a ex:Disease ;
 # Migraine
 wd:Q133823 a ex:Disease ;
     skos:prefLabel "Migraine"@en ;
-    ex:hasExplanation "Migraine is a neurological disorder causing repeated headache attacks."@en ;
     ex:seeDoctor "If attacks become more frequent or severe."@en ;
-    ex:treatment "Medical treatment is often needed to control attacks."@en ; 
     ex:hasRareSymptom
         wd:Q209789 ,        # burping
         wd:Q281289 ,        # photophobia
@@ -979,9 +949,7 @@ wd:Q133823 a ex:Disease ;
 # Allergy
 wd:Q42982 a ex:Disease ;
     skos:prefLabel "Allergy"@en ;
-    ex:hasExplanation "An allergy occurs when the immune system overreacts to harmless substances."@en ;
     ex:seeDoctor "Immediately if swelling or breathing difficulty occurs."@en ;
-    ex:treatment "Mild allergies may be self-managed; severe reactions require emergency care."@en ; 
     ex:hasRareSymptom
         wd:Q1115038,        # runny nose
         sym:itching_eyes; 
@@ -1004,9 +972,7 @@ wd:Q42982 a ex:Disease ;
 # Gastroesophageal reflux disease
 wd:Q223591 a ex:Disease ;
     skos:prefLabel "Gastroesophageal reflux disease"@en ;
-    ex:hasExplanation "This condition occurs when stomach acid repeatedly flows back into the esophagus."@en ;
     ex:seeDoctor "If symptoms persist for several weeks."@en ;
-    ex:treatment "Lifestyle changes may help, but medical treatment is often needed."@en ; 
     ex:hasRareSymptom
         wd:Q537297 ,        # heartburn
         wd:Q21120264 ,      # precordial pain
@@ -1027,9 +993,7 @@ wd:Q223591 a ex:Disease ;
 # Peptic ulcer disease
 wd:Q172941 a ex:Disease ;
     skos:prefLabel "Peptic ulcer disease"@en ;
-    ex:hasExplanation "Peptic ulcer disease involves open sores in the stomach or intestine lining."@en ;
     ex:seeDoctor "Immediately if bleeding occurs."@en ;
-    ex:treatment "Medical treatment is required; do not self-treat."@en ; 
     ex:hasRareSymptom
         wd:Q209789 ,        # burping 
         wd:Q1163908 ,       # melena 
@@ -1055,9 +1019,7 @@ wd:Q172941 a ex:Disease ;
 # Drug reaction
 wd:Q3931183 a ex:Disease ;
     skos:prefLabel "Drug reaction"@en ;
-    ex:hasExplanation "A drug reaction is an unwanted response to medication."@en ;
     ex:seeDoctor "Immediately if severe reactions occur."@en ;
-    ex:treatment "Stop the drug and seek medical care; severe cases need urgent treatment."@en ; 
     ex:hasRareSymptom
         wd:Q517104,         # wheeze
         wd:Q10916362 ,      # dizziness
@@ -1078,9 +1040,7 @@ wd:Q3931183 a ex:Disease ;
 # Diabetes
 wd:Q12206 a ex:Disease ;
     skos:prefLabel "Diabetes mellitus"@en ;
-    ex:hasExplanation "Diabetes mellitus is a chronic disease affecting blood sugar control."@en ;
     ex:seeDoctor "If symptoms of high blood sugar persist."@en ;
-    ex:treatment "Medical management is required; self-treatment alone is not sufficient."@en ; 
     ex:hasRareSymptom
         wd:Q352585,         # frequent urination
         wd:Q1124286 ,       # polyuria
@@ -1106,9 +1066,7 @@ wd:Q12206 a ex:Disease ;
 # Urinary tract infection
 wd:Q221668 a ex:Disease ;
     skos:prefLabel "Urinary tract infection"@en ;
-    ex:hasExplanation "A urinary tract infection is a bacterial infection of the bladder or kidneys."@en ;
     ex:seeDoctor "If symptoms last more than three days or worsen."@en ;
-    ex:treatment "Mild cases may resolve, but medical treatment is often needed."@en ; 
     ex:hasRareSymptom
         wd:Q1269399 ,       # dysuria
         wd:Q183425 ,        # abdominal pain
@@ -1131,9 +1089,7 @@ wd:Q221668 a ex:Disease ;
 # Cervical spondylosis
 wd:Q11664912 a ex:Disease ;
     skos:prefLabel "Cervical spondylosis"@en ;
-    ex:hasExplanation "Cervical spondylosis is age-related wear of the neck bones and discs."@en ;
     ex:seeDoctor "If pain or nerve symptoms persist."@en ;
-    ex:treatment "Medical evaluation is recommended for ongoing symptoms."@en ;
     ex:hasRareSymptom
         wd:Q3567802,        # neck pain
         wd:Q769220 ;        # paresthesia
@@ -1148,9 +1104,7 @@ wd:Q11664912 a ex:Disease ;
 # Jaundice
 wd:Q133244 a ex:Disease ;
     skos:prefLabel "Jaundice"@en ;
-    ex:hasExplanation "Jaundice is yellowing of the skin and eyes due to liver or blood problems."@en ;
     ex:seeDoctor "Always when jaundice appears."@en ;
-    ex:treatment "Immediate medical evaluation is required."@en ; 
     ex:hasRareSymptom
         wd:Q21110084,       # dark urine
         sym:yellow_skin,                                            
@@ -1170,9 +1124,7 @@ wd:Q133244 a ex:Disease ;
 # Malaria
 wd:Q12156 a ex:Disease ;
     skos:prefLabel "Malaria"@en ;
-    ex:hasExplanation "Malaria is a serious parasitic infection transmitted by mosquitoes."@en ;
     ex:seeDoctor "Immediately if fever occurs after travel to a risk area."@en ;
-    ex:treatment "Immediate medical treatment is required; do not self-treat."@en ; 
     ex:hasRareSymptom
         wd:Q1129121 ,       # splenomegaly
         wd:Q1362864 ,       # hepatomegaly
