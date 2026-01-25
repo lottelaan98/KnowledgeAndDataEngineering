@@ -1,5 +1,7 @@
 # KnowledgeAndDataEngineering
 
+To run this python files please read requirements.txt file. 
+
 **Clinical Decision-Support**
 
 Clinical decision-support demo using an RDF/OWL knowledge graph + SPARQL reasoning + RAG explanations.
@@ -14,9 +16,9 @@ How does it work?
 5. Produces triage label via KG rules + optional text refinement
 6. Optionally generates an explanation using local LLM (Llama 3.1 via Ollama) grounded in retrieved documents
 
-Some additional information
+*Some additional information*
 
-**4. Ranks diseases with explainable scoring **
+**4. Ranks diseases with explainable scoring**
 
 As part of the final deliverable of the project we used two main queries based the final ttl file version: <br />
 1)Information retrieval query that fetches relevant information on symptoms and diseases of interest. <br />
@@ -37,8 +39,23 @@ Brief Intuition:<br />
 
 The formula is explicit, explainable and easy to extend with additional factors as more medical knowledge is added to the graph.
 
-Note:<br />
-A set of additional queries that were implemented but not used in the final deliverable can be found under: <br />
-querying/ImplementedQueries/ <br />
-This directory contains a Colab Νotebook with all the queries that were created and the corresponding ttl file (older version) used when developing them. 
+**5. Determines urgency with explainable triage rules**
+
+In addition to disease ranking, the system determines how urgently the user should consult a doctor using rule-based triage queries over the RDF knowledge graph. The triage label can be established in two ways: with queries and using cosine similarity score.
+
+Hard trigger query:
+The system first checks whether any user-reported symptom is classified as an alarm symptom in the knowledge graph. This includes both categorical alarm symptoms and numeric alarm symptoms that exceed predefined thresholds (e.g. very high temperature or blood pressure). If any hard trigger is detected, the corresponding emergency triage label is immediately assigned and overrides all other reasoning.
+
+Point-based triage scoring query:
+If no hard trigger is activated, a triage score is computed by summing the scorePoints assigned to matched symptoms in the knowledge graph. This total score is then compared to a triage rule threshold.
+
+Decision Rules:
+- If ScoreSum ≥ Threshold → Urgent
+- If 0 < ScoreSum < Threshold → Routine
+- If ScoreSum = 0 → Unclear
+
+Cosine similarity score:
+This score is calculated using the see doctor recommendations, which are included in our knowledge base combined with the user’s input. A cosine-similarity comparison against 4 urgency labels to upgrade urgency when strong textual evidence is present. This is to prevent not recognising an urgent triage label.
+
+Eventually the triage labels of both systems are combined to get the final label. 
 
