@@ -507,13 +507,11 @@ sym:high_blood_pressure a ex:AlarmSymptom ;
 ex:Case a owl:Class ;
   rdfs:label "Case"@en .
 
-# Reported symptoms from the user (can be wd:... or sym:... or even AlarmSymptom resources)
 ex:hasReportedSymptom a owl:ObjectProperty ;
   rdfs:domain ex:Case ;
   rdfs:range ex:Symptom ;
   rdfs:label "has reported symptom"@en .
 
-# Minimal measurements used by your numeric alarm symptoms
 ex:temperatureC a owl:DatatypeProperty ;
   rdfs:domain ex:Case ;
   rdfs:range xsd:decimal ;
@@ -529,7 +527,6 @@ ex:systolicBP a owl:DatatypeProperty ;
   rdfs:range xsd:decimal ;
   rdfs:label "systolic blood pressure (mmHg)"@en .
 
-# Optional: store triage output (if you want to write back results later)
 ex:triageResult a owl:ObjectProperty ;
   rdfs:domain ex:Case ;
   rdfs:range ex:TriageLabel ;
