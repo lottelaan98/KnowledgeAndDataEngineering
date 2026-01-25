@@ -19,6 +19,7 @@ from reasoning.emergency_reasoner import triage_case
 from reasoning import symptom_matcher
 from querying import scriptV3
 from UI import UI
+from evaluation.dataset_statistics import compute_stats
 
 
 # ------------------------------------------------------------
@@ -365,6 +366,11 @@ def run_diagnosis(text: str, components: Dict[str, Any], temperature = None, sys
 # MAIN
 # ------------------------------------------------------------
 def main() -> None:
+    stats = compute_stats()
+    print("Dataset Statistics:")
+    for k, v in stats.items():
+        print(f"{k}: {v}")
+
     components = load_components(base_dir)
     UI.start_UI(components)
 

@@ -1,9 +1,9 @@
 from rdflib import Graph, RDF, RDFS, OWL
-PATH = "ontology/databaseV6.ttl"
+PATH = "ontology/databaseV7.ttl"
 
-def compute_stats(path: str):
+def compute_stats():
     g = Graph()
-    g.parse(path, format="turtle")
+    g.parse(PATH, format="turtle")
 
     subjects = set()
     predicates = set()
@@ -29,10 +29,3 @@ def compute_stats(path: str):
         "classes": len(classes),
         "properties": len(properties),
     }
-
-
-stats = compute_stats(PATH)
-
-print("Dataset Statistics:")
-for k, v in stats.items():
-    print(f"{k}: {v}")
