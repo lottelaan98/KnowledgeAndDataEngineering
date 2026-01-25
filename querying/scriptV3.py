@@ -113,6 +113,19 @@ PREFIX ex:   <http://example.org/med#>
 PREFIX wd:   <http://www.wikidata.org/entity/>
 PREFIX sym:  <http://example.org/med#symptom/>
 
+### FORMULA TERMINOLOGY MAPPING ###
+# Base disease score:
+# - idfNorm      : global symptom rarity (inverse disease frequency)
+# - jaccard      : symptom overlap between user and disease
+# - coverage     : how much of the disease profile is explained
+
+# Final score:
+# - coreCoeff    : boosts diseases matching primary symptoms
+# - catNorm      : symptom location (body system) overlap bonus
+
+# ?baseScore = 0.6 * ?idfNorm + 0.2 * ?jaccard + 0.2 * ?coverage 
+# ?finalScore = ?baseScore * ?coreCoeff + 0.10 * ?catNorm
+
 SELECT ?disease ?label
        ?catNorm
        ?baseScore ?finalScore
@@ -147,7 +160,7 @@ WHERE {{
     GROUP BY ?disease
   }}
 
-  ### DISEASE TOTAL SYMPTOMS ###
+  ### DISEASE TOTAL SYMPTOMS (primary/secondary)###
   {{
     SELECT ?disease (COUNT(DISTINCT ?sAll) AS ?diseaseSymptomCount)
     WHERE {{
@@ -157,6 +170,7 @@ WHERE {{
   }}
 
   ### JACCARD SIMILARITY ###
+  # Intesection of input symptoms and symptoms of each disease over their union. 
   BIND(
     IF(
       (xsd:decimal(?inputCount) + xsd:decimal(?diseaseSymptomCount) - xsd:decimal(?matchedCount)) = 0,
@@ -167,6 +181,7 @@ WHERE {{
   )
 
   ### COVERAGE ###
+  # Number of matched symptoms between user's input and disease's symptomatology / number of disease's symptoms.
   BIND(
     IF(
       xsd:decimal(?diseaseSymptomCount) = 0,
@@ -200,7 +215,7 @@ WHERE {{
     GROUP BY ?disease
   }}
 
-  ### IDF MAX: idfMax = SUM_ ( x in input) --- (1/df(x))  (upper bound for this input) ###
+  ### IDF MAX: idfMax = SUM_ ( symptom x in input) --- (1/df(x)) ###
   {{
     SELECT (SUM(?wIn) AS ?idfMax)
     WHERE {{
@@ -223,6 +238,8 @@ WHERE {{
 
 
   ### PRIMARY SYMPTOMS MENTIONED IN USER INPUT ###
+  # Count number of input symptoms that are PRIMARY for the disease.
+  # Then map that number to a multiplier  [0:0.40, 1:0.70, 2:0.90, >= 3:1.00]
   OPTIONAL {{
     SELECT ?disease (COUNT(DISTINCT ?cm) AS ?coreMatchedRaw)
     WHERE {{
@@ -242,6 +259,10 @@ WHERE {{
   )
 
   ### SYMPTOM TYPE BONUS ###
+  # Each symptom belongs to a category/class (e.g., SkinSymptom, RespiratorySymptom, ...)
+  # patientCatCount = number of distinct categories among the user's input symptoms
+  # catOverlap      = number of those categories also present in the disease symptoms
+  # Bonus = 0.1 * catOverlap/patientCatCount
   {{
     SELECT (COUNT(DISTINCT ?pType) AS ?patientCatCount)
     WHERE {{
