@@ -59,3 +59,15 @@ This score is calculated using the see doctor recommendations, which are include
 
 Eventually the triage labels of both systems are combined to get the final label. 
 
+**Using the client UI**
+
+Enter your symptoms in the input box at the top and press Go to run the diagnosis.
+
+Optional specifications (temperature, blood pressure, pain score) can be enabled via checkboxes, these are otherwise ignored in the pipeline. (Used only for triage)
+Use the Options section to control explanations, confidence display, and number of results.
+
+Results are shown below as ranked disease cards.
+Each card includes symptoms, description, treatment, a reference link and the confidence if enabled.  
+Only the top result may include explanations (if enabled) and triage advice.
+
+The pipeline can also be viewed in the terminal aswell and will contain errors if they appear.
