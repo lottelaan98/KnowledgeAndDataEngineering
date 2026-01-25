@@ -43,5 +43,5 @@ The formula is explicit, explainable and easy to extend with additional factors 
 Note:<br />
 A set of additional queries that were implemented but not used in the final deliverable can be found under: <br />
 querying/ImplementedQueries/ <br />
-This directory contains a Colab notebook and the corresponding TTL version used when developing these queries. 
+This directory contains a Colab Νotebook with all the queries that were created and the corresponding ttl file (older version) used when developing them. 
 
